@@ -1,44 +1,45 @@
-version: "3.1"
-
+version: '3.1'
 config:
   store_entities_as_slots: true
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 intents:
-- materia
-- matricula
 - afirmacion
 - agradecimiento
-- despedida
-- negacion
-- saludo
-- requisitos_inscripcion
-- informar_servicios
-- informar_equipamiento_tecnologico
-- informar_asistencia
-- informar_examen_recuperatorio
-- informar_equivalencias
-- informar_intercambio_de_estudio
-- curso_ingreso
 - certificadas
+- curso_ingreso
+- despedida
 - evaluacion_coneau
-- plazos_inscripcion
-- informar_modalidad_inscripcion
-- visitas_consultas
-- informar_becas_hermanos
-- informar_horarios_trabajadores
+- informar_asistencia
 - informar_ayuda_informatica_ingles
+- informar_becas_hermanos
+- informar_equipamiento_tecnologico
+- informar_equivalencias
+- informar_examen_recuperatorio
+- informar_horarios_trabajadores
+- informar_intercambio_de_estudio
+- informar_modalidad_inscripcion
 - informar_nivel_profesores
+- informar_servicios
+- materia
+- matricula
+- negacion
+- nlu_fallback
+- plazos_inscripcion
+- requisitos_inscripcion
+- saludo
 - tiempo
+- visitas_consultas
 entities:
 - matricula
 slots:
   matricula:
     type: text
-    influence_conversation: true
+    influence_conversation: false
     mappings:
-    - type: custom
+    - type: from_entity
+      entity: matricula
 responses:
   utter_saludo:
   - text: |
@@ -115,7 +116,9 @@ responses:
   - text: |
       Con que matricula?
 actions:
-- action_datos_alumno
 - action_materia
-- action_tiempo
 - utter_ask_matricula
+- utter_saludo
+- utter_despedida
+- action_datos_alumno
+- action_tiempo

@@ -1,13 +1,11 @@
 version: "3.1"
 
 rules:
-
-- rule: mensaje out-of-scope
-  steps:
-  - intent: out_of_scope
-  - action: utter_out_of_scope
-
-- rule: Le pide al usuario que reformule la oración cuando el mensaje que envió tiene un confianza de NLU baja
-  steps:
-  - intent: nlu_fallback
-  - action: utter_please_rephrase
+  qu- rule: mensaje out-of-scope
+    steps:
+    - intent: out_of_scope
+    - action: utter_out_of_scope
+  - rule: Le pide al usuario que reformule la oración cuando el mensaje que envió tiene un confianza de NLU baja
+    steps:
+    - intent: nlu_fallback
+    - action: utter_please_rephrase
