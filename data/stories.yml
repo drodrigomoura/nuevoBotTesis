@@ -212,14 +212,21 @@ stories:
   steps:
   - intent: contactos
   - action: utter_contactos
-
+  
 - story: interactive_story_1
   steps:
   - intent: materia
   - action: utter_ask_matricula
   - intent: matricula
     entities:
-    - matricula: '66031'
+    - matricula: '66007'
   - slot_was_set:
-    - matricula: '66031'
+    - matricula: '66007'
   - action: action_materia
+
+- story: interactive_story_2
+  steps:
+  - intent: mesa_examen
+    entities:
+    - mesa_examen: mesa de examen
+  - action: action_mesas_examen

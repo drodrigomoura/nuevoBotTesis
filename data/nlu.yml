@@ -1,5 +1,4 @@
 version: "3.1"
-
 nlu:
 - intent: afirmacion
   examples: |
@@ -7,14 +6,12 @@ nlu:
     - por supuesto
     - eso suena bien
     - correcto
-
 - intent: agradecimiento
   examples: |
     - Gracias
     - Muchas Gracias
     - gracias
     - muchas gracias
-
 - intent: despedida
   examples: |
     - Chau
@@ -24,7 +21,6 @@ nlu:
     - gracias, chau
     - chau
     - adios
-
 - intent: negacion
   examples: |
     - no
@@ -33,7 +29,6 @@ nlu:
     - eso no me gusta
     - de ninguna manera
     - no realmente
-
 - intent: saludo
   examples: |
     - Hola
@@ -43,7 +38,6 @@ nlu:
     - Buenas noches
     - hola
     - buenas tardes
-
 - intent: requisitos_inscripcion
   examples: |
     - buenos dias cuales son los requisitos para inscribirme?
@@ -71,7 +65,6 @@ nlu:
     - hola, que documentos necesito para la inscripción
     - ¿Es necesario presentar alguna documentación para la inscripción?
     - requisitos de inscripcion
-
 - intent: plazos_inscripcion
   examples: |
     - ¿Me puedo inscribir en cualquier momento
@@ -99,8 +92,7 @@ nlu:
     - hay fechas para inscribirse?
     - ¿Existen fechas preestablecidas de inscripción?
     - Puedo inscribirme en cualquier momento del año?
-    - Hay un plazo para la inscripción?    
-
+    - Hay un plazo para la inscripción?
 - intent: evaluacion_coneau
   examples: |
     - ¿La UGD y las carreras que ofrece fueron evaluadas por la CONEAU?
@@ -131,7 +123,6 @@ nlu:
     - ¿Porque organismo está avalada la universidad y propuestas académicas?
     - Las carreras ofrecidas por la UGD cuentan con el aval o la aprobación de la CONEAU
     - Las carreras están acreditadas por la CONEAU o en proceso de acreditación?
-
 - intent: curso_ingreso
   examples: |
     - ¿Hay ingreso sin limitaciones o hay que hacer algún curso?
@@ -165,7 +156,6 @@ nlu:
     - Hay que realizar un cursillo para el ingreso?
     - hay curso de ingreso?
     - para ingresar hay un curso de ingreso o nivelatorio?
-
 - intent: informar_modalidad_inscripcion
   examples: |
     - ¿Tengo que inscribirme personalmente o puedo hacerlo a distancia?
@@ -195,8 +185,7 @@ nlu:
     - debo inscribirme en el edificio de la facultad o lo puedo hacer desde casa?
     - ¿El proceso de inscripción es presencial o es posible realizarlo vía online?
     - Puedo realizar inscripción a distancia o solamente de manera presencial?
-    - Puede inscribirme de manera online o requieren necesariamente que me presente en persona a realizarlo?   
-
+    - Puede inscribirme de manera online o requieren necesariamente que me presente en persona a realizarlo?
 - intent: visitas_consultas
   examples: |
     - ¿Puedo visitar la Universidad? ¿Puedo hablar con un profesor o con el Rector?
@@ -226,7 +215,6 @@ nlu:
     - ¿Es posible realiza algún tipo de visita previa para conocer la universidad? ¿Hay posibilidades de tener contacto con profesores o rectores?
     - Se puede realizar una visita guiada en la universidad a cargo de algún docente o el rector?
     - Es posible conocer la Universidad y si hay oportunidad, hablar con algún profesor o con el Rector de la misma?
-
 - intent: informar_becas_hermanos
   examples: |
     - Cuáles son las becas o beneficios existentes para estudiantes y familiares de estudiantes?
@@ -255,7 +243,6 @@ nlu:
     - ¿Que tipo se beneficios brinda la universidad a los estudiantes?
     - Con que beneficios cuantan los estudiantes a la hora de inscribirse?
     - La universidad otorga algún tipo de beca o bonificacion para hermanos en las cuotas?
-
 - intent: informar_horarios_trabajadores
   examples: |
     - Existen horarios diferenciados para trabajadores?
@@ -282,7 +269,6 @@ nlu:
     - En cuanto a mi situación laboral ¿Que ayuda me brinda la universidad, con respecto a las faltas y horarios?
     - Las carreras poseen flexibilidad en los horarios?
     - Hola,quiero consultarle respecto a los horarios y asistencias porque trabajo y estudio? Tienen algún tipo de contemplación en este caso?
-
 - intent: informar_equivalencias
   examples: |
     - ¿Me reconocen las materias ya aprobadas en otra universidad?
@@ -300,7 +286,6 @@ nlu:
     - Otra universidad me reconoce las materias ya aprobabas?
     - ¿Puedo validar mis materias aprobadas de otra universidad y así continuar la cursada?
     - me reconocen las materias aprobadas en otra universidad?
-
 - intent: informar_intercambio_de_estudio
   examples: |
     - ¿Puedo hacer intercambio de estudios? ¿Dónde? ¿Con qué valor?
@@ -317,7 +302,6 @@ nlu:
     - Hola, puedo un intercambio de estudios? Donde? que valor tiene?
     - ¿Existe el intercambio universitario? ¿Tiene algún costo o requisito?
     - puedo hacer intercambio de estudio?
-
 - intent: informar_asistencia
   examples: |
     - ¿La asistencia a clases es obligatoria?
@@ -334,7 +318,6 @@ nlu:
     - Es obligatorio ir a clases?
     - ¿La cursada es presencial o a distancia?
     - es obligatorio asistir a clases?
-
 - intent: informar_examen_recuperatorio
   examples: |
     - ¿Cómo son los exámenes? ¿Existen recuperatorios?
@@ -351,7 +334,6 @@ nlu:
     - Como es el tema de los examenes?como puedo rendirlos? Tienen recuperatorios?
     - ¿Los exámenes son presenciales ? ¿Cuantos recuperatorios tengo por materia?
     - como son los examenes?
-
 - intent: informar_ayuda_informatica_ingles
   examples: |
     - ¿Me ayudan en Informática y en Inglés?
@@ -366,7 +348,6 @@ nlu:
     - Necesito ayuda en informática e inglés.
     - Dan ayuda en informatica y en ingles?
     - ¿Cuento con clases de apoyo en las áreas que tenga complicaciones?
-
 - intent: informar_nivel_profesores
   examples: |
     - ¿Cuál es el nivel académico de los profesores?
@@ -382,7 +363,6 @@ nlu:
     - ¿Que estudios tienen los profesores?
     - que nivel academico tienen los profesores?
     - ¿Todos los profesores son idóneos en sus áreas?
-
 - intent: informar_equipamiento_tecnologico
   examples: |
     - ¿Cómo es el equipamiento tecnológico de la Universidad ?
@@ -398,7 +378,6 @@ nlu:
     - ¿Con qué tecnología cuentan en la Universidad?
     - Que equpamiento tecnologico tiene la UGD?
     - ¿Cómo funcionan las instalaciones de la universidad?
-
 - intent: informar_servicios
   examples: |
     - ¿Con qué servicios cuenta la Universidad?
@@ -414,13 +393,11 @@ nlu:
     - ¿Que carreras tiene la Facultad?
     - que servicios tiene la universidad?
     - ¿Que comodidades brinda la universidad a sus estudiantes?
-
 - intent: out_of_scope
   examples: |
     - Quiero ordenar comida
     - ¿Cuanto es 2 + 2?
     - Quien es el presidente de Argentina?
-
 - intent: contactos
   examples: |
     - Hola a que numero puedo comunicarme?
@@ -428,11 +405,11 @@ nlu:
     - Cuál es el numero de contacto?
     - A que mail puedo mandar mi consulta?
     - Cual es el mail de administración?
-
 - intent: materia
   examples: |
     - quiero saber mis materias [materias](materia)
     - hola quiero saber mis materias
+    - quiero saber mis materias
 - intent: datos
   examples: |
     - quiero saber los datos del [alumno](alumno)
@@ -440,3 +417,7 @@ nlu:
   examples: |
     - [66022](matricula)
     - [66031](matricula)
+    - [66007](matricula)
+- intent: mesa_examen
+  examples: |
+    - me gustaria saber las [mesa de examen](mesa_examen) disponibles
