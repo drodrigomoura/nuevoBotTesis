@@ -212,6 +212,7 @@ stories:
   steps:
   - intent: contactos
   - action: utter_contactos
+  
 - story: interactive_story_1
   steps:
   - intent: materia
@@ -222,3 +223,10 @@ stories:
   - slot_was_set:
     - matricula: '66007'
   - action: action_materia
+
+- story: interactive_story_2
+  steps:
+  - intent: mesa_examen
+    entities:
+    - mesa_examen: mesa de examen
+  - action: action_mesas_examen
