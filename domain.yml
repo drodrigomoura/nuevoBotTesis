@@ -24,6 +24,7 @@ intents:
 - informar_servicios
 - materia
 - matricula
+- mesa_examen
 - negacion
 - nlu_fallback
 - plazos_inscripcion
@@ -32,7 +33,10 @@ intents:
 - tiempo
 - visitas_consultas
 entities:
+- mesa_examen
 - matricula
+- codigo_mesa
+- materia
 slots:
   matricula:
     type: text
@@ -40,6 +44,18 @@ slots:
     mappings:
     - type: from_entity
       entity: matricula
+  mesa_examen:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: codigo_mesa
+  materia:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: materia
 responses:
   utter_saludo:
   - text: |
@@ -115,7 +131,11 @@ responses:
   utter_ask_matricula:
   - text: |
       Con que matricula?
+  utter_ask_mesa_examen:
+  - text: |
+      De que materia es la mesa de examen que busca?
 actions:
+- action_mesas_examen
 - action_materia
 - utter_ask_matricula
 - utter_saludo

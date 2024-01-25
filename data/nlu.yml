@@ -418,4 +418,6 @@ nlu:
     - [66022](matricula)
     - [66031](matricula)
     - [66007](matricula)
-    - [66007](matricula)
+- intent: mesa_examen
+  examples: |
+    - me gustaria saber las [mesa de examen](mesa_examen) disponibles
