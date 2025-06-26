@@ -39,10 +39,26 @@ class ActionVerMesasExamen(Action):
         return "action_mesas_examen"
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
-        response = supabase.table("MesaExamen").select('fecha, codigo,Materia(nombre)').execute()
+        materia = tracker.get_slot('materia')
+        print(materia)
+        # response = supabase.table("Materia").select('codigo').ilike("nombre", "%fisica%").execute()
+        response = supabase.table("MesaExamen").select('fecha, codigo,Materia(nombre)').ilike("Materia.nombre", "%" + materia + "%").execute()
+        print(response)
         for materia in response.data:
             dispatcher.utter_message(json_message = materia)
             dispatcher.utter_message(buttons = [
                 {"payload":  materia.get("codigo"), "title": materia.get("Materia").get("nombre"), "fecha de la mesa": materia.get("fecha")},
             ])
+        return []
+
+class ActionInscripcionMesaExamen(Action):
+
+    def name(self):
+        return "action_inscripcion_mesa"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
+        codigoMesa = tracker.get_slot('codigo_mesa_examen')
+        matricula = tracker.get_slot('matricula')
+        print(codigoMesa)
+        print(matricula)
         return []
