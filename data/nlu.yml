@@ -410,6 +410,9 @@ nlu:
     - quiero saber mis materias [materias](materia)
     - hola quiero saber mis materias
     - quiero saber mis materias
+    - de [fisica 1](materia)
+    - [fisica](materia)
+    - [analisis matematico](materia)
 - intent: datos
   examples: |
     - quiero saber los datos del [alumno](alumno)
@@ -418,6 +421,13 @@ nlu:
     - [66022](matricula)
     - [66031](matricula)
     - [66007](matricula)
+    - [66007](matricula)
 - intent: mesa_examen
   examples: |
     - me gustaria saber las [mesa de examen](mesa_examen) disponibles
+    - hola quiero saber las [mesas de examen](mesa_examen)
+    - me gustaria saber las fechas de las [mesas deexamen](mesa_examen)
+- intent: codigo_mesa_examen
+  examples: |
+    - [cod1001](codigo_mesa_examen)
+    - [cod1001](codigo_mesa_examen)

@@ -1,0 +1,23 @@
+version: '3.0'
+services:
+  rasa:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 5005:5005
+    environment:
+      - SQLALCHEMY_WARN_20=0
+      - SQLALCHEMY_SILENCE_UBER_WARNING=1
+    command: ["rasa", "run", "--enable-api", "--cors", "*", "--port", "5005", "--host", "0.0.0.0"]
+
+  rasa-actions:
+    build:
+      context: ./actions
+      dockerfile: Dockerfile
+    ports:
+      - 5055:5055
+    environment:
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_KEY=${SUPABASE_KEY}
+    command: ["python", "-m", "rasa_sdk", "--actions", "actions", "--port", "5055", "--host", "0.0.0.0"] 

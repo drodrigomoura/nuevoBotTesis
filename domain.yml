@@ -8,6 +8,7 @@ intents:
 - afirmacion
 - agradecimiento
 - certificadas
+- codigo_mesa_examen
 - curso_ingreso
 - despedida
 - evaluacion_coneau
@@ -32,10 +33,13 @@ intents:
 - saludo
 - tiempo
 - visitas_consultas
+- becas_hermanos
+- horarios_trabajadores
+- contactos
 entities:
-- mesa_examen
 - matricula
-- codigo_mesa
+- codigo_mesa_examen
+- mesa_examen
 - materia
 slots:
   matricula:
@@ -49,13 +53,19 @@ slots:
     influence_conversation: false
     mappings:
     - type: from_entity
-      entity: codigo_mesa
+      entity: mesa_examen
   materia:
     type: text
     influence_conversation: false
     mappings:
     - type: from_entity
       entity: materia
+  codigo_mesa_examen:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: codigo_mesa_examen
 responses:
   utter_saludo:
   - text: |
@@ -135,9 +145,11 @@ responses:
   - text: |
       De que materia es la mesa de examen que busca?
 actions:
+- utter_ask_matricula
+- utter_ask_mesa_examen
+- action_inscripcion_mesa
 - action_mesas_examen
 - action_materia
-- utter_ask_matricula
 - utter_saludo
 - utter_despedida
 - action_datos_alumno

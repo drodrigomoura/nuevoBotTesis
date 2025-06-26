@@ -212,8 +212,8 @@ stories:
   steps:
   - intent: contactos
   - action: utter_contactos
-  
-- story: interactive_story_1
+
+- story: ver mis materias
   steps:
   - intent: materia
   - action: utter_ask_matricula
@@ -224,9 +224,21 @@ stories:
     - matricula: '66007'
   - action: action_materia
 
-- story: interactive_story_2
+- story: buscar mesa de examen por asignatura
   steps:
   - intent: mesa_examen
     entities:
-    - mesa_examen: mesa de examen
+    - mesa_examen: mesas de examen
+  - action: utter_ask_mesa_examen
+  - intent: materia
+    entities:
+    - materia: fisica 1
+  - slot_was_set:
+    - materia: fisica 1
   - action: action_mesas_examen
+  - intent: codigo_mesa_examen
+    entities:
+    - codigo_mesa_examen: 'cod1001'
+  - slot_was_set:
+    - codigo_mesa_examen: 'cod1001'
+  - action: action_inscripcion_mesa
