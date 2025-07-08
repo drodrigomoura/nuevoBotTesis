@@ -407,15 +407,36 @@ nlu:
     - Cual es el mail de administración?
 - intent: materia
   examples: |
-    - quiero saber mis materias [materias](materia)
-    - hola quiero saber mis materias
     - quiero saber mis materias
-    - de [fisica 1](materia)
-    - [fisica](materia)
-    - [analisis matematico](materia)
+    - hola quiero saber mis materias
+    - quiero saber mis materias cursadas
+    - cuales son mis materias
+    - dime mis materias
+    - quiero ver mis materias
+    - necesito saber mis materias
+    - consultar mis materias
+    - ver mis materias cursadas
+    - cuales materias tengo
+    - que materias tengo
+    - mis materias
+    - quiero consultar mis materias
+    - necesito ver mis materias
+    - dime cuales son mis materias
+    - quiero saber de que materias estoy cursando
+    - cuales son las materias que tengo
+    - que materias estoy cursando
+    - ver mi historial de materias
+    - consultar mi historial académico
+    - quiero ver mi historial de materias
 - intent: datos
   examples: |
     - quiero saber los datos del [alumno](alumno)
+    - datos del alumno
+    - información del alumno
+    - datos estudiante
+    - información estudiante
+    - datos personales
+    - información personal
 - intent: matricula
   examples: |
     - [66022](matricula)
@@ -427,7 +448,65 @@ nlu:
     - me gustaria saber las [mesa de examen](mesa_examen) disponibles
     - hola quiero saber las [mesas de examen](mesa_examen)
     - me gustaria saber las fechas de las [mesas deexamen](mesa_examen)
+- intent: buscar_mesas_materia
+  examples: |
+    - quiero ver las mesas de examen de [fisica 1](materia)
+    - busco mesas de examen para [analisis matematico](materia)
+    - necesito ver las mesas de [fisica](materia)
+    - quiero saber las mesas de examen de [quimica](materia)
+    - busco fechas de mesa para [matematicas](materia)
+    - necesito ver las mesas de [programacion](materia)
+    - quiero consultar las mesas de [ingles](materia)
+    - busco mesas de examen de [estadistica](materia)
+    - necesito ver las fechas de mesa de [algebra](materia)
+    - quiero saber las mesas de [calculo](materia)
+    - busco mesas de examen para [fisica 2](materia)
+    - necesito ver las mesas de [analisis 2](materia)
+    - quiero consultar mesas de [probabilidad](materia)
+    - busco fechas de mesa para [investigacion operativa](materia)
+    - necesito ver las mesas de [sistemas operativos](materia)
 - intent: codigo_mesa_examen
   examples: |
     - [cod1001](codigo_mesa_examen)
     - [cod1001](codigo_mesa_examen)
+    - cod1001
+    - cod1002
+    - cod1003
+    - codigo mesa
+    - codigo de mesa
+    - código mesa
+    - código de mesa
+
+- intent: becas_hermanos
+  examples: |
+    - becas para hermanos
+    - descuento hermanos
+    - bonificación hermanos
+    - beca hermanos
+    - descuento por hermanos
+    - bonificación por hermanos
+    - beca por hermanos
+
+- intent: certificadas
+  examples: |
+    - carreras certificadas
+    - certificación
+    - certificadas
+    - carreras avaladas
+    - avaladas
+
+- intent: horarios_trabajadores
+  examples: |
+    - horarios trabajadores
+    - horarios para trabajadores
+    - flexibilidad horaria
+    - horarios flexibles
+    - trabajadores
+
+- intent: tiempo
+  examples: |
+    - tiempo
+    - duración
+    - cuánto tiempo
+    - cuánto dura
+    - duración carrera

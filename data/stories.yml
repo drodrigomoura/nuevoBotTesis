@@ -242,3 +242,46 @@ stories:
   - slot_was_set:
     - codigo_mesa_examen: 'cod1001'
   - action: action_inscripcion_mesa
+
+- story: buscar mesas de examen por materia específica
+  steps:
+  - intent: buscar_mesas_materia
+    entities:
+    - materia: fisica 1
+  - slot_was_set:
+    - materia: fisica 1
+  - action: action_mesas_examen
+  - intent: codigo_mesa_examen
+    entities:
+    - codigo_mesa_examen: 'cod1001'
+  - slot_was_set:
+    - codigo_mesa_examen: 'cod1001'
+  - action: action_inscripcion_mesa
+
+- story: cancelar inscripción mesa de examen
+  steps:
+  - intent: cancelar_inscripcion_mesa
+  - action: utter_ask_matricula
+  - intent: matricula
+    entities:
+    - matricula: '66007'
+  - slot_was_set:
+    - matricula: '66007'
+  - action: utter_ask_materia_cancelar
+  - intent: materia
+    entities:
+    - materia: fisica 1
+  - slot_was_set:
+    - materia: fisica 1
+  - action: action_cancelar_inscripcion_mesa
+
+- story: cancelar inscripción mesa de examen con datos completos
+  steps:
+  - intent: cancelar_inscripcion_mesa
+    entities:
+    - matricula: '66007'
+    - materia: fisica 1
+  - slot_was_set:
+    - matricula: '66007'
+    - materia: fisica 1
+  - action: action_cancelar_inscripcion_mesa

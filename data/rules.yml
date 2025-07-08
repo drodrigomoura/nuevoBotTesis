@@ -1,11 +1,27 @@
 version: "3.1"
 
 rules:
-  # - rule: mensaje out-of-scope
-  #   steps:
-  #   - intent: out_of_scope
-  #   - action: utter_out_of_scope
-  # - rule: Le pide al usuario que reformule la oración cuando el mensaje que envió tiene un confianza de NLU baja
-  #   steps:
-  #   - intent: nlu_fallback
-  #   - action: utter_please_rephrase
+- rule: saludo directo
+  steps:
+  - intent: saludo
+  - action: utter_saludo
+
+- rule: despedida directa
+  steps:
+  - intent: despedida
+  - action: utter_despedida
+
+- rule: agradecimiento directo
+  steps:
+  - intent: agradecimiento
+  - action: utter_agradecimiento
+
+- rule: fallback para baja confianza
+  steps:
+  - intent: nlu_fallback
+  - action: utter_please_rephrase
+
+- rule: out of scope
+  steps:
+  - intent: out_of_scope
+  - action: utter_out_of_scope
