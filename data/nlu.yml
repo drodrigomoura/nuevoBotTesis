@@ -510,3 +510,11 @@ nlu:
     - cuánto tiempo
     - cuánto dura
     - duración carrera
+
+- intent: autenticar_usuario
+  examples: |
+    - autenticarme con el token [12345](auth_token)
+    - mi token es [abcdef](auth_token)
+    - iniciar sesión con el token [token123](auth_token)
+    - quiero autenticarme
+    - este es mi token: [xyz789](auth_token)

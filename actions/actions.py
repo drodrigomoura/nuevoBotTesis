@@ -235,3 +235,16 @@ class ActionCancelarInscripcionMesa(Action):
             dispatcher.utter_message("❌ Hubo un error al procesar la cancelación. Por favor, intenta nuevamente más tarde.")
         
         return []
+
+class ActionAuthenticateUser(Action):
+    def name(self):
+        return "action_authenticate_user"
+
+    def run(self, dispatcher, tracker, domain):
+        token = tracker.get_slot("auth_token")
+        if token:
+            # No enviar mensaje al usuario si el token es válido
+            return [SlotSet("is_authenticated", True)]
+        else:
+            dispatcher.utter_message(text="No se recibió un token válido.")
+            return [SlotSet("is_authenticated", False)]

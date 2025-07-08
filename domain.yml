@@ -68,6 +68,13 @@ slots:
     mappings:
     - type: from_entity
       entity: codigo_mesa_examen
+  is_authenticated:
+    type: bool
+    initial_value: false
+    influence_conversation: true
+  auth_token:
+    type: text
+    influence_conversation: false
 responses:
   utter_saludo:
   - text: |
@@ -155,6 +162,8 @@ responses:
   utter_ask_materia_cancelar:
   - text: |
       Para cancelar tu inscripción necesito saber de qué materia es la mesa de examen. ¿Podrías decirme la materia?
+  utter_need_authentication:
+  - text: "Debes autenticarte antes de poder inscribirte a una mesa de examen. Por favor, proporciona tu token de autenticación."
 actions:
 - utter_ask_matricula
 - utter_ask_matricula_cancelar
@@ -169,3 +178,4 @@ actions:
 - utter_despedida
 - action_datos_alumno
 - action_tiempo
+- action_authenticate_user

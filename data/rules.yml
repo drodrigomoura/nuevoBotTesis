@@ -16,6 +16,27 @@ rules:
   - intent: agradecimiento
   - action: utter_agradecimiento
 
+- rule: Autenticar usuario con token
+  steps:
+    - intent: autenticar_usuario
+    - action: action_authenticate_user
+
+- rule: Inscribirse a mesa de examen solo si autenticado
+  condition:
+    - slot_was_set:
+        - is_authenticated: true
+  steps:
+    - intent: codigo_mesa_examen
+    - action: action_inscripcion_mesa
+
+- rule: Intento de inscripción sin autenticación
+  condition:
+    - slot_was_set:
+        - is_authenticated: false
+  steps:
+    - intent: codigo_mesa_examen
+    - action: utter_need_authentication
+
 - rule: fallback para baja confianza
   steps:
   - intent: nlu_fallback
