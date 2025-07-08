@@ -224,21 +224,76 @@ stories:
     - matricula: '66007'
   - action: action_materia
 
-- story: buscar mesa de examen por asignatura
+- story: buscar mesa de examen por asignatura (autenticado)
   steps:
-  - intent: mesa_examen
+    - intent: autenticar_usuario
+      entities:
+        - auth_token: "TOKEN"
+    - action: action_authenticate_user
+    - slot_was_set:
+        - is_authenticated: true
+    - intent: mesa_examen
+      entities:
+        - mesa_examen: mesas de examen
+    - action: utter_ask_mesa_examen
+    - intent: materia
+      entities:
+        - materia: fisica 1
+    - slot_was_set:
+        - materia: fisica 1
+    - action: action_mesas_examen
+    - intent: codigo_mesa_examen
+      entities:
+        - codigo_mesa_examen: 'cod1001'
+    - slot_was_set:
+        - codigo_mesa_examen: 'cod1001'
+    - action: action_inscripcion_mesa
+
+- story: buscar mesas de examen por materia específica (autenticado)
+  steps:
+    - intent: autenticar_usuario
+      entities:
+        - auth_token: "TOKEN"
+    - action: action_authenticate_user
+    - slot_was_set:
+        - is_authenticated: true
+    - intent: buscar_mesas_materia
+      entities:
+        - materia: fisica 1
+    - slot_was_set:
+        - materia: fisica 1
+    - action: action_mesas_examen
+    - intent: codigo_mesa_examen
+      entities:
+        - codigo_mesa_examen: 'cod1001'
+    - slot_was_set:
+        - codigo_mesa_examen: 'cod1001'
+    - action: action_inscripcion_mesa
+
+- story: cancelar inscripción mesa de examen
+  steps:
+  - intent: cancelar_inscripcion_mesa
+  - action: utter_ask_matricula
+  - intent: matricula
     entities:
-    - mesa_examen: mesas de examen
-  - action: utter_ask_mesa_examen
+    - matricula: '66007'
+  - slot_was_set:
+    - matricula: '66007'
+  - action: utter_ask_materia_cancelar
   - intent: materia
     entities:
     - materia: fisica 1
   - slot_was_set:
     - materia: fisica 1
-  - action: action_mesas_examen
-  - intent: codigo_mesa_examen
+  - action: action_cancelar_inscripcion_mesa
+
+- story: cancelar inscripción mesa de examen con datos completos
+  steps:
+  - intent: cancelar_inscripcion_mesa
     entities:
-    - codigo_mesa_examen: 'cod1001'
+    - matricula: '66007'
+    - materia: fisica 1
   - slot_was_set:
-    - codigo_mesa_examen: 'cod1001'
-  - action: action_inscripcion_mesa
+    - matricula: '66007'
+    - materia: fisica 1
+  - action: action_cancelar_inscripcion_mesa
