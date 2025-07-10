@@ -55,7 +55,7 @@ class ActionMaterias(Action):
 class ActionVerMesasExamen(Action):
 
     def name(self):
-        return "action_mesas_examen"
+        return "action_consultar_mesas_examen"
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
         materia = tracker.get_slot('materia')
@@ -123,7 +123,7 @@ class ActionVerMesasExamen(Action):
 class ActionInscripcionMesaExamen(Action):
 
     def name(self):
-        return "action_inscripcion_mesa"
+        return "action_inscripcion_mesa_examen"
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
         codigoMesa = tracker.get_slot('codigo_mesa_examen')

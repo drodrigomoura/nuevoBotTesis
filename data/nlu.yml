@@ -241,7 +241,7 @@ nlu:
     - Existen otorgamientos de becas? Que tipo?
     - hola, quisiera saber si tienen becas para las carreras?
     - ¿Que tipo se beneficios brinda la universidad a los estudiantes?
-    - Con que beneficios cuantan los estudiantes a la hora de inscribirse?
+    - Con que beneficios cuentan los estudiantes a la hora de inscribirse?
     - La universidad otorga algún tipo de beca o bonificacion para hermanos en las cuotas?
 - intent: informar_horarios_trabajadores
   examples: |
@@ -405,78 +405,6 @@ nlu:
     - Cuál es el numero de contacto?
     - A que mail puedo mandar mi consulta?
     - Cual es el mail de administración?
-- intent: materia
-  examples: |
-    - quiero saber mis materias
-    - hola quiero saber mis materias
-    - quiero saber mis materias cursadas
-    - cuales son mis materias
-    - dime mis materias
-    - quiero ver mis materias
-    - necesito saber mis materias
-    - consultar mis materias
-    - ver mis materias cursadas
-    - cuales materias tengo
-    - que materias tengo
-    - mis materias
-    - quiero consultar mis materias
-    - necesito ver mis materias
-    - dime cuales son mis materias
-    - quiero saber de que materias estoy cursando
-    - cuales son las materias que tengo
-    - que materias estoy cursando
-    - ver mi historial de materias
-    - consultar mi historial académico
-    - quiero ver mi historial de materias
-- intent: datos
-  examples: |
-    - quiero saber los datos del [alumno](alumno)
-    - datos del alumno
-    - información del alumno
-    - datos estudiante
-    - información estudiante
-    - datos personales
-    - información personal
-- intent: matricula
-  examples: |
-    - [66022](matricula)
-    - [66031](matricula)
-    - [66007](matricula)
-    - [66007](matricula)
-- intent: mesa_examen
-  examples: |
-    - me gustaria saber las [mesa de examen](mesa_examen) disponibles
-    - hola quiero saber las [mesas de examen](mesa_examen)
-    - me gustaria saber las fechas de las [mesas deexamen](mesa_examen)
-- intent: buscar_mesas_materia
-  examples: |
-    - quiero ver las mesas de examen de [fisica 1](materia)
-    - busco mesas de examen para [analisis matematico](materia)
-    - necesito ver las mesas de [fisica](materia)
-    - quiero saber las mesas de examen de [quimica](materia)
-    - busco fechas de mesa para [matematicas](materia)
-    - necesito ver las mesas de [programacion](materia)
-    - quiero consultar las mesas de [ingles](materia)
-    - busco mesas de examen de [estadistica](materia)
-    - necesito ver las fechas de mesa de [algebra](materia)
-    - quiero saber las mesas de [calculo](materia)
-    - busco mesas de examen para [fisica 2](materia)
-    - necesito ver las mesas de [analisis 2](materia)
-    - quiero consultar mesas de [probabilidad](materia)
-    - busco fechas de mesa para [investigacion operativa](materia)
-    - necesito ver las mesas de [sistemas operativos](materia)
-- intent: codigo_mesa_examen
-  examples: |
-    - [cod1001](codigo_mesa_examen)
-    - [cod1001](codigo_mesa_examen)
-    - cod1001
-    - cod1002
-    - cod1003
-    - codigo mesa
-    - codigo de mesa
-    - código mesa
-    - código de mesa
-
 - intent: becas_hermanos
   examples: |
     - becas para hermanos
@@ -486,15 +414,6 @@ nlu:
     - descuento por hermanos
     - bonificación por hermanos
     - beca por hermanos
-
-- intent: certificadas
-  examples: |
-    - carreras certificadas
-    - certificación
-    - certificadas
-    - carreras avaladas
-    - avaladas
-
 - intent: horarios_trabajadores
   examples: |
     - horarios trabajadores
@@ -503,18 +422,20 @@ nlu:
     - horarios flexibles
     - trabajadores
 
-- intent: tiempo
-  examples: |
-    - tiempo
-    - duración
-    - cuánto tiempo
-    - cuánto dura
-    - duración carrera
-
 - intent: autenticar_usuario
   examples: |
-    - autenticarme con el token [12345](auth_token)
-    - mi token es [abcdef](auth_token)
-    - iniciar sesión con el token [token123](auth_token)
-    - quiero autenticarme
-    - este es mi token: [xyz789](auth_token)
+    - [eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c](auth_token)
+    - [eyJ0b2tlbiI6IjEyMzQ1Njc4OTAiLCJ1c2VyX2lkIjoiMTIzNDU2Nzg5MCIsImV4cCI6MTYzNDU2Nzg5MH0.abc123def456ghi789](auth_token)
+    - [eyJ1c2VyX2lkIjoiNjYwMDciLCJtYXRyaWN1bGEiOiI2NjAwNyIsImV4cCI6MTYzNDU2Nzg5MH0.xyz789abc123def456](auth_token)
+    - [eyJhbHVtbm9faWQiOiI2NjAwNyIsIm5vbWJyZSI6Ikp1YW4gUGVyZXoiLCJleHAiOjE2MzQ1Njc4OTB9.ghi789jkl012mno345](auth_token)
+    - [eyJjb2RpZ29fZXN0dWRpYW50ZSI6IjEyMzQ1Iiwibm9tYnJlX2VzdHVkaWFudGUiOiJNYXJpYSBHb256YWxleiIsImV4cCI6MTYzNDU2Nzg5MH0.pqr678stu901vwx234](auth_token)
+    - [eyJ0b2tlbl9hdXRoIjoiYXV0aGVudGljYXRlZCIsInVzZXJfaWQiOiI2NjAwNyIsImV4cCI6MTYzNDU2Nzg5MH0.yza567bcd890efg123](auth_token)
+    - [eyJhdXRoZW50aWNhdGVkIjp0cnVlLCJ1c2VyX2lkIjoiNjYwMDciLCJleHAiOjE2MzQ1Njc4OTB9.hij456klm789nop012](auth_token)
+    - [eyJ0b2tlbiI6ImF1dGhlbnRpY2F0ZWQiLCJ1c2VyX2lkIjoiNjYwMDciLCJleHAiOjE2MzQ1Njc4OTB9.qrs345tuv678wxy901](auth_token)
+    - [eyJjb2RpZ29fYXV0aGVudGljYXRpb24iOiI2NjAwNyIsImV4cCI6MTYzNDU2Nzg5MH0.zab234cde567fgh890](auth_token)
+    - [eyJ1c2VyX2F1dGhlbnRpY2F0ZWQiOiJ0cnVlIiwidXNlcl9pZCI6IjY2MDA3IiwiZXhwIjoxNjM0NTY3ODkwfQ.ijk345lmn678opq901](auth_token)
+    - [eyJ0b2tlbl9kZV9hdXRoZW50aWNhY2lvbiI6IjY2MDA3IiwiZXhwIjoxNjM0NTY3ODkwfQ.rst234uvw567xyz890](auth_token)
+    - [eyJhdXRoZW50aWNhdGVkX3VzZXIiOiI2NjAwNyIsImV4cCI6MTYzNDU2Nzg5MH0.abc123def456ghi789](auth_token)
+    - [eyJjb2RpZ29fZGVfYXV0aGVudGljYWNpb24iOiI2NjAwNyIsImV4cCI6MTYzNDU2Nzg5MH0.jkl234mno567pqr890](auth_token)
+    - [eyJ1c2VyX2F1dGhlbnRpY2F0ZWQiOiJ0cnVlIiwidXNlcl9pZCI6IjY2MDA3IiwiZXhwIjoxNjM0NTY3ODkwfQ.stu234vwx567yza890](auth_token)
+    - [eyJ0b2tlbl9kZV9hdXRoZW50aWNhY2lvbiI6IjY2MDA3IiwiZXhwIjoxNjM0NTY3ODkwfQ.bcd234efg567hij890](auth_token)

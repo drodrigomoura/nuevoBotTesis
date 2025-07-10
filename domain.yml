@@ -7,10 +7,6 @@ session_config:
 intents:
 - afirmacion
 - agradecimiento
-- certificadas
-- codigo_mesa_examen
-- buscar_mesas_materia
-- cancelar_inscripcion_mesa
 - curso_ingreso
 - despedida
 - evaluacion_coneau
@@ -25,49 +21,19 @@ intents:
 - informar_modalidad_inscripcion
 - informar_nivel_profesores
 - informar_servicios
-- materia
-- matricula
-- mesa_examen
 - negacion
 - nlu_fallback
 - plazos_inscripcion
 - requisitos_inscripcion
-- saludo
-- tiempo
+- saludo  
 - visitas_consultas
-- becas_hermanos
-- horarios_trabajadores
 - contactos
+- out_of_scope
+- autenticar_usuario
+
 entities:
-- matricula
-- codigo_mesa_examen
-- mesa_examen
-- materia
+- auth_token
 slots:
-  matricula:
-    type: text
-    influence_conversation: false
-    mappings:
-    - type: from_entity
-      entity: matricula
-  mesa_examen:
-    type: text
-    influence_conversation: false
-    mappings:
-    - type: from_entity
-      entity: mesa_examen
-  materia:
-    type: text
-    influence_conversation: false
-    mappings:
-    - type: from_entity
-      entity: materia
-  codigo_mesa_examen:
-    type: text
-    influence_conversation: false
-    mappings:
-    - type: from_entity
-      entity: codigo_mesa_examen
   is_authenticated:
     type: bool
     initial_value: false
@@ -78,7 +44,8 @@ slots:
     type: text
     influence_conversation: false
     mappings:
-      - type: custom
+      - type: from_entity
+        entity: auth_token
 responses:
   utter_saludo:
   - text: |
@@ -151,35 +118,7 @@ responses:
   utter_contactos:
   - text: |
       Te paso un enlace con la [Lista de contactos según las sedes](https://www.ugd.edu.ar/contacto)
-  utter_ask_matricula:
-  - text: |
-      Con que matricula?
-  utter_ask_mesa_examen:
-  - text: |
-      De que materia es la mesa de examen que busca?
-  utter_ask_materia_mesas:
-  - text: |
-      ¿De qué materia necesitas ver las mesas de examen?
-  utter_ask_matricula_cancelar:
-  - text: |
-      Para cancelar tu inscripción necesito tu número de matrícula. ¿Podrías proporcionármelo?
-  utter_ask_materia_cancelar:
-  - text: |
-      Para cancelar tu inscripción necesito saber de qué materia es la mesa de examen. ¿Podrías decirme la materia?
-  utter_need_authentication:
-  - text: "Debes autenticarte antes de poder inscribirte a una mesa de examen. Por favor, proporciona tu token de autenticación."
 actions:
-- utter_ask_matricula
-- utter_ask_matricula_cancelar
-- utter_ask_mesa_examen
-- utter_ask_materia_mesas
-- utter_ask_materia_cancelar
-- action_inscripcion_mesa
-- action_cancelar_inscripcion_mesa
-- action_mesas_examen
-- action_materia
+- action_authenticate_user
 - utter_saludo
 - utter_despedida
-- action_datos_alumno
-- action_tiempo
-- action_authenticate_user
