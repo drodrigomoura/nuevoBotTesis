@@ -17,41 +17,6 @@ url: str = os.getenv("SUPABASE_URL")
 key: str = os.getenv("SUPABASE_KEY")
 supabase: Client = create_client(url, key)
 
-class ActionMaterias(Action):
-
-    def name(self):
-        return "action_materia"
-
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
-        matricula = tracker.get_slot('matricula')
-        
-        if not matricula:
-            dispatcher.utter_message("❌ No tengo tu número de matrícula. Por favor, proporciona tu matrícula para poder consultar tus materias.")
-            return []
-        
-        try:
-            response = supabase.table("MateriaCursada").select('fecha_cursada, Materia(nombre)').eq("estudiante", matricula).execute()
-            
-            if not response.data:
-                dispatcher.utter_message(f"📚 No se encontraron materias cursadas para la matrícula {matricula}.")
-                return []
-            
-            dispatcher.utter_message(f"📚 **Materias cursadas para la matrícula {matricula}:**")
-            
-            for materia in response.data:
-                nombre_materia = materia.get("Materia", {}).get("nombre", "Materia sin nombre")
-                fecha_cursada = materia.get("fecha_cursada", "Fecha no disponible")
-                
-                dispatcher.utter_message(f"• **{nombre_materia}** - Cursada el: {fecha_cursada}")
-            
-            dispatcher.utter_message(f"✅ Total de materias encontradas: {len(response.data)}")
-            
-        except Exception as e:
-            print(f"Error al consultar materias: {e}")
-            dispatcher.utter_message("❌ Hubo un error al consultar tus materias. Por favor, intenta nuevamente más tarde.")
-        
-        return []
-
 class ActionVerMesasExamen(Action):
 
     def name(self):
@@ -233,6 +198,49 @@ class ActionCancelarInscripcionMesa(Action):
         except Exception as e:
             print(f"Error al cancelar inscripción: {e}")
             dispatcher.utter_message("❌ Hubo un error al procesar la cancelación. Por favor, intenta nuevamente más tarde.")
+        
+        return []
+
+class ActionConsultarMaterias(Action):
+
+    def name(self):
+        return "action_consultar_materias"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
+        # Verificar si el usuario está autenticado
+        is_authenticated = tracker.get_slot('is_authenticated')
+        
+        if not is_authenticated:
+            dispatcher.utter_message("❌ Necesitas estar autenticado para consultar tus materias. Por favor, inicia sesión primero.")
+            return []
+        
+        # Obtener la matrícula del slot
+        matricula = tracker.get_slot('matricula')
+        
+        if not matricula:
+            dispatcher.utter_message("❌ No tengo tu número de matrícula. Por favor, proporciona tu matrícula para poder consultar tus materias.")
+            return []
+        
+        try:
+            response = supabase.table("MateriaCursada").select('fecha_cursada, Materia(nombre)').eq("estudiante", matricula).execute()
+            
+            if not response.data:
+                dispatcher.utter_message(f"📚 No se encontraron materias cursadas para la matrícula {matricula}.")
+                return []
+            
+            dispatcher.utter_message(f"📚 **Materias cursadas para la matrícula {matricula}:**")
+            
+            for materia in response.data:
+                nombre_materia = materia.get("Materia", {}).get("nombre", "Materia sin nombre")
+                fecha_cursada = materia.get("fecha_cursada", "Fecha no disponible")
+                
+                dispatcher.utter_message(f"• **{nombre_materia}** - Cursada el: {fecha_cursada}")
+            
+            dispatcher.utter_message(f"✅ Total de materias encontradas: {len(response.data)}")
+            
+        except Exception as e:
+            print(f"Error al consultar materias: {e}")
+            dispatcher.utter_message("❌ Hubo un error al consultar tus materias. Por favor, intenta nuevamente más tarde.")
         
         return []
 

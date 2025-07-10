@@ -239,3 +239,91 @@ stories:
     - is_authenticated: true
   - intent: saludo
   - action: utter_saludo
+
+- story: consultar materias con matrícula
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_materias
+    entities:
+    - matricula: "66001"
+  - action: action_consultar_materias
+
+- story: consultar materias con matrícula y saludo
+  steps:
+  - intent: saludo
+  - action: utter_saludo
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_materias
+    entities:
+    - matricula: "66022"
+  - action: action_consultar_materias
+  - intent: agradecimiento
+  - action: utter_agradecimiento
+  - intent: despedida
+  - action: utter_despedida
+
+- story: consultar materias sin matrícula
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_materias
+  - action: utter_solicitar_matricula
+
+- story: consultar materias sin matrícula con saludo
+  steps:
+  - intent: saludo
+  - action: utter_saludo
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_materias
+  - action: utter_solicitar_matricula
+
+- story: proporcionar matrícula y consultar materias
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_materias
+  - action: utter_solicitar_matricula
+  - intent: proporcionar_matricula
+    entities:
+    - matricula: "66001"
+  - action: action_consultar_materias
+
+- story: proporcionar matrícula directamente
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: proporcionar_matricula
+    entities:
+    - matricula: "66022"
+  - action: action_consultar_materias
+
+- story: consultar materias con matrícula ya proporcionada
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+    - matricula: "66017"
+  - intent: consultar_materias
+  - action: action_consultar_materias
+
+- story: consultar materias con matrícula ya proporcionada y saludo
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+    - matricula: "66017"
+  - intent: saludo
+  - action: utter_saludo
+  - intent: consultar_materias
+  - action: action_consultar_materias
+
+- story: múltiples consultas con misma matrícula
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+    - matricula: "66017"
+  - intent: consultar_materias
+  - action: action_consultar_materias
+  - intent: consultar_materias
+  - action: action_consultar_materias

@@ -30,3 +30,16 @@ rules:
   steps:
   - intent: out_of_scope
   - action: utter_out_of_scope
+
+- rule: proporcionar matrícula
+  steps:
+  - intent: proporcionar_matricula
+  - action: action_consultar_materias
+
+- rule: consultar materias con matrícula existente
+  condition:
+  - slot_was_set:
+    - matricula: not null
+  steps:
+  - intent: consultar_materias
+  - action: action_consultar_materias

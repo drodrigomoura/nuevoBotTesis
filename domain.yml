@@ -3,7 +3,7 @@ config:
   store_entities_as_slots: true
 session_config:
   session_expiration_time: 60
-  carry_over_slots_to_new_session: true
+  carry_over_slots_to_new_session: false
 intents:
 - afirmacion
 - agradecimiento
@@ -30,9 +30,12 @@ intents:
 - contactos
 - out_of_scope
 - autenticar_usuario
+- consultar_materias
+- proporcionar_matricula
 
 entities:
 - auth_token
+- matricula
 slots:
   is_authenticated:
     type: bool
@@ -46,6 +49,12 @@ slots:
     mappings:
       - type: from_entity
         entity: auth_token
+  matricula:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: matricula
 responses:
   utter_saludo:
   - text: |
@@ -118,7 +127,9 @@ responses:
   utter_contactos:
   - text: |
       Te paso un enlace con la [Lista de contactos según las sedes](https://www.ugd.edu.ar/contacto)
+  utter_solicitar_matricula:
+  - text: |
+      Para consultar tus materias necesito tu número de matrícula. Por favor, proporciona tu matrícula (por ejemplo: 66001, 66022, 66031).
 actions:
+- action_consultar_materias
 - action_authenticate_user
-- utter_saludo
-- utter_despedida
