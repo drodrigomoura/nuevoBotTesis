@@ -5,7 +5,6 @@ session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: false
 intents:
-- afirmacion
 - agradecimiento
 - curso_ingreso
 - despedida
@@ -21,7 +20,6 @@ intents:
 - informar_modalidad_inscripcion
 - informar_nivel_profesores
 - informar_servicios
-- negacion
 - nlu_fallback
 - plazos_inscripcion
 - requisitos_inscripcion
@@ -32,10 +30,13 @@ intents:
 - autenticar_usuario
 - consultar_materias
 - proporcionar_matricula
+- consultar_notas
+- proporcionar_materia
 
 entities:
 - auth_token
 - matricula
+- materia
 slots:
   is_authenticated:
     type: bool
@@ -55,6 +56,12 @@ slots:
     mappings:
       - type: from_entity
         entity: matricula
+  materia:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: materia
 responses:
   utter_saludo:
   - text: |
@@ -130,6 +137,16 @@ responses:
   utter_solicitar_matricula:
   - text: |
       Para consultar tus materias necesito tu número de matrícula. Por favor, proporciona tu matrícula (por ejemplo: 66001, 66022, 66031).
+  utter_solicitar_matricula_notas:
+  - text: |
+      Para consultar tus notas necesito tu número de matrícula. Por favor, proporciona tu matrícula (por ejemplo: 66001, 66022, 66031).
+  utter_solicitar_materia_notas:
+  - text: |
+      Para consultar tus notas necesito saber de qué materia. Por favor, especifica la materia (por ejemplo: matematica, fisica, programacion).
+  utter_solicitar_matricula_y_materia_notas:
+  - text: |
+      Para consultar tus notas necesito tu número de matrícula y la materia. Por favor, proporciona tu matrícula y especifica la materia (por ejemplo: "matricula 66001 de matematica").
 actions:
 - action_consultar_materias
 - action_authenticate_user
+- action_consultar_notas

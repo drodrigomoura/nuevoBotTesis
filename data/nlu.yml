@@ -531,3 +531,83 @@ nlu:
     - ver materias con matricula [66001](matricula)
     - mis materias con matricula [66022](matricula)
     - materias en curso con matricula [66031](matricula)
+
+- intent: consultar_notas
+  examples: |
+    - quiero ver mis notas
+    - necesito ver mis calificaciones
+    - cuales son mis notas actuales
+    - dime que notas tengo
+    - quiero saber mis calificaciones
+    - cuales son mis notas del cuatrimestre
+    - necesito consultar mis notas
+    - quiero ver que notas tengo
+    - dime mis calificaciones
+    - cuales son las notas que tengo
+    - quiero saber que notas tengo este cuatrimestre
+    - necesito ver mi lista de notas
+    - cuales son mis calificaciones actuales
+    - quiero consultar que notas tengo
+    - dime cuales son mis notas
+    - necesito saber mis calificaciones
+    - quiero ver cuales son mis notas
+    - cuales notas tengo este semestre
+    - quiero consultar mis calificaciones actuales
+    - dime que notas tengo
+    - quiero ver mis notas de [matematica](materia)
+    - necesito ver mis calificaciones de [fisica](materia)
+    - cuales son mis notas de [programacion](materia)
+    - dime que notas tengo en [ingles](materia)
+    - quiero saber mis calificaciones de [historia](materia)
+    - cuales son mis notas del [cuatrimestre](materia)
+    - necesito consultar mis notas de [algebra](materia)
+    - quiero ver que notas tengo en [quimica](materia)
+    - dime mis calificaciones de [biologia](materia)
+    - cuales son las notas que tengo en [literatura](materia)
+    - quiero saber que notas tengo en [filosofia](materia)
+    - necesito ver mi lista de notas de [geografia](materia)
+    - cuales son mis calificaciones de [economia](materia)
+    - quiero consultar que notas tengo en [psicologia](materia)
+    - dime cuales son mis notas de [sociologia](materia)
+    - necesito saber mis calificaciones de [derecho](materia)
+    - quiero ver cuales son mis notas de [contabilidad](materia)
+    - cuales notas tengo en [estadistica](materia)
+    - quiero consultar mis calificaciones de [administracion](materia)
+    - dime que notas tengo en [marketing](materia)
+    - quiero ver mis notas con matricula [66001](matricula)
+    - necesito consultar mis notas matricula [66022](matricula)
+    - cuales son mis notas matricula [66031](matricula)
+    - dime que notas tengo matricula [66001](matricula)
+    - quiero saber mis calificaciones matricula [66022](matricula)
+    - consultar notas matricula [66031](matricula)
+    - ver notas matricula [66001](matricula)
+    - mis calificaciones matricula [66022](matricula)
+    - notas del cuatrimestre matricula [66031](matricula)
+    - quiero ver mis notas con matricula [66001](matricula)
+    - necesito consultar mis notas con matricula [66022](matricula)
+    - cuales son mis notas con matricula [66031](matricula)
+    - dime que notas tengo con matricula [66001](matricula)
+    - quiero saber mis calificaciones con matricula [66022](matricula)
+    - consultar notas con matricula [66031](matricula)
+    - ver notas con matricula [66001](matricula)
+    - mis calificaciones con matricula [66022](matricula)
+    - notas del cuatrimestre con matricula [66031](matricula)
+    - quiero ver mis notas de [matematica](materia) con matricula [66001](matricula)
+    - necesito ver mis calificaciones de [fisica](materia) matricula [66022](matricula)
+    - cuales son mis notas de [programacion](materia) matricula [66031](matricula)
+    - dime que notas tengo en [ingles](materia) matricula [66001](matricula)
+    - quiero saber mis calificaciones de [historia](materia) matricula [66022](matricula)
+    - consultar notas de [algebra](materia) matricula [66031](matricula)
+    - ver notas de [quimica](materia) matricula [66001](matricula)
+    - mis calificaciones de [biologia](materia) matricula [66022](matricula)
+    - notas de [literatura](materia) matricula [66031](matricula)
+    - quiero ver mis notas de [matematica](materia) con matricula [66001](matricula)
+    - necesito ver mis calificaciones de [fisica](materia) con matricula [66022](matricula)
+    - cuales son mis notas de [programacion](materia) con matricula [66031](matricula)
+    - dime que notas tengo en [ingles](materia) con matricula [66001](matricula)
+    - quiero saber mis calificaciones de [historia](materia) con matricula [66022](matricula)
+    - consultar notas de [algebra](materia) con matricula [66031](matricula)
+    - ver notas de [quimica](materia) con matricula [66001](matricula)
+    - mis calificaciones de [biologia](materia) con matricula [66022](matricula)
+    - notas de [literatura](materia) con matricula [66031](matricula)
+

@@ -256,3 +256,116 @@ class ActionAuthenticateUser(Action):
         else:
             dispatcher.utter_message(text="No se recibió un token válido.")
             return [SlotSet("is_authenticated", False)]
+
+class ActionConsultarNotas(Action):
+
+    def name(self):
+        return "action_consultar_notas"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
+        # Verificar si el usuario está autenticado
+        is_authenticated = tracker.get_slot('is_authenticated')
+        
+        if not is_authenticated:
+            dispatcher.utter_message("❌ Necesitas estar autenticado para consultar tus notas. Por favor, inicia sesión primero.")
+            return []
+        
+        # Obtener la matrícula del slot
+        matricula = tracker.get_slot('matricula')
+        
+        if not matricula:
+            dispatcher.utter_message("❌ No tengo tu número de matrícula. Por favor, proporciona tu matrícula para poder consultar tus notas.")
+            return []
+        
+        # Convertir matrícula a entero
+        try:
+            matricula = int(matricula)
+        except ValueError:
+            dispatcher.utter_message("❌ El número de matrícula debe ser un número válido.")
+            return []
+        
+        # Obtener la materia del slot
+        materia = tracker.get_slot('materia')
+        print(f"[LOG] Consultando notas para matrícula: {matricula}, materia: {materia}")
+        try:
+            materia_codigo = None
+            if materia:
+                # Buscar el id de la materia por nombre
+                materia_resp = supabase.table("Materia").select("codigo, nombre").ilike("nombre", "%" + materia + "%").execute()
+                print(f"[LOG] Materia encontrada: {materia_resp.data}")
+                if materia_resp.data:
+                    materia_codigo = materia_resp.data[0]["codigo"]
+                else:
+                    dispatcher.utter_message(f"❌ No se encontró la materia '{materia}' en la base de datos.")
+                    return []
+
+            # Buscar las notas usando el id de la materia si está disponible
+            print(f"[LOG] Materia codigo: {materia_codigo}")
+            print(f"[LOG] Matricula: {matricula}")
+            
+            if materia_codigo:
+                # Usar query SQL directa con .from_()
+                sql_query = f"SELECT * FROM public.\"Notas\" WHERE materia_codigo = '{materia_codigo}' AND estudiante_id = {matricula}"
+                print(f"[LOG] SQL Query: {sql_query}")
+                response = supabase.from_('Notas').select("*").eq("materia_codigo", materia_codigo).eq("estudiante_id", matricula).execute()
+            else:
+                # Consulta sin filtro de materia
+                sql_query = f"SELECT * FROM public.\"Notas\" WHERE estudiante_id = {matricula}"
+                print(f"[LOG] SQL Query: {sql_query}")
+                response = supabase.from_('Notas').select("*").eq("estudiante_id", matricula).execute()
+            
+            print(f"[LOG] Response: {response}")
+            print(f"[LOG] Response data: {response.data}")
+            print(f"[LOG] Response data length: {len(response.data) if response.data else 0}")
+            
+            # Verificar si hay errores en la respuesta
+            if hasattr(response, 'error') and response.error:
+                print(f"[LOG] Supabase error: {response.error}")
+            
+            # Si no hay datos, probar una consulta simple sin filtros
+            if not response.data:
+                print(f"[LOG] Probando consulta simple sin filtros...")
+                try:
+                    simple_response = supabase.from_('Notas').select("*").limit(5).execute()
+                    print(f"[LOG] Simple response: {simple_response.data}")
+                    print(f"[LOG] Simple response length: {len(simple_response.data) if simple_response.data else 0}")
+                except Exception as e:
+                    print(f"[LOG] Error en consulta simple: {e}")
+            
+            if not response.data:
+                if materia:
+                    dispatcher.utter_message(f"📊 No se encontraron notas registradas para la matrícula {matricula} en la materia '{materia}'.")
+                else:
+                    dispatcher.utter_message(f"📊 No se encontraron notas registradas para la matrícula {matricula}.")
+                return []
+
+            # Mostrar el título según si se especificó materia o no
+            if materia:
+                dispatcher.utter_message(f"📊 **Notas de {materia.upper()} para la matrícula {matricula}:**")
+            else:
+                dispatcher.utter_message(f"📊 **Todas las notas para la matrícula {matricula}:**")
+
+            for nota in response.data:
+                calificacion = nota.get("nota", "Sin calificar")
+                fecha_nota = nota.get("created_at", "Fecha no disponible")
+                descripcion = nota.get("descripcion", "Sin descripción")
+                # Formatear la nota con emoji según la calificación
+                if isinstance(calificacion, (int, float)):
+                    if calificacion >= 7:
+                        emoji = "🟢"
+                    elif calificacion >= 4:
+                        emoji = "🟡"
+                    else:
+                        emoji = "🔴"
+                    nota_formateada = f"{emoji} {calificacion}/10"
+                else:
+                    nota_formateada = f"📝 {calificacion}"
+                dispatcher.utter_message(f"• {nota_formateada} - {descripcion} - Fecha: {fecha_nota}")
+
+            dispatcher.utter_message(f"✅ Total de notas encontradas: {len(response.data)}")
+        
+        except Exception as e:
+            print(f"Error al consultar notas: {e}")
+            dispatcher.utter_message("❌ Hubo un error al consultar tus notas. Por favor, intenta nuevamente más tarde.")
+        
+        return []

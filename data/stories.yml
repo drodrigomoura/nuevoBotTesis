@@ -327,3 +327,116 @@ stories:
   - action: action_consultar_materias
   - intent: consultar_materias
   - action: action_consultar_materias
+
+- story: consultar notas con matrícula y materia
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_notas
+    entities:
+    - matricula: "66001"
+    - materia: "matematica"
+  - action: action_consultar_notas
+
+- story: consultar notas con matrícula y materia y saludo
+  steps:
+  - intent: saludo
+  - action: utter_saludo
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_notas
+    entities:
+    - matricula: "66022"
+    - materia: "fisica"
+  - action: action_consultar_notas
+  - intent: agradecimiento
+  - action: utter_agradecimiento
+  - intent: despedida
+  - action: utter_despedida
+
+- story: consultar notas sin matrícula ni materia
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_notas
+  - action: utter_solicitar_matricula_y_materia_notas
+
+- story: consultar notas sin matrícula ni materia con saludo
+  steps:
+  - intent: saludo
+  - action: utter_saludo
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_notas
+  - action: utter_solicitar_matricula_y_materia_notas
+
+- story: consultar notas y proporcionar matrícula
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_notas
+  - action: utter_solicitar_matricula_y_materia_notas
+  - intent: proporcionar_matricula
+    entities:
+    - matricula: "66001"
+  - action: utter_solicitar_materia_notas
+
+- story: consultar notas con matrícula pero sin materia
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+    - matricula: "66017"
+  - intent: consultar_notas
+  - action: utter_solicitar_materia_notas
+
+- story: consultar notas con matrícula pero sin materia y saludo
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+    - matricula: "66017"
+  - intent: saludo
+  - action: utter_saludo
+  - intent: consultar_notas
+  - action: utter_solicitar_materia_notas
+
+- story: consultar notas con materia pero sin matrícula
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_notas
+    entities:
+    - materia: "matematica"
+  - action: utter_solicitar_matricula_notas
+
+- story: consultar notas con materia pero sin matrícula y saludo
+  steps:
+  - intent: saludo
+  - action: utter_saludo
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_notas
+    entities:
+    - materia: "fisica"
+  - action: utter_solicitar_matricula_notas
+
+- story: proporcionar materia para notas
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+    - matricula: "66017"
+  - intent: proporcionar_materia
+    entities:
+    - materia: "matematica"
+  - action: action_consultar_notas
+
+- story: múltiples consultas de notas con misma matrícula y materia
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+    - matricula: "66017"
+    - materia: "fisica"
+  - intent: consultar_notas
+  - action: action_consultar_notas
+  - intent: consultar_notas
+  - action: action_consultar_notas
+
