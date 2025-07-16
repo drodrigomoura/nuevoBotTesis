@@ -369,3 +369,61 @@ class ActionConsultarNotas(Action):
             dispatcher.utter_message("❌ Hubo un error al consultar tus notas. Por favor, intenta nuevamente más tarde.")
         
         return []
+
+class ActionConsultarRequerimientosMateria(Action):
+
+    def name(self):
+        return "action_consultar_requerimientos_materia"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
+        # Verificar si el usuario está autenticado
+        is_authenticated = tracker.get_slot('is_authenticated')
+        
+        if not is_authenticated:
+            dispatcher.utter_message("❌ Necesitas estar autenticado para consultar los requerimientos de las materias. Por favor, inicia sesión primero.")
+            return []
+        
+        # Obtener la matrícula del slot
+        matricula = tracker.get_slot('matricula')
+        
+        if not matricula:
+            dispatcher.utter_message("❌ No tengo tu número de matrícula. Por favor, proporciona tu matrícula para poder consultar los requerimientos de las materias.")
+            return []
+        
+        # Obtener la materia del slot
+        materia = tracker.get_slot('materia')
+        
+        if not materia:
+            dispatcher.utter_message("❌ No tengo la materia especificada. Por favor, dime de qué materia quieres consultar los requerimientos.")
+            return []
+        
+        try:    
+            # Buscar el id de la materia por nombre
+            materia_resp = supabase.table("Materia").select("codigo, nombre").ilike("nombre", "%" + materia + "%").execute()
+            if not materia_resp.data:
+                dispatcher.utter_message(f"❌ No se encontró la materia '{materia}' en la base de datos.")
+                return []
+            
+            materia_codigo = materia_resp.data[0]["codigo"]
+            
+            # Buscar los requerimientos de la materia
+            requerimientos_resp = supabase.table("MateriaEquivalencia").select('*, Materia!MateriaEquivalencia_equivalencia_id_fkey(nombre)').eq("materia_codigo", materia_codigo).execute()
+
+            if not requerimientos_resp.data:
+                dispatcher.utter_message(f"❌ No se encontraron requerimientos para la materia '{materia}'.")
+                return []
+            
+            dispatcher.utter_message(f"📊 **Requerimientos de {materia.upper()}:**")
+            
+            for requerimiento in requerimientos_resp.data:
+                nombre_materia_equivalencia = requerimiento.get("Materia", {}).get("nombre", "Materia sin nombre")
+                dispatcher.utter_message(f"• **{nombre_materia_equivalencia}**")
+
+            dispatcher.utter_message(f"✅ Total de requerimientos encontrados: {len(requerimientos_resp.data)}")
+
+        except Exception as e:
+            print(f"Error al consultar requerimientos de la materia: {e}")
+            dispatcher.utter_message("❌ Hubo un error al consultar los requerimientos de la materia. Por favor, intenta nuevamente más tarde.")
+        
+        return []
+            

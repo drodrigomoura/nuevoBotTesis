@@ -32,6 +32,7 @@ intents:
 - proporcionar_matricula
 - consultar_notas
 - proporcionar_materia
+- consultar_requerimientos_materia
 
 entities:
 - auth_token
@@ -150,3 +151,4 @@ actions:
 - action_consultar_materias
 - action_authenticate_user
 - action_consultar_notas
+- action_consultar_requerimientos_materia

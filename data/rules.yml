@@ -85,3 +85,8 @@ rules:
   steps:
   - intent: proporcionar_materia
   - action: action_consultar_notas
+
+- rule: consultar requerimientos de materia
+  steps:
+  - intent: consultar_requerimientos_materia
+  - action: action_consultar_requerimientos_materia
