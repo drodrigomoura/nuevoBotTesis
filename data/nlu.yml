@@ -653,3 +653,178 @@ nlu:
     - necesito saber que materias debo tener para [Investigacion Operativa](materia)
     - cuales son los prerequisitos para cursar [Inteligencia Artificial 2](materia)
     - que necesito para poder cursar [Proyectos Informaticos](materia)
+
+- intent: consultar_fecha_mesas_examen_final
+  examples: |
+    - quiero ver las fechas de examen final
+    - necesito consultar las fechas de examen final
+    - cuales son las fechas de examen final
+    - dime las fechas de examen final
+    - quiero saber las fechas de examen final
+    - cuales son las fechas de los examenes finales
+    - necesito ver las fechas de los examenes finales
+    - quiero consultar las fechas de los examenes finales
+    - dime las fechas de los examenes finales
+    - quiero saber las fechas de los examenes finales
+    - cuales son las fechas de examen final disponibles
+    - necesito ver las fechas de examen final disponibles
+    - quiero consultar las fechas de examen final disponibles
+    - dime las fechas de examen final disponibles
+    - quiero saber las fechas de examen final disponibles
+    - cuando son los examenes finales
+    - cuales son las fechas para rendir examen final
+    - necesito ver las fechas para rendir examen final
+    - quiero consultar las fechas para rendir examen final
+    - dime las fechas para rendir examen final
+    - quiero saber las fechas para rendir examen final
+    - cuando puedo rendir examen final
+    - cuales son las fechas de mesas de examen
+    - necesito ver las fechas de mesas de examen
+    - quiero consultar las fechas de mesas de examen
+    - dime las fechas de mesas de examen
+    - quiero saber las fechas de mesas de examen
+    - cuando son las mesas de examen
+    - cuales son las fechas para rendir
+    - necesito ver las fechas para rendir
+    - quiero consultar las fechas para rendir
+    - dime las fechas para rendir
+    - quiero saber las fechas para rendir
+    - cuando puedo rendir
+    - fechas de examen final
+    - fechas de examenes finales
+    - fechas de mesas de examen
+    - fechas para rendir
+    - fechas de examen
+    - fechas de examenes
+    - fechas de mesas
+    - fechas de rendir
+    - fechas de finales
+    - fechas de final
+    - fechas de mesa
+    - fechas de mesa de examen
+    - fechas de mesa de examenes
+    - fechas de mesa de final
+    - fechas de mesa de finales
+    - fechas de mesa de rendir
+    - fechas de mesa de rendir examen
+    - fechas de mesa de rendir examenes
+    - fechas de mesa de rendir final
+    - fechas de mesa de rendir finales
+    - quiero ver las fechas de examen final de [matematica](materia)
+    - necesito consultar las fechas de examen final de [fisica](materia)
+    - cuales son las fechas de examen final de [programacion](materia)
+    - dime las fechas de examen final de [ingles](materia)
+    - quiero saber las fechas de examen final de [historia](materia)
+    - cuales son las fechas de examen final de [algebra](materia)
+    - necesito ver las fechas de examen final de [quimica](materia)
+    - quiero consultar las fechas de examen final de [biologia](materia)
+    - dime las fechas de examen final de [literatura](materia)
+    - quiero saber las fechas de examen final de [filosofia](materia)
+    - cuales son las fechas de examen final de [geografia](materia)
+    - necesito ver las fechas de examen final de [economia](materia)
+    - quiero consultar las fechas de examen final de [psicologia](materia)
+    - dime las fechas de examen final de [sociologia](materia)
+    - quiero saber las fechas de examen final de [derecho](materia)
+    - cuales son las fechas de examen final de [contabilidad](materia)
+    - necesito ver las fechas de examen final de [estadistica](materia)
+    - quiero consultar las fechas de examen final de [administracion](materia)
+    - dime las fechas de examen final de [marketing](materia)
+    - cuando son los examenes finales de [matematica](materia)
+    - cuales son las fechas para rendir examen final de [fisica](materia)
+    - necesito ver las fechas para rendir examen final de [programacion](materia)
+    - quiero consultar las fechas para rendir examen final de [ingles](materia)
+    - dime las fechas para rendir examen final de [historia](materia)
+    - quiero saber las fechas para rendir examen final de [algebra](materia)
+    - cuando puedo rendir examen final de [quimica](materia)
+    - cuales son las fechas de mesas de examen de [biologia](materia)
+    - necesito ver las fechas de mesas de examen de [literatura](materia)
+    - quiero consultar las fechas de mesas de examen de [filosofia](materia)
+    - dime las fechas de mesas de examen de [geografia](materia)
+    - quiero saber las fechas de mesas de examen de [economia](materia)
+    - cuando son las mesas de examen de [psicologia](materia)
+    - cuales son las fechas para rendir de [sociologia](materia)
+    - necesito ver las fechas para rendir de [derecho](materia)
+    - quiero consultar las fechas para rendir de [contabilidad](materia)
+    - dime las fechas para rendir de [estadistica](materia)
+    - quiero saber las fechas para rendir de [administracion](materia)
+    - cuando puedo rendir de [marketing](materia)
+    - fechas de examen final de [matematica](materia)
+    - fechas de examenes finales de [fisica](materia)
+    - fechas de mesas de examen de [programacion](materia)
+    - fechas para rendir de [ingles](materia)
+    - fechas de examen de [historia](materia)
+    - fechas de examenes de [algebra](materia)
+    - fechas de mesas de [quimica](materia)
+    - fechas de rendir de [biologia](materia)
+    - fechas de finales de [literatura](materia)
+    - fechas de final de [filosofia](materia)
+    - fechas de mesa de [geografia](materia)
+    - fechas de mesa de examen de [economia](materia)
+    - fechas de mesa de examenes de [psicologia](materia)
+    - fechas de mesa de final de [sociologia](materia)
+    - fechas de mesa de finales de [derecho](materia)
+    - fechas de mesa de rendir de [contabilidad](materia)
+    - fechas de mesa de rendir examen de [estadistica](materia)
+    - fechas de mesa de rendir examenes de [administracion](materia)
+    - fechas de mesa de rendir final de [marketing](materia)
+    - fechas de mesa de rendir finales de [matematica](materia)
+
+- intent: proporcionar_materia
+  examples: |
+    - [matematica](materia)
+    - [fisica](materia)
+    - [programacion](materia)
+    - [ingles](materia)
+    - [historia](materia)
+    - [algebra](materia)
+    - [quimica](materia)
+    - [biologia](materia)
+    - [literatura](materia)
+    - [filosofia](materia)
+    - [geografia](materia)
+    - [economia](materia)
+    - [psicologia](materia)
+    - [sociologia](materia)
+    - [derecho](materia)
+    - [contabilidad](materia)
+    - [estadistica](materia)
+    - [administracion](materia)
+    - [marketing](materia)
+    - [redes de computadoras 1](materia)
+    - [algoritmos 1](materia)
+    - [programacion estructurada](materia)
+    - [analisis de sistemas](materia)
+    - [algoritmos 2](materia)
+    - [analisis matematico 3](materia)
+    - [diseno de sistemas](materia)
+    - [fisica 2](materia)
+    - [analisis matematico 1](materia)
+    - [ingenieria de software](materia)
+    - [calculo numerico](materia)
+    - [redes de computadoras 2](materia)
+    - [programacion avanzada](materia)
+    - [analisis matematico 2](materia)
+    - [investigacion operativa](materia)
+    - [inteligencia artificial 2](materia)
+    - [proyectos informaticos](materia)
+    - [inteligencia artificial 1](materia)
+    - la materia es [matematica](materia)
+    - es [fisica](materia)
+    - quiero [programacion](materia)
+    - necesito [ingles](materia)
+    - de [historia](materia)
+    - para [algebra](materia)
+    - sobre [quimica](materia)
+    - acerca de [biologia](materia)
+    - me interesa [literatura](materia)
+    - busco [filosofia](materia)
+    - consulto [geografia](materia)
+    - informacion de [economia](materia)
+    - datos de [psicologia](materia)
+    - detalles de [sociologia](materia)
+    - informacion sobre [derecho](materia)
+    - datos sobre [contabilidad](materia)
+    - detalles sobre [estadistica](materia)
+    - informacion acerca de [administracion](materia)
+    - datos acerca de [marketing](materia)
+

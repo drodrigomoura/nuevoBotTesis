@@ -5,34 +5,35 @@ session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: false
 intents:
-- agradecimiento
-- curso_ingreso
-- despedida
-- evaluacion_coneau
-- informar_asistencia
-- informar_ayuda_informatica_ingles
-- informar_becas_hermanos
-- informar_equipamiento_tecnologico
-- informar_equivalencias
-- informar_examen_recuperatorio
-- informar_horarios_trabajadores
-- informar_intercambio_de_estudio
-- informar_modalidad_inscripcion
-- informar_nivel_profesores
-- informar_servicios
-- nlu_fallback
-- plazos_inscripcion
-- requisitos_inscripcion
-- saludo  
-- visitas_consultas
-- contactos
-- out_of_scope
-- autenticar_usuario
-- consultar_materias
-- proporcionar_matricula
-- consultar_notas
-- proporcionar_materia
-- consultar_requerimientos_materia
+  - agradecimiento
+  - curso_ingreso
+  - despedida
+  - evaluacion_coneau
+  - informar_asistencia
+  - informar_ayuda_informatica_ingles
+  - informar_becas_hermanos
+  - informar_equipamiento_tecnologico
+  - informar_equivalencias
+  - informar_examen_recuperatorio
+  - informar_horarios_trabajadores
+  - informar_intercambio_de_estudio
+  - informar_modalidad_inscripcion
+  - informar_nivel_profesores
+  - informar_servicios
+  - nlu_fallback
+  - plazos_inscripcion
+  - requisitos_inscripcion
+  - saludo  
+  - visitas_consultas
+  - contactos
+  - out_of_scope
+  - autenticar_usuario
+  - consultar_materias
+  - proporcionar_matricula
+  - consultar_notas
+  - proporcionar_materia
+  - consultar_requerimientos_materia
+  - consultar_fecha_mesas_examen_final
 
 entities:
 - auth_token
@@ -147,8 +148,12 @@ responses:
   utter_solicitar_matricula_y_materia_notas:
   - text: |
       Para consultar tus notas necesito tu número de matrícula y la materia. Por favor, proporciona tu matrícula y especifica la materia (por ejemplo: "matricula 66001 de matematica").
+  utter_solicitar_materia_examen:
+  - text: |
+      Para consultar las fechas de examen final necesito saber de qué materia. Por favor, especifica la materia (por ejemplo: matematica, fisica, programacion).
 actions:
-- action_consultar_materias
-- action_authenticate_user
-- action_consultar_notas
-- action_consultar_requerimientos_materia
+  - action_consultar_materias
+  - action_authenticate_user
+  - action_consultar_notas
+  - action_consultar_requerimientos_materia
+  - action_consultar_mesas_examen

@@ -440,3 +440,114 @@ stories:
   - intent: consultar_notas
   - action: action_consultar_notas
 
+# FLUJO CORRECTO PARA CONSULTAR FECHAS DE MESAS DE EXAMEN
+- story: consultar fechas de mesas de examen sin materia
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_fecha_mesas_examen_final
+  - action: utter_solicitar_materia_examen
+
+- story: consultar fechas de mesas de examen sin materia con saludo
+  steps:
+  - intent: saludo
+  - action: utter_saludo
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_fecha_mesas_examen_final
+  - action: utter_solicitar_materia_examen
+
+- story: consultar fechas de mesas de examen con materia
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_fecha_mesas_examen_final
+    entities:
+    - materia: "matematica"
+  - action: action_consultar_mesas_examen
+
+- story: consultar fechas de mesas de examen con materia y saludo
+  steps:
+  - intent: saludo
+  - action: utter_saludo
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_fecha_mesas_examen_final
+    entities:
+    - materia: "fisica"
+  - action: action_consultar_mesas_examen
+
+- story: consultar fechas de mesas de examen y luego proporcionar materia
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_fecha_mesas_examen_final
+  - action: utter_solicitar_materia_examen
+  - intent: proporcionar_materia
+    entities:
+    - materia: "matematica"
+  - action: action_consultar_mesas_examen
+
+- story: consultar fechas de mesas de examen y luego proporcionar materia con saludo
+  steps:
+  - intent: saludo
+  - action: utter_saludo
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_fecha_mesas_examen_final
+  - action: utter_solicitar_materia_examen
+  - intent: proporcionar_materia
+    entities:
+    - materia: "programacion"
+  - action: action_consultar_mesas_examen
+
+- story: múltiples consultas de fechas de mesas de examen
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_fecha_mesas_examen_final
+  - action: utter_solicitar_materia_examen
+  - intent: proporcionar_materia
+    entities:
+    - materia: "matematica"
+  - action: action_consultar_mesas_examen
+  - intent: consultar_fecha_mesas_examen_final
+  - action: utter_solicitar_materia_examen
+  - intent: proporcionar_materia
+    entities:
+    - materia: "fisica"
+  - action: action_consultar_mesas_examen
+
+- story: consultar requerimientos de materia con matrícula y materia
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+    - matricula: "66007"
+  - intent: consultar_requerimientos_materia
+    entities:
+    - materia: "fisica 2"
+  - action: action_consultar_requerimientos_materia
+
+- story: consultar requerimientos de materia y luego proporcionar materia
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+    - matricula: "66007"
+  - intent: consultar_requerimientos_materia
+  - action: action_consultar_requerimientos_materia
+  - intent: proporcionar_materia
+    entities:
+    - materia: "fisica 2"
+  - action: action_consultar_requerimientos_materia
+
+- story: consultar notas y luego proporcionar materia
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+    - matricula: "66007"
+  - intent: consultar_notas
+  - action: utter_solicitar_materia_notas
+  - intent: proporcionar_materia
+    entities:
+    - materia: "matematica"
+  - action: action_consultar_notas 

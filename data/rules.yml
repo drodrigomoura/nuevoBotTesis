@@ -31,8 +31,6 @@ rules:
   - intent: out_of_scope
   - action: utter_out_of_scope
 
-
-
 - rule: consultar materias con matrícula existente
   condition:
   - slot_was_set:
@@ -77,16 +75,11 @@ rules:
   - intent: consultar_notas
   - action: utter_solicitar_matricula_y_materia_notas
 
-- rule: proporcionar materia para notas
-  condition:
-  - slot_was_set:
-    - matricula: not null
-    - materia: null
-  steps:
-  - intent: proporcionar_materia
-  - action: action_consultar_notas
-
 - rule: consultar requerimientos de materia
   steps:
   - intent: consultar_requerimientos_materia
   - action: action_consultar_requerimientos_materia
+
+
+
+

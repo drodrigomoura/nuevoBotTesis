@@ -23,66 +23,50 @@ class ActionVerMesasExamen(Action):
         return "action_consultar_mesas_examen"
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
+        is_authenticated = tracker.get_slot('is_authenticated')
+        if not is_authenticated:
+            dispatcher.utter_message("❌ Necesitas estar autenticado para consultar las mesas de examen. Por favor, inicia sesión primero.")
+            return []
+
         materia = tracker.get_slot('materia')
-        
         if not materia:
             dispatcher.utter_message("❌ No especificaste qué materia quieres consultar. Por favor, dime de qué materia necesitas ver las mesas de examen.")
             return []
-        
+
         try:
-            response = supabase.table("MesaExamen").select('fecha, codigo, Materia(nombre)').ilike("Materia.nombre", "%" + materia + "%").execute()
-            
-            if not response.data:
-                dispatcher.utter_message(f"📅 No se encontraron mesas de examen para la materia '{materia}'.")
+            # 1. Buscar el código de la materia
+            materia_resp = supabase.table("Materia").select("codigo, nombre").ilike("nombre", "%" + materia + "%").execute()
+            if not materia_resp.data:
+                dispatcher.utter_message(f"❌ No se encontró la materia '{materia}' en la base de datos.")
                 return []
-            
-            dispatcher.utter_message(f"📅 **Mesas de examen disponibles para {materia.upper()}:**")
-            
-            for mesa in response.data:
-                nombre_materia = mesa.get("Materia", {}).get("nombre", "Materia sin nombre")
+
+            materia_codigo = materia_resp.data[0]["codigo"]
+            nombre_materia = materia_resp.data[0]["nombre"]
+
+            # 2. Buscar las mesas de examen con ese código de materia
+            mesas_resp = supabase.table("MesaExamen").select('fecha, codigo').eq("materia_codigo", materia_codigo).execute()
+            if not mesas_resp.data:
+                dispatcher.utter_message(f"📅 No se encontraron mesas de examen para la materia '{nombre_materia}'.")
+                return []
+
+            dispatcher.utter_message(f"📅 **Mesas de examen disponibles para {nombre_materia.upper()}:**")
+            for idx, mesa in enumerate(mesas_resp.data, 1):
                 codigo_mesa = mesa.get("codigo", "Sin código")
                 fecha_mesa = mesa.get("fecha", "Fecha no disponible")
-                
-                dispatcher.utter_message(f"• **{nombre_materia}**")
-                dispatcher.utter_message(f"  📋 Código: `{codigo_mesa}`")
-                dispatcher.utter_message(f"  📅 Fecha: {fecha_mesa}")
-            
-            # Mostrar botones de inscripción solo al final
-            if len(response.data) == 1:
-                # Si solo hay una mesa, mostrar botón directo
-                mesa = response.data[0]
-                nombre_materia = mesa.get("Materia", {}).get("nombre", "Materia")
-                codigo_mesa = mesa.get("codigo")
                 dispatcher.utter_message(
-                    buttons=[
-                        {
-                            "title": f"📝 Inscribirse a {nombre_materia}",
-                            "payload": f"/codigo_mesa_examen{{\"codigo_mesa_examen\": \"{codigo_mesa}\"}}"
-                        }
-                    ]
+                    f"-----------------------------\n"
+                    f"📝 Mesa #{idx}\n"
+                    f"📋 Código: `{codigo_mesa}`\n"
+                    f"📅 Fecha: {fecha_mesa}\n"
+                    f"-----------------------------"
                 )
-            else:
-                # Si hay múltiples mesas, mostrar opciones
-                dispatcher.utter_message("📝 **¿Te gustaría inscribirte a alguna de estas mesas?**")
-                for mesa in response.data:
-                    nombre_materia = mesa.get("Materia", {}).get("nombre", "Materia")
-                    codigo_mesa = mesa.get("codigo")
-                    dispatcher.utter_message(
-                        buttons=[
-                            {
-                                "title": f"Inscribirse a {nombre_materia}",
-                                "payload": f"/codigo_mesa_examen{{\"codigo_mesa_examen\": \"{codigo_mesa}\"}}"
-                            }
-                        ]
-                    )
-            
-            dispatcher.utter_message(f"✅ Se encontraron {len(response.data)} mesa(s) de examen para {materia.upper()}")
-            dispatcher.utter_message("💡 **Nota:** Puedes consultar las fechas sin inscribirte. Los botones de inscripción son opcionales.")
-            
+            dispatcher.utter_message(f"✅ Se encontraron {len(mesas_resp.data)} mesa(s) de examen para {nombre_materia.upper()}")
+            dispatcher.utter_message("💡 **Nota:** Estas son las fechas disponibles para la materia consultada.")
+
         except Exception as e:
             print(f"Error al consultar mesas de examen: {e}")
             dispatcher.utter_message("❌ Hubo un error al consultar las mesas de examen. Por favor, intenta nuevamente más tarde.")
-        
+
         return []
 
 class ActionInscripcionMesaExamen(Action):
@@ -426,4 +410,3 @@ class ActionConsultarRequerimientosMateria(Action):
             dispatcher.utter_message("❌ Hubo un error al consultar los requerimientos de la materia. Por favor, intenta nuevamente más tarde.")
         
         return []
-            
