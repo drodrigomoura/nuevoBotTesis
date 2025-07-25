@@ -424,7 +424,7 @@ stories:
   - slot_was_set:
     - is_authenticated: true
     - matricula: "66017"
-  - intent: proporcionar_materia
+  - intent: proporcionar_materia_para_notas
     entities:
     - materia: "matematica"
   - action: action_consultar_notas
@@ -535,7 +535,7 @@ stories:
     - matricula: "66007"
   - intent: consultar_requerimientos_materia
   - action: action_consultar_requerimientos_materia
-  - intent: proporcionar_materia
+  - intent: proporcionar_materia_para_requerimientos
     entities:
     - materia: "fisica 2"
   - action: action_consultar_requerimientos_materia
@@ -547,7 +547,72 @@ stories:
     - matricula: "66007"
   - intent: consultar_notas
   - action: utter_solicitar_materia_notas
-  - intent: proporcionar_materia
+  - intent: proporcionar_materia_para_notas
     entities:
     - materia: "matematica"
   - action: action_consultar_notas 
+
+- story: Inscripción a mesa de examen (flujo completo)
+  steps:
+    - intent: inscribirse_mesa_examen
+    - action: action_ofrecer_mesas_examen
+    - intent: seleccionar_mesa_examen
+      entities:
+        - codigo_mesa_examen: "12345"
+    - slot_was_set:
+        - codigo_mesa_examen: "12345"
+    - action: action_inscripcion_mesa_examen
+
+- story: Inscripción a mesa de examen por código
+  steps:
+    - intent: inscribirse_mesa_examen
+      entities:
+        - materia: "matematica"
+    - action: action_ofrecer_mesas_examen
+    - intent: seleccionar_mesa_examen
+      entities:
+        - codigo_mesa_examen: "12345"
+    - slot_was_set:
+        - codigo_mesa_examen: "12345"
+    - action: action_inscripcion_mesa_examen
+
+- story: Inscripción a mesa de examen por fecha
+  steps:
+    - intent: inscribirse_mesa_examen
+      entities:
+        - materia: "fisica"
+    - action: action_ofrecer_mesas_examen
+    - intent: seleccionar_mesa_examen
+      entities:
+        - fecha_mesa: "2024-07-25"
+    - action: action_inscripcion_mesa_examen
+
+- story: Inscripción a mesa de examen sin materia
+  steps:
+    - intent: inscribirse_mesa_examen
+    - action: action_ofrecer_mesas_examen
+    - intent: proporcionar_materia_para_inscripcion
+      entities:
+        - materia: "quimica"
+    - action: action_ofrecer_mesas_examen
+    - intent: seleccionar_mesa_examen
+      entities:
+        - codigo_mesa_examen: "45678"
+    - slot_was_set:
+        - codigo_mesa_examen: "45678"
+    - action: action_inscripcion_mesa_examen
+
+- story: Inscripción a mesa de examen con confirmación
+  steps:
+    - intent: inscribirse_mesa_examen
+      entities:
+        - materia: "biologia"
+    - action: action_ofrecer_mesas_examen
+    - intent: seleccionar_mesa_examen
+      entities:
+        - codigo_mesa_examen: "78901"
+    - slot_was_set:
+        - codigo_mesa_examen: "78901"
+    - action: action_inscripcion_mesa_examen
+    - intent: afirmacion
+    - action: utter_agradecimiento 

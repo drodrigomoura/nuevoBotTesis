@@ -34,11 +34,19 @@ intents:
   - proporcionar_materia
   - consultar_requerimientos_materia
   - consultar_fecha_mesas_examen_final
+  - inscribirse_mesa_examen
+  - seleccionar_mesa_examen
+  - proporcionar_materia_para_inscripcion
+  - proporcionar_materia_para_notas
+  - proporcionar_materia_para_requerimientos
 
 entities:
 - auth_token
 - matricula
 - materia
+- codigo_mesa_examen
+- fecha_mesa
+- flujo_actual
 slots:
   is_authenticated:
     type: bool
@@ -64,6 +72,23 @@ slots:
     mappings:
       - type: from_entity
         entity: materia
+  codigo_mesa_examen:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: codigo_mesa_examen
+  fecha_mesa:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: fecha_mesa
+  flujo_actual:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: custom
 responses:
   utter_saludo:
   - text: |
@@ -157,3 +182,5 @@ actions:
   - action_consultar_notas
   - action_consultar_requerimientos_materia
   - action_consultar_mesas_examen
+  - action_ofrecer_mesas_examen
+  - action_inscripcion_mesa_examen

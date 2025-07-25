@@ -69,65 +69,137 @@ class ActionVerMesasExamen(Action):
 
         return []
 
-class ActionInscripcionMesaExamen(Action):
+class ActionOfrecerMesasExamen(Action):
+    def name(self):
+        return "action_ofrecer_mesas_examen"
 
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
+        is_authenticated = tracker.get_slot('is_authenticated')
+        if not is_authenticated:
+            dispatcher.utter_message("❌ Necesitas estar autenticado para consultar e inscribirte a una mesa de examen. Por favor, inicia sesión primero.")
+            return []
+
+        matricula = tracker.get_slot('matricula')
+        materia = tracker.get_slot('materia')
+
+        if not matricula:
+            dispatcher.utter_message("❌ No tengo tu número de matrícula. Por favor, proporciona tu matrícula para poder continuar.")
+            return [SlotSet("flujo_actual", "inscripcion_mesa_examen")]
+        if not materia:
+            dispatcher.utter_message("❌ No tengo la materia especificada. Por favor, dime a qué materia quieres inscribirte para la mesa de examen.")
+            return [SlotSet("flujo_actual", "inscripcion_mesa_examen")]
+        try:
+            materia_resp = supabase.table("Materia").select("codigo, nombre").ilike("nombre", "%" + materia + "%").execute()
+            if not materia_resp.data:
+                dispatcher.utter_message(f"❌ No se encontró la materia '{materia}' en la base de datos.")
+                return []
+            materia_codigo = materia_resp.data[0]["codigo"]
+            nombre_materia = materia_resp.data[0]["nombre"]
+
+            mesas_resp = supabase.table("MesaExamen").select('fecha, codigo').eq("materia_codigo", materia_codigo).order("fecha", desc=False).execute()
+            if not mesas_resp.data:
+                dispatcher.utter_message(f"📅 No se encontraron mesas de examen para la materia '{nombre_materia}'.")
+                return []
+
+            dispatcher.utter_message(f"📅 **Mesas de examen disponibles para {nombre_materia.upper()}:**")
+            mesas_list = []
+            for idx, mesa in enumerate(mesas_resp.data, 1):
+                codigo_mesa = mesa.get("codigo", "Sin código")
+                fecha_mesa = mesa.get("fecha", "Fecha no disponible")
+                mesas_list.append({"codigo": codigo_mesa, "fecha": fecha_mesa})
+                dispatcher.utter_message(
+                    f"-----------------------------\n"
+                    f"📝 Mesa #{idx}\n"
+                    f"📋 Código: `{codigo_mesa}`\n"
+                    f"📅 Fecha: {fecha_mesa}\n"
+                    f"-----------------------------"
+                )
+            dispatcher.utter_message("Por favor, dime la fecha o el código de la mesa a la que deseas inscribirte.")
+            # Limpiar el contexto porque ya se ofrecieron las mesas
+            return [SlotSet("flujo_actual", None)]
+        except Exception as e:
+            print(f"Error al ofrecer mesas de examen: {e}")
+            dispatcher.utter_message("❌ Hubo un error al consultar las mesas de examen. Por favor, intenta nuevamente más tarde.")
+        return []
+
+# Modificar ActionInscripcionMesaExamen para solo inscribir si ya hay código de mesa seleccionado
+def _find_mesa_by_codigo(codigo_mesa):
+    try:
+        mesa_response = supabase.table("MesaExamen").select('fecha, Materia(nombre)').eq("codigo", codigo_mesa).execute()
+        if mesa_response.data:
+            return mesa_response.data[0]
+    except Exception as e:
+        print(f"Error buscando mesa por código: {e}")
+    return None
+
+class ActionInscripcionMesaExamen(Action):
     def name(self):
         return "action_inscripcion_mesa_examen"
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
-        codigoMesa = tracker.get_slot('codigo_mesa_examen')
+        is_authenticated = tracker.get_slot('is_authenticated')
+        if not is_authenticated:
+            dispatcher.utter_message("❌ Necesitas estar autenticado para inscribirte a una mesa de examen. Por favor, inicia sesión primero.")
+            return []
         matricula = tracker.get_slot('matricula')
-        
+        codigo_mesa = tracker.get_slot('codigo_mesa_examen')
+        fecha_mesa = tracker.get_slot('fecha_mesa')
+        materia = tracker.get_slot('materia')
         if not matricula:
             dispatcher.utter_message("❌ No tengo tu número de matrícula. Por favor, proporciona tu matrícula para poder inscribirte a la mesa de examen.")
             return []
-        
-        if not codigoMesa:
-            dispatcher.utter_message("❌ No tengo el código de la mesa de examen. Por favor, selecciona una mesa de examen para inscribirte.")
+        # Si no hay código pero sí fecha, buscar el código de la mesa para esa fecha y materia
+        if not codigo_mesa and fecha_mesa and materia:
+            try:
+                materia_resp = supabase.table("Materia").select("codigo").ilike("nombre", "%" + materia + "%").execute()
+                if not materia_resp.data:
+                    dispatcher.utter_message(f"❌ No se encontró la materia '{materia}' en la base de datos.")
+                    return []
+                materia_codigo = materia_resp.data[0]["codigo"]
+                mesa_resp = supabase.table("MesaExamen").select('codigo').eq("materia_codigo", materia_codigo).eq("fecha", fecha_mesa).execute()
+                if not mesa_resp.data:
+                    dispatcher.utter_message(f"❌ No se encontró una mesa de examen para la materia '{materia}' en la fecha '{fecha_mesa}'.")
+                    return []
+                codigo_mesa = mesa_resp.data[0]["codigo"]
+            except Exception as e:
+                print(f"Error buscando mesa por fecha: {e}")
+                dispatcher.utter_message("❌ Hubo un error al buscar la mesa de examen por fecha. Por favor, intenta nuevamente más tarde.")
+                return []
+        if not codigo_mesa:
+            dispatcher.utter_message("❌ No tengo el código de la mesa de examen. Por favor, selecciona una mesa de examen para inscribirte (puedes consultarlas primero).")
             return []
-        
         try:
-            # Primero verificar que la mesa de examen existe
-            mesa_response = supabase.table("MesaExamen").select('fecha, Materia(nombre)').eq("codigo", codigoMesa).execute()
-            
-            if not mesa_response.data:
-                dispatcher.utter_message(f"❌ No se encontró una mesa de examen con el código '{codigoMesa}'.")
+            mesa_info = _find_mesa_by_codigo(codigo_mesa)
+            if not mesa_info:
+                dispatcher.utter_message(f"❌ No se encontró una mesa de examen con el código '{codigo_mesa}'.")
                 return []
-            
-            mesa_info = mesa_response.data[0]
             nombre_materia = mesa_info.get("Materia", {}).get("nombre", "Materia sin nombre")
-            fecha_mesa = mesa_info.get("fecha", "Fecha no disponible")
-            
+            fecha_mesa_final = mesa_info.get("fecha", "Fecha no disponible")
             # Verificar si ya está inscrito
-            inscripcion_existente = supabase.table("InscripcionMesa").select('*').eq("estudiante", matricula).eq("mesa_examen", codigoMesa).execute()
-            
+            inscripcion_existente = supabase.table("Inscripcion").select('*').eq("estudiante", matricula).eq("codigo_mesa", codigo_mesa).execute()
             if inscripcion_existente.data:
-                dispatcher.utter_message(f"⚠️ Ya estás inscrito a la mesa de examen de **{nombre_materia}** (código: {codigoMesa}) que se realizará el {fecha_mesa}.")
+                dispatcher.utter_message(f"⚠️ Ya estás inscrito a la mesa de examen de **{nombre_materia}** (código: {codigo_mesa}) que se realizará el {fecha_mesa_final}.")
                 return []
-            
             # Realizar la inscripción
             inscripcion_data = {
                 "estudiante": matricula,
-                "mesa_examen": codigoMesa,
+                "codigo_mesa": codigo_mesa,
                 "fecha_inscripcion": "now()"
             }
-            
-            insert_response = supabase.table("InscripcionMesa").insert(inscripcion_data).execute()
-            
+            insert_response = supabase.table("Inscripcion").insert(inscripcion_data).execute()
             if insert_response.data:
                 dispatcher.utter_message(f"✅ **¡Inscripción exitosa!**")
                 dispatcher.utter_message(f"📚 Materia: **{nombre_materia}**")
-                dispatcher.utter_message(f"📋 Código de mesa: `{codigoMesa}`")
-                dispatcher.utter_message(f"📅 Fecha del examen: {fecha_mesa}")
+                dispatcher.utter_message(f"📋 Código de mesa: `{codigo_mesa}`")
+                dispatcher.utter_message(f"📅 Fecha del examen: {fecha_mesa_final}")
                 dispatcher.utter_message(f"🎓 Matrícula: {matricula}")
                 dispatcher.utter_message("📝 Recuerda presentarte con tu DNI y los materiales necesarios para el examen.")
+                return [SlotSet("flujo_actual", None)]
             else:
                 dispatcher.utter_message("❌ Hubo un problema al procesar tu inscripción. Por favor, intenta nuevamente.")
-                
         except Exception as e:
             print(f"Error al inscribir a mesa de examen: {e}")
             dispatcher.utter_message("❌ Hubo un error al procesar tu inscripción. Por favor, intenta nuevamente más tarde.")
-        
         return []
 
 class ActionCancelarInscripcionMesa(Action):
@@ -203,14 +275,14 @@ class ActionConsultarMaterias(Action):
         
         if not matricula:
             dispatcher.utter_message("❌ No tengo tu número de matrícula. Por favor, proporciona tu matrícula para poder consultar tus materias.")
-            return []
+            return [SlotSet("flujo_actual", "consultar_materias")]
         
         try:
             response = supabase.table("MateriaCursada").select('fecha_cursada, Materia(nombre)').eq("estudiante", matricula).execute()
             
             if not response.data:
                 dispatcher.utter_message(f"📚 No se encontraron materias cursadas para la matrícula {matricula}.")
-                return []
+                return [SlotSet("flujo_actual", None)]
             
             dispatcher.utter_message(f"📚 **Materias cursadas para la matrícula {matricula}:**")
             
@@ -221,7 +293,7 @@ class ActionConsultarMaterias(Action):
                 dispatcher.utter_message(f"• **{nombre_materia}** - Cursada el: {fecha_cursada}")
             
             dispatcher.utter_message(f"✅ Total de materias encontradas: {len(response.data)}")
-            
+            return [SlotSet("flujo_actual", None)]
         except Exception as e:
             print(f"Error al consultar materias: {e}")
             dispatcher.utter_message("❌ Hubo un error al consultar tus materias. Por favor, intenta nuevamente más tarde.")
@@ -259,7 +331,7 @@ class ActionConsultarNotas(Action):
         
         if not matricula:
             dispatcher.utter_message("❌ No tengo tu número de matrícula. Por favor, proporciona tu matrícula para poder consultar tus notas.")
-            return []
+            return [SlotSet("flujo_actual", "consultar_notas")]
         
         # Convertir matrícula a entero
         try:
@@ -271,6 +343,9 @@ class ActionConsultarNotas(Action):
         # Obtener la materia del slot
         materia = tracker.get_slot('materia')
         print(f"[LOG] Consultando notas para matrícula: {matricula}, materia: {materia}")
+        if not materia:
+            dispatcher.utter_message("❌ No tengo la materia especificada. Por favor, dime de qué materia quieres consultar las notas.")
+            return [SlotSet("flujo_actual", "consultar_notas")]
         try:
             materia_codigo = None
             if materia:
@@ -281,7 +356,7 @@ class ActionConsultarNotas(Action):
                     materia_codigo = materia_resp.data[0]["codigo"]
                 else:
                     dispatcher.utter_message(f"❌ No se encontró la materia '{materia}' en la base de datos.")
-                    return []
+                    return [SlotSet("flujo_actual", None)]
 
             # Buscar las notas usando el id de la materia si está disponible
             print(f"[LOG] Materia codigo: {materia_codigo}")
@@ -321,7 +396,7 @@ class ActionConsultarNotas(Action):
                     dispatcher.utter_message(f"📊 No se encontraron notas registradas para la matrícula {matricula} en la materia '{materia}'.")
                 else:
                     dispatcher.utter_message(f"📊 No se encontraron notas registradas para la matrícula {matricula}.")
-                return []
+                return [SlotSet("flujo_actual", None)]
 
             # Mostrar el título según si se especificó materia o no
             if materia:
@@ -347,7 +422,7 @@ class ActionConsultarNotas(Action):
                 dispatcher.utter_message(f"• {nota_formateada} - {descripcion} - Fecha: {fecha_nota}")
 
             dispatcher.utter_message(f"✅ Total de notas encontradas: {len(response.data)}")
-        
+            return [SlotSet("flujo_actual", None)]
         except Exception as e:
             print(f"Error al consultar notas: {e}")
             dispatcher.utter_message("❌ Hubo un error al consultar tus notas. Por favor, intenta nuevamente más tarde.")
@@ -372,21 +447,21 @@ class ActionConsultarRequerimientosMateria(Action):
         
         if not matricula:
             dispatcher.utter_message("❌ No tengo tu número de matrícula. Por favor, proporciona tu matrícula para poder consultar los requerimientos de las materias.")
-            return []
+            return [SlotSet("flujo_actual", "consultar_requerimientos_materia")]
         
         # Obtener la materia del slot
         materia = tracker.get_slot('materia')
         
         if not materia:
             dispatcher.utter_message("❌ No tengo la materia especificada. Por favor, dime de qué materia quieres consultar los requerimientos.")
-            return []
+            return [SlotSet("flujo_actual", "consultar_requerimientos_materia")]
         
         try:    
             # Buscar el id de la materia por nombre
             materia_resp = supabase.table("Materia").select("codigo, nombre").ilike("nombre", "%" + materia + "%").execute()
             if not materia_resp.data:
                 dispatcher.utter_message(f"❌ No se encontró la materia '{materia}' en la base de datos.")
-                return []
+                return [SlotSet("flujo_actual", None)]
             
             materia_codigo = materia_resp.data[0]["codigo"]
             
@@ -395,7 +470,7 @@ class ActionConsultarRequerimientosMateria(Action):
 
             if not requerimientos_resp.data:
                 dispatcher.utter_message(f"❌ No se encontraron requerimientos para la materia '{materia}'.")
-                return []
+                return [SlotSet("flujo_actual", None)]
             
             dispatcher.utter_message(f"📊 **Requerimientos de {materia.upper()}:**")
             
@@ -404,7 +479,7 @@ class ActionConsultarRequerimientosMateria(Action):
                 dispatcher.utter_message(f"• **{nombre_materia_equivalencia}**")
 
             dispatcher.utter_message(f"✅ Total de requerimientos encontrados: {len(requerimientos_resp.data)}")
-
+            return [SlotSet("flujo_actual", None)]
         except Exception as e:
             print(f"Error al consultar requerimientos de la materia: {e}")
             dispatcher.utter_message("❌ Hubo un error al consultar los requerimientos de la materia. Por favor, intenta nuevamente más tarde.")
