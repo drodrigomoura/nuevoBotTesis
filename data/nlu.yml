@@ -421,7 +421,6 @@ nlu:
     - flexibilidad horaria
     - horarios flexibles
     - trabajadores
-
 - intent: autenticar_usuario
   examples: |
     - [eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c](auth_token)
@@ -439,7 +438,7 @@ nlu:
     - [eyJjb2RpZ29fZGVfYXV0aGVudGljYWNpb24iOiI2NjAwNyIsImV4cCI6MTYzNDU2Nzg5MH0.jkl234mno567pqr890](auth_token)
     - [eyJ1c2VyX2F1dGhlbnRpY2F0ZWQiOiJ0cnVlIiwidXNlcl9pZCI6IjY2MDA3IiwiZXhwIjoxNjM0NTY3ODkwfQ.stu234vwx567yza890](auth_token)
     - [eyJ0b2tlbl9kZV9hdXRoZW50aWNhY2lvbiI6IjY2MDA3IiwiZXhwIjoxNjM0NTY3ODkwfQ.bcd234efg567hij890](auth_token)
-
+    - [eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c](auth_token)
 - intent: proporcionar_matricula
   examples: |
     - mi matricula es [66001](matricula)
@@ -490,7 +489,7 @@ nlu:
     - [66067](matricula)
     - [66078](matricula)
     - [66089](matricula)
-
+    - mi matricula es [66007](matricula)
 - intent: consultar_materias
   examples: |
     - quiero ver mis materias
@@ -505,7 +504,6 @@ nlu:
     - cuales son las materias que estoy cursando
     - quiero saber que materias tengo este cuatrimestre
     - necesito ver mi lista de materias
-    - cuales son mis materias actuales
     - quiero consultar que materias estoy cursando
     - dime cuales son mis materias
     - necesito saber mis materias en curso
@@ -522,7 +520,6 @@ nlu:
     - ver materias matricula [66001](matricula)
     - mis materias matricula [66022](matricula)
     - materias en curso matricula [66031](matricula)
-    - quiero ver mis materias con matricula [66001](matricula)
     - necesito consultar mis materias con matricula [66022](matricula)
     - cuales son mis materias con matricula [66031](matricula)
     - dime que materias tengo con matricula [66001](matricula)
@@ -531,7 +528,6 @@ nlu:
     - ver materias con matricula [66001](matricula)
     - mis materias con matricula [66022](matricula)
     - materias en curso con matricula [66031](matricula)
-
 - intent: consultar_notas
   examples: |
     - quiero ver mis notas
@@ -553,7 +549,6 @@ nlu:
     - quiero ver cuales son mis notas
     - cuales notas tengo este semestre
     - quiero consultar mis calificaciones actuales
-    - dime que notas tengo
     - quiero ver mis notas de [matematica](materia)
     - necesito ver mis calificaciones de [fisica](materia)
     - cuales son mis notas de [programacion](materia)
@@ -583,7 +578,6 @@ nlu:
     - ver notas matricula [66001](matricula)
     - mis calificaciones matricula [66022](matricula)
     - notas del cuatrimestre matricula [66031](matricula)
-    - quiero ver mis notas con matricula [66001](matricula)
     - necesito consultar mis notas con matricula [66022](matricula)
     - cuales son mis notas con matricula [66031](matricula)
     - dime que notas tengo con matricula [66001](matricula)
@@ -601,7 +595,6 @@ nlu:
     - ver notas de [quimica](materia) matricula [66001](matricula)
     - mis calificaciones de [biologia](materia) matricula [66022](matricula)
     - notas de [literatura](materia) matricula [66031](matricula)
-    - quiero ver mis notas de [matematica](materia) con matricula [66001](matricula)
     - necesito ver mis calificaciones de [fisica](materia) con matricula [66022](matricula)
     - cuales son mis notas de [programacion](materia) con matricula [66031](matricula)
     - dime que notas tengo en [ingles](materia) con matricula [66001](matricula)
@@ -610,7 +603,6 @@ nlu:
     - ver notas de [quimica](materia) con matricula [66001](matricula)
     - mis calificaciones de [biologia](materia) con matricula [66022](matricula)
     - notas de [literatura](materia) con matricula [66031](matricula)
-
 - intent: consultar_requerimientos_materia
   examples: |
     - cuales son los requerimientos para cursar [Redes de computadoras 1](materia)
@@ -653,7 +645,157 @@ nlu:
     - necesito saber que materias debo tener para [Investigacion Operativa](materia)
     - cuales son los prerequisitos para cursar [Inteligencia Artificial 2](materia)
     - que necesito para poder cursar [Proyectos Informaticos](materia)
-
+- intent: consultar_asistencia
+  examples: |
+    - quiero ver mi asistencia
+    - necesito consultar mi asistencia
+    - cuales es mi porcentaje de asistencia
+    - dime mi asistencia
+    - quiero saber mi asistencia
+    - cuales es mi asistencia actual
+    - necesito ver mi porcentaje de asistencia
+    - quiero consultar mi porcentaje de asistencia
+    - dime mi porcentaje de asistencia
+    - quiero saber mi porcentaje de asistencia
+    - cuales es mi asistencia del cuatrimestre
+    - necesito ver mi asistencia del cuatrimestre
+    - quiero consultar mi asistencia del cuatrimestre
+    - dime mi asistencia del cuatrimestre
+    - quiero saber mi asistencia del cuatrimestre
+    - cuales es mi asistencia del semestre
+    - necesito ver mi asistencia del semestre
+    - quiero consultar mi asistencia del semestre
+    - dime mi asistencia del semestre
+    - quiero saber mi asistencia del semestre
+    - necesito ver mi asistencia actual
+    - quiero consultar mi asistencia actual
+    - dime mi asistencia actual
+    - quiero saber mi asistencia actual
+    - cuales es mi asistencia en [matematica](materia)
+    - necesito ver mi asistencia en [fisica](materia)
+    - quiero consultar mi asistencia en [programacion](materia)
+    - dime mi asistencia en [ingles](materia)
+    - quiero saber mi asistencia en [historia](materia)
+    - cuales es mi asistencia de [algebra](materia)
+    - necesito ver mi asistencia de [quimica](materia)
+    - quiero consultar mi asistencia de [biologia](materia)
+    - dime mi asistencia de [literatura](materia)
+    - quiero saber mi asistencia de [filosofia](materia)
+    - cuales es mi asistencia en [geografia](materia)
+    - necesito ver mi asistencia en [economia](materia)
+    - quiero consultar mi asistencia en [psicologia](materia)
+    - dime mi asistencia en [sociologia](materia)
+    - quiero saber mi asistencia en [derecho](materia)
+    - cuales es mi asistencia de [contabilidad](materia)
+    - necesito ver mi asistencia de [estadistica](materia)
+    - quiero consultar mi asistencia de [administracion](materia)
+    - dime mi asistencia de [marketing](materia)
+    - quiero ver mi asistencia con matricula [66001](matricula)
+    - necesito consultar mi asistencia matricula [66022](matricula)
+    - cuales es mi asistencia matricula [66031](matricula)
+    - dime mi asistencia matricula [66001](matricula)
+    - quiero saber mi asistencia matricula [66022](matricula)
+    - consultar asistencia matricula [66031](matricula)
+    - ver asistencia matricula [66001](matricula)
+    - mi asistencia matricula [66022](matricula)
+    - asistencia del cuatrimestre matricula [66031](matricula)
+    - necesito consultar mi asistencia con matricula [66022](matricula)
+    - cuales es mi asistencia con matricula [66031](matricula)
+    - dime mi asistencia con matricula [66001](matricula)
+    - quiero saber mi asistencia con matricula [66022](matricula)
+    - consultar asistencia con matricula [66031](matricula)
+    - ver asistencia con matricula [66001](matricula)
+    - mi asistencia con matricula [66022](matricula)
+    - asistencia del cuatrimestre con matricula [66031](matricula)
+    - quiero ver mi asistencia de [matematica](materia) con matricula [66001](matricula)
+    - necesito ver mi asistencia de [fisica](materia) matricula [66022](matricula)
+    - cuales es mi asistencia de [programacion](materia) matricula [66031](matricula)
+    - dime mi asistencia de [ingles](materia) matricula [66001](matricula)
+    - quiero saber mi asistencia de [historia](materia) matricula [66022](matricula)
+    - consultar asistencia de [algebra](materia) matricula [66031](matricula)
+    - ver asistencia de [quimica](materia) matricula [66001](matricula)
+    - mi asistencia de [biologia](materia) matricula [66022](matricula)
+    - asistencia de [literatura](materia) matricula [66031](matricula)
+    - necesito ver mi asistencia de [fisica](materia) con matricula [66022](matricula)
+    - cuales es mi asistencia de [programacion](materia) con matricula [66031](matricula)
+    - dime mi asistencia de [ingles](materia) con matricula [66001](matricula)
+    - quiero saber mi asistencia de [historia](materia) con matricula [66022](matricula)
+    - consultar asistencia de [algebra](materia) con matricula [66031](matricula)
+    - ver asistencia de [quimica](materia) con matricula [66001](matricula)
+    - mi asistencia de [biologia](materia) con matricula [66022](matricula)
+    - asistencia de [literatura](materia) con matricula [66031](matricula)
+    - quiero ver mi porcentaje de asistencia
+    - necesito consultar mi porcentaje de asistencia
+    - cuales es mi porcentaje de asistencia en [matematica](materia)
+    - necesito ver mi porcentaje de asistencia en [fisica](materia)
+    - quiero consultar mi porcentaje de asistencia en [programacion](materia)
+    - dime mi porcentaje de asistencia en [ingles](materia)
+    - quiero saber mi porcentaje de asistencia en [historia](materia)
+    - cuales es mi porcentaje de asistencia de [algebra](materia)
+    - necesito ver mi porcentaje de asistencia de [quimica](materia)
+    - quiero consultar mi porcentaje de asistencia de [biologia](materia)
+    - dime mi porcentaje de asistencia de [literatura](materia)
+    - quiero saber mi porcentaje de asistencia de [filosofia](materia)
+    - cuales es mi porcentaje de asistencia en [geografia](materia)
+    - necesito ver mi porcentaje de asistencia en [economia](materia)
+    - quiero consultar mi porcentaje de asistencia en [psicologia](materia)
+    - dime mi porcentaje de asistencia en [sociologia](materia)
+    - quiero saber mi porcentaje de asistencia en [derecho](materia)
+    - cuales es mi porcentaje de asistencia de [contabilidad](materia)
+    - necesito ver mi porcentaje de asistencia de [estadistica](materia)
+    - quiero consultar mi porcentaje de asistencia de [administracion](materia)
+    - dime mi porcentaje de asistencia de [marketing](materia)
+    - porcentaje de asistencia
+    - mi porcentaje de asistencia
+    - asistencia porcentaje
+    - porcentaje asistencia
+    - asistencia
+    - mi asistencia
+    - consultar asistencia
+    - ver asistencia
+    - asistencia actual
+    - asistencia del cuatrimestre
+    - asistencia del semestre
+    - asistencia en [matematica](materia)
+    - asistencia en [fisica](materia)
+    - asistencia en [programacion](materia)
+    - asistencia en [ingles](materia)
+    - asistencia en [historia](materia)
+    - asistencia de [algebra](materia)
+    - asistencia de [quimica](materia)
+    - asistencia de [biologia](materia)
+    - asistencia de [literatura](materia)
+    - asistencia de [filosofia](materia)
+    - asistencia en [geografia](materia)
+    - asistencia en [economia](materia)
+    - asistencia en [psicologia](materia)
+    - asistencia en [sociologia](materia)
+    - asistencia en [derecho](materia)
+    - asistencia de [contabilidad](materia)
+    - asistencia de [estadistica](materia)
+    - asistencia de [administracion](materia)
+    - asistencia de [marketing](materia)
+    - hola quiero saber mis asistencia en [fisica](materia)
+- intent: proporcionar_materia_para_asistencia
+  examples: |
+    - La materia para consultar mi asistencia es [matematica](materia)
+    - Quiero ver mi asistencia de [fisica](materia)
+    - Para consultar mi asistencia, la materia es [programacion](materia)
+    - Mi asistencia de [historia](materia)
+    - Quiero consultar mi asistencia de [algebra](materia)
+    - La materia para consultar asistencia es [quimica](materia)
+    - Quiero ver mi porcentaje de asistencia de [biologia](materia)
+    - Para ver mi asistencia, la materia es [literatura](materia)
+    - Asistencia de [filosofia](materia)
+    - Quiero ver mi asistencia de [geografia](materia)
+    - Para consultar mi asistencia, la materia es [economia](materia)
+    - Quiero ver mi asistencia de [psicologia](materia)
+    - La materia para ver mi asistencia es [sociologia](materia)
+    - Quiero consultar mi asistencia de [derecho](materia)
+    - Para ver mi asistencia, la materia es [contabilidad](materia)
+    - Asistencia de [estadistica](materia)
+    - La materia para consultar asistencia es [administracion](materia)
+    - Quiero ver mi asistencia de [marketing](materia)
 - intent: consultar_fecha_mesas_examen_final
   examples: |
     - quiero ver las fechas de examen final
@@ -768,7 +910,6 @@ nlu:
     - fechas de mesa de rendir examenes de [administracion](materia)
     - fechas de mesa de rendir final de [marketing](materia)
     - fechas de mesa de rendir finales de [matematica](materia)
-
 - intent: proporcionar_materia
   examples: |
     - [matematica](materia)
@@ -808,7 +949,6 @@ nlu:
     - [inteligencia artificial 2](materia)
     - [proyectos informaticos](materia)
     - [inteligencia artificial 1](materia)
-
 - intent: proporcionar_materia_para_inscripcion
   examples: |
     - La materia para inscribirme es [matematica](materia)
@@ -829,7 +969,6 @@ nlu:
     - Inscribirme a la mesa de [estadistica](materia)
     - La materia para la inscripción es [administracion](materia)
     - Quiero inscribirme a la mesa de [marketing](materia)
-
 - intent: proporcionar_materia_para_notas
   examples: |
     - La materia para ver mis notas es [matematica](materia)
@@ -850,7 +989,6 @@ nlu:
     - Notas de [estadistica](materia)
     - La materia para consultar notas es [administracion](materia)
     - Quiero ver mis notas de [marketing](materia)
-
 - intent: proporcionar_materia_para_requerimientos
   examples: |
     - La materia para consultar requerimientos es [matematica](materia)
@@ -871,7 +1009,6 @@ nlu:
     - Requerimientos de [estadistica](materia)
     - La materia para consultar requerimientos es [administracion](materia)
     - Quiero saber los requisitos de [marketing](materia)
-
 - intent: inscribirse_mesa_examen
   examples: |
     - Quiero inscribirme a una mesa de examen
@@ -927,8 +1064,6 @@ nlu:
     - Quiero inscribirme a la mesa de examen de [inteligencia artificial 2](materia)
     - Quiero inscribirme a la mesa de examen de [proyectos informaticos](materia)
     - Quiero inscribirme a la mesa de examen de [inteligencia artificial 1](materia)
-
-# Más ejemplos para seleccionar_mesa_examen
 - intent: seleccionar_mesa_examen
   examples: |
     - Quiero inscribirme a la mesa del [25 de julio](fecha_mesa)
@@ -945,10 +1080,8 @@ nlu:
     - Inscribirme a la mesa con código [COD2024](codigo_mesa_examen)
     - Quiero la mesa [COD2024](codigo_mesa_examen)
     - Al código [COD2024](codigo_mesa_examen)
-
 - regex: codigo_mesa_examen
   examples: |
-    - cod[0-9]{4}
     - COD[0-9]{4}
     - [a-zA-Z0-9]+
-
+    - cod[0-9]{4}

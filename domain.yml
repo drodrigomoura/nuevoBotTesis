@@ -5,45 +5,46 @@ session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: false
 intents:
-  - agradecimiento
-  - curso_ingreso
-  - despedida
-  - evaluacion_coneau
-  - informar_asistencia
-  - informar_ayuda_informatica_ingles
-  - informar_becas_hermanos
-  - informar_equipamiento_tecnologico
-  - informar_equivalencias
-  - informar_examen_recuperatorio
-  - informar_horarios_trabajadores
-  - informar_intercambio_de_estudio
-  - informar_modalidad_inscripcion
-  - informar_nivel_profesores
-  - informar_servicios
-  - nlu_fallback
-  - plazos_inscripcion
-  - requisitos_inscripcion
-  - saludo  
-  - visitas_consultas
-  - contactos
-  - out_of_scope
-  - autenticar_usuario
-  - consultar_materias
-  - proporcionar_matricula
-  - consultar_notas
-  - proporcionar_materia
-  - consultar_requerimientos_materia
-  - consultar_fecha_mesas_examen_final
-  - inscribirse_mesa_examen
-  - seleccionar_mesa_examen
-  - proporcionar_materia_para_inscripcion
-  - proporcionar_materia_para_notas
-  - proporcionar_materia_para_requerimientos
-
+- agradecimiento
+- autenticar_usuario
+- consultar_asistencia
+- consultar_fecha_mesas_examen_final
+- consultar_materias
+- consultar_notas
+- consultar_requerimientos_materia
+- contactos
+- curso_ingreso
+- despedida
+- evaluacion_coneau
+- informar_asistencia
+- informar_ayuda_informatica_ingles
+- informar_becas_hermanos
+- informar_equipamiento_tecnologico
+- informar_equivalencias
+- informar_examen_recuperatorio
+- informar_horarios_trabajadores
+- informar_intercambio_de_estudio
+- informar_modalidad_inscripcion
+- informar_nivel_profesores
+- informar_servicios
+- inscribirse_mesa_examen
+- nlu_fallback
+- out_of_scope
+- plazos_inscripcion
+- proporcionar_materia
+- proporcionar_materia_para_asistencia
+- proporcionar_materia_para_inscripcion
+- proporcionar_materia_para_notas
+- proporcionar_materia_para_requerimientos
+- proporcionar_matricula
+- requisitos_inscripcion
+- saludo
+- seleccionar_mesa_examen
+- visitas_consultas
 entities:
-- auth_token
 - matricula
 - materia
+- auth_token
 - codigo_mesa_examen
 - fecha_mesa
 - flujo_actual
@@ -53,42 +54,42 @@ slots:
     initial_value: false
     influence_conversation: true
     mappings:
-      - type: custom
+    - type: custom
   auth_token:
     type: text
     influence_conversation: false
     mappings:
-      - type: from_entity
-        entity: auth_token
+    - type: from_entity
+      entity: auth_token
   matricula:
     type: text
     influence_conversation: true
     mappings:
-      - type: from_entity
-        entity: matricula
+    - type: from_entity
+      entity: matricula
   materia:
     type: text
     influence_conversation: true
     mappings:
-      - type: from_entity
-        entity: materia
+    - type: from_entity
+      entity: materia
   codigo_mesa_examen:
     type: text
     influence_conversation: true
     mappings:
-      - type: from_entity
-        entity: codigo_mesa_examen
+    - type: from_entity
+      entity: codigo_mesa_examen
   fecha_mesa:
     type: text
     influence_conversation: false
     mappings:
-      - type: from_entity
-        entity: fecha_mesa
+    - type: from_entity
+      entity: fecha_mesa
   flujo_actual:
     type: text
     influence_conversation: true
     mappings:
-      - type: custom
+    - type: custom
 responses:
   utter_saludo:
   - text: |
@@ -175,12 +176,13 @@ responses:
       Para consultar tus notas necesito tu número de matrícula y la materia. Por favor, proporciona tu matrícula y especifica la materia (por ejemplo: "matricula 66001 de matematica").
   utter_solicitar_materia_examen:
   - text: |
-      Para consultar las fechas de examen final necesito saber de qué materia. Por favor, especifica la materia (por ejemplo: matematica, fisica, programacion).
+      Para consultar las fechas de examen final necesito saber de qué materia. Por favor, especifica la materia (por ejemplo: matematica, fisica, programacion)..
 actions:
-  - action_consultar_materias
-  - action_authenticate_user
-  - action_consultar_notas
-  - action_consultar_requerimientos_materia
-  - action_consultar_mesas_examen
-  - action_ofrecer_mesas_examen
-  - action_inscripcion_mesa_examen
+- action_consultar_asistencia
+- action_authenticate_user
+- action_consultar_materias
+- action_consultar_notas
+- action_consultar_requerimientos_materia
+- action_consultar_mesas_examen
+- action_ofrecer_mesas_examen
+- action_inscripcion_mesa_examen

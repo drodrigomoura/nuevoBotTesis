@@ -62,6 +62,7 @@ class ActionVerMesasExamen(Action):
                 )
             dispatcher.utter_message(f"✅ Se encontraron {len(mesas_resp.data)} mesa(s) de examen para {nombre_materia.upper()}")
             dispatcher.utter_message("💡 **Nota:** Estas son las fechas disponibles para la materia consultada.")
+            return [SlotSet("materia", None)]
 
         except Exception as e:
             print(f"Error al consultar mesas de examen: {e}")
@@ -116,7 +117,7 @@ class ActionOfrecerMesasExamen(Action):
                 )
             dispatcher.utter_message("Por favor, dime la fecha o el código de la mesa a la que deseas inscribirte.")
             # Limpiar el contexto porque ya se ofrecieron las mesas
-            return [SlotSet("flujo_actual", None)]
+            return [SlotSet("flujo_actual", None), SlotSet("materia", None)]
         except Exception as e:
             print(f"Error al ofrecer mesas de examen: {e}")
             dispatcher.utter_message("❌ Hubo un error al consultar las mesas de examen. Por favor, intenta nuevamente más tarde.")
@@ -194,7 +195,7 @@ class ActionInscripcionMesaExamen(Action):
                 dispatcher.utter_message(f"📅 Fecha del examen: {fecha_mesa_final}")
                 dispatcher.utter_message(f"🎓 Matrícula: {matricula}")
                 dispatcher.utter_message("📝 Recuerda presentarte con tu DNI y los materiales necesarios para el examen.")
-                return [SlotSet("flujo_actual", None)]
+                return [SlotSet("flujo_actual", None), SlotSet("materia", None)]
             else:
                 dispatcher.utter_message("❌ Hubo un problema al procesar tu inscripción. Por favor, intenta nuevamente.")
         except Exception as e:
@@ -293,7 +294,7 @@ class ActionConsultarMaterias(Action):
                 dispatcher.utter_message(f"• **{nombre_materia}** - Cursada el: {fecha_cursada}")
             
             dispatcher.utter_message(f"✅ Total de materias encontradas: {len(response.data)}")
-            return [SlotSet("flujo_actual", None)]
+            return [SlotSet("flujo_actual", None), SlotSet("materia", None)]
         except Exception as e:
             print(f"Error al consultar materias: {e}")
             dispatcher.utter_message("❌ Hubo un error al consultar tus materias. Por favor, intenta nuevamente más tarde.")
@@ -422,7 +423,7 @@ class ActionConsultarNotas(Action):
                 dispatcher.utter_message(f"• {nota_formateada} - {descripcion} - Fecha: {fecha_nota}")
 
             dispatcher.utter_message(f"✅ Total de notas encontradas: {len(response.data)}")
-            return [SlotSet("flujo_actual", None)]
+            return [SlotSet("flujo_actual", None), SlotSet("materia", None)]
         except Exception as e:
             print(f"Error al consultar notas: {e}")
             dispatcher.utter_message("❌ Hubo un error al consultar tus notas. Por favor, intenta nuevamente más tarde.")
@@ -479,9 +480,102 @@ class ActionConsultarRequerimientosMateria(Action):
                 dispatcher.utter_message(f"• **{nombre_materia_equivalencia}**")
 
             dispatcher.utter_message(f"✅ Total de requerimientos encontrados: {len(requerimientos_resp.data)}")
-            return [SlotSet("flujo_actual", None)]
+            return [SlotSet("flujo_actual", None), SlotSet("materia", None)]
         except Exception as e:
             print(f"Error al consultar requerimientos de la materia: {e}")
             dispatcher.utter_message("❌ Hubo un error al consultar los requerimientos de la materia. Por favor, intenta nuevamente más tarde.")
+        
+        return []
+
+class ActionConsultarAsistencia(Action):
+
+    def name(self):
+        return "action_consultar_asistencia"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
+        # Verificar si el usuario está autenticado
+        is_authenticated = tracker.get_slot('is_authenticated')
+        
+        if not is_authenticated:
+            dispatcher.utter_message("❌ Necesitas estar autenticado para consultar tu asistencia. Por favor, inicia sesión primero.")
+            return []
+        
+        # Obtener la matrícula del slot
+        matricula = tracker.get_slot('matricula')
+        
+        if not matricula:
+            dispatcher.utter_message("❌ No tengo tu número de matrícula. Por favor, proporciona tu matrícula para poder consultar tu asistencia.")
+            return [SlotSet("flujo_actual", "consultar_asistencia")]
+        
+        # Obtener la materia del slot
+        materia = tracker.get_slot('materia')
+        
+        if not materia:
+            dispatcher.utter_message("❌ No tengo la materia especificada. Por favor, dime de qué materia quieres consultar la asistencia.")
+            return [SlotSet("flujo_actual", "consultar_asistencia")]
+        
+        try:
+            # Buscar el código de la materia por nombre
+            materia_resp = supabase.table("Materia").select("codigo, nombre").ilike("nombre", "%" + materia + "%").execute()
+            if not materia_resp.data:
+                dispatcher.utter_message(f"❌ No se encontró la materia '{materia}' en la base de datos.")
+                return [SlotSet("flujo_actual", None)]
+            
+            materia_codigo = materia_resp.data[0]["codigo"]
+            nombre_materia = materia_resp.data[0]["nombre"]
+            
+            # Buscar las asistencias del estudiante para esa materia
+            asistencia_resp = supabase.table("Asistencia").select('*').eq("estudiante", matricula).eq("materia", materia_codigo).execute()
+            
+            if not asistencia_resp.data:
+                dispatcher.utter_message(f"📊 No se encontraron registros de asistencia para la matrícula {matricula} en la materia '{nombre_materia}'.")
+                return [SlotSet("flujo_actual", None)]
+            
+            # Calcular estadísticas de asistencia
+            clases_asistidas = 0
+            clases_ausentes = 0
+            
+            for registro in asistencia_resp.data:
+                asistio = registro.get("is_present", False)
+                if asistio:
+                    clases_asistidas += 1
+                else:
+                    clases_ausentes += 1
+            
+            # Calcular el porcentaje de asistencia usando la fórmula
+            # Porcentaje de asistencia = (Clases asistidas / (Clases asistidas + Clases ausentes)) x 100
+            total_clases = clases_asistidas + clases_ausentes
+            
+            if total_clases > 0:
+                porcentaje_asistencia = (clases_asistidas / total_clases) * 100
+                porcentaje_formateado = round(porcentaje_asistencia, 2)
+            else:
+                porcentaje_formateado = 0
+            
+            # Mostrar los resultados
+            dispatcher.utter_message(f"📊 **Asistencia en {nombre_materia.upper()}:**")
+            dispatcher.utter_message(f"🎓 Matrícula: {matricula}")
+            dispatcher.utter_message(f"✅ Clases asistidas: {clases_asistidas}")
+            dispatcher.utter_message(f"❌ Clases ausentes: {clases_ausentes}")
+            dispatcher.utter_message(f"📅 Total de clases: {total_clases}")
+            dispatcher.utter_message(f"📈 **Porcentaje de asistencia: {porcentaje_formateado}%**")
+            
+            # Agregar comentario sobre el rendimiento
+            if porcentaje_formateado >= 80:
+                dispatcher.utter_message("🎉 ¡Excelente asistencia! Mantén este buen rendimiento.")
+            elif porcentaje_formateado >= 60:
+                dispatcher.utter_message("⚠️ Tu asistencia es regular. Te recomiendo mejorar la asistencia a clases.")
+            else:
+                dispatcher.utter_message("🚨 Tu asistencia es baja. Es importante que asistas más a clases para mejorar tu rendimiento académico.")
+            
+            # # Mostrar la fórmula utilizada
+            # dispatcher.utter_message(f"📝 **Fórmula utilizada:**")
+            # dispatcher.utter_message(f"Porcentaje = ({clases_asistidas} / {total_clases}) × 100 = {porcentaje_formateado}%")
+            
+            return [SlotSet("flujo_actual", None), SlotSet("materia", None)]
+            
+        except Exception as e:
+            print(f"Error al consultar asistencia: {e}")
+            dispatcher.utter_message("❌ Hubo un error al consultar tu asistencia. Por favor, intenta nuevamente más tarde.")
         
         return []

@@ -616,3 +616,146 @@ stories:
     - action: action_inscripcion_mesa_examen
     - intent: afirmacion
     - action: utter_agradecimiento 
+
+- story: consultar asistencia con matrícula y materia
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_asistencia
+    entities:
+    - matricula: "66001"
+    - materia: "matematica"
+  - action: action_consultar_asistencia
+
+- story: consultar asistencia con matrícula y materia y saludo
+  steps:
+  - intent: saludo
+  - action: utter_saludo
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_asistencia
+    entities:
+    - matricula: "66022"
+    - materia: "fisica"
+  - action: action_consultar_asistencia
+  - intent: agradecimiento
+  - action: utter_agradecimiento
+  - intent: despedida
+  - action: utter_despedida
+
+- story: consultar asistencia sin matrícula ni materia
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_asistencia
+  - action: action_consultar_asistencia
+
+- story: consultar asistencia sin matrícula ni materia con saludo
+  steps:
+  - intent: saludo
+  - action: utter_saludo
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_asistencia
+  - action: action_consultar_asistencia
+
+- story: consultar asistencia y proporcionar matrícula
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_asistencia
+  - action: action_consultar_asistencia
+  - intent: proporcionar_matricula
+    entities:
+    - matricula: "66001"
+  - action: action_consultar_asistencia
+
+- story: proporcionar materia para asistencia
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+    - matricula: "66017"
+  - intent: proporcionar_materia_para_asistencia
+    entities:
+    - materia: "matematica"
+  - action: action_consultar_asistencia
+
+- story: múltiples consultas de asistencia con misma matrícula y materia
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+    - matricula: "66017"
+    - materia: "fisica"
+  - intent: consultar_asistencia
+  - action: action_consultar_asistencia
+  - intent: consultar_asistencia
+  - action: action_consultar_asistencia
+
+- story: consultar asistencia y luego proporcionar materia
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+    - matricula: "66007"
+  - intent: consultar_asistencia
+  - action: action_consultar_asistencia
+  - intent: proporcionar_materia_para_asistencia
+    entities:
+    - materia: "matematica"
+  - action: action_consultar_asistencia
+
+- story: consultar asistencia con porcentaje específico
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_asistencia
+    entities:
+    - matricula: "66001"
+    - materia: "programacion"
+  - action: action_consultar_asistencia
+
+- story: consultar asistencia del cuatrimestre
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_asistencia
+    entities:
+    - matricula: "66022"
+    - materia: "ingles"
+  - action: action_consultar_asistencia
+
+- story: consultar asistencia actual
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_asistencia
+    entities:
+    - matricula: "66031"
+    - materia: "historia"
+  - action: action_consultar_asistencia 
+  
+- story: interactive_story_1
+  steps:
+  - intent: autenticar_usuario
+    entities:
+    - auth_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+  - slot_was_set:
+    - auth_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+  - action: action_authenticate_user
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_asistencia
+    entities:
+    - materia: fisica
+  - slot_was_set:
+    - materia: fisica
+  - action: action_consultar_asistencia
+  - slot_was_set:
+    - flujo_actual: consultar_asistencia
+  - intent: proporcionar_matricula
+    entities:
+    - matricula: '66007'
+  - slot_was_set:
+    - matricula: '66007'
+  - action: action_consultar_asistencia
+  - slot_was_set:
+    - flujo_actual: null
