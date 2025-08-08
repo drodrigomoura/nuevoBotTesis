@@ -163,3 +163,5 @@ cython_debug/
 #.idea/
 
 venv_rasa/
+
+results/
