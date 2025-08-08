@@ -579,3 +579,58 @@ class ActionConsultarAsistencia(Action):
             dispatcher.utter_message("❌ Hubo un error al consultar tu asistencia. Por favor, intenta nuevamente más tarde.")
         
         return []
+
+class ActionConsultarFechasParciales(Action):
+
+    def name(self):
+        return "action_consultar_fechas_parciales"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
+        # Verificar si el usuario está autenticado
+        is_authenticated = tracker.get_slot('is_authenticated')
+        
+        if not is_authenticated:
+            dispatcher.utter_message("❌ Necesitas estar autenticado para consultar las fechas de los parciales. Por favor, inicia sesión primero.")
+            return []
+        
+        # Obtener la matrícula del slot
+        matricula = tracker.get_slot('matricula')
+        
+        if not matricula:
+            dispatcher.utter_message("❌ No tengo tu número de matrícula. Por favor, proporciona tu matrícula para poder consultar las fechas de los parciales.")
+            return [SlotSet("flujo_actual", "consultar_fechas_parciales")]
+        
+        # Obtener la materia del slot
+        materia = tracker.get_slot('materia')
+        
+        if not materia:
+            dispatcher.utter_message("❌ No tengo la materia especificada. Por favor, dime de qué materia quieres consultar las fechas de los parciales.")
+            return [SlotSet("flujo_actual", "consultar_fechas_parciales")]
+        
+        try:
+            # Buscar el código de la materia por nombre
+            materia_resp = supabase.table("Materia").select("codigo, nombre").ilike("nombre", "%" + materia + "%").execute()
+            if not materia_resp.data:
+                dispatcher.utter_message(f"❌ No se encontró la materia '{materia}' en la base de datos.")
+                return [SlotSet("flujo_actual", None)]
+            
+            materia_codigo = materia_resp.data[0]["codigo"]
+            # Buscar las fechas de los parciales
+            fechas_parciales_resp = supabase.table("Parciales").select("*").eq("materia_codigo", materia_codigo).execute()
+            
+            if not fechas_parciales_resp.data:
+                dispatcher.utter_message("❌ No se encontraron fechas de parciales registradas.")
+                return [SlotSet("flujo_actual", None)]
+            
+            dispatcher.utter_message(f"📊 **Fechas de los parciales:**")
+            
+            for parcial in fechas_parciales_resp.data:
+                dispatcher.utter_message(f"• **{parcial.get('fecha', 'Parcial sin fecha')}**")
+            
+            dispatcher.utter_message(f"✅ Total de parciales encontrados: {len(fechas_parciales_resp.data)}")
+            return [SlotSet("flujo_actual", None), SlotSet("materia", None)]
+        except Exception as e:
+            print(f"Error al consultar fechas de parciales: {e}")
+            dispatcher.utter_message("❌ Hubo un error al consultar las fechas de los parciales. Por favor, intenta nuevamente más tarde.")
+        
+        return []

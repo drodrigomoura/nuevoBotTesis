@@ -483,7 +483,7 @@ stories:
     - is_authenticated: true
   - intent: consultar_fecha_mesas_examen_final
   - action: utter_solicitar_materia_examen
-  - intent: proporcionar_materia
+  - intent: proporcionar_materia_para_mesas
     entities:
     - materia: "matematica"
   - action: action_consultar_mesas_examen
@@ -496,7 +496,7 @@ stories:
     - is_authenticated: true
   - intent: consultar_fecha_mesas_examen_final
   - action: utter_solicitar_materia_examen
-  - intent: proporcionar_materia
+  - intent: proporcionar_materia_para_mesas
     entities:
     - materia: "programacion"
   - action: action_consultar_mesas_examen
@@ -507,13 +507,13 @@ stories:
     - is_authenticated: true
   - intent: consultar_fecha_mesas_examen_final
   - action: utter_solicitar_materia_examen
-  - intent: proporcionar_materia
+  - intent: proporcionar_materia_para_mesas
     entities:
     - materia: "matematica"
   - action: action_consultar_mesas_examen
   - intent: consultar_fecha_mesas_examen_final
   - action: utter_solicitar_materia_examen
-  - intent: proporcionar_materia
+  - intent: proporcionar_materia_para_mesas
     entities:
     - materia: "fisica"
   - action: action_consultar_mesas_examen

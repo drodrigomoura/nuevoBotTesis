@@ -36,6 +36,7 @@ intents:
 - proporcionar_materia_para_inscripcion
 - proporcionar_materia_para_notas
 - proporcionar_materia_para_requerimientos
+- proporcionar_materia_para_mesas
 - proporcionar_matricula
 - requisitos_inscripcion
 - saludo

@@ -405,22 +405,6 @@ nlu:
     - Cuál es el numero de contacto?
     - A que mail puedo mandar mi consulta?
     - Cual es el mail de administración?
-- intent: becas_hermanos
-  examples: |
-    - becas para hermanos
-    - descuento hermanos
-    - bonificación hermanos
-    - beca hermanos
-    - descuento por hermanos
-    - bonificación por hermanos
-    - beca por hermanos
-- intent: horarios_trabajadores
-  examples: |
-    - horarios trabajadores
-    - horarios para trabajadores
-    - flexibilidad horaria
-    - horarios flexibles
-    - trabajadores
 - intent: autenticar_usuario
   examples: |
     - [eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c](auth_token)
@@ -1008,7 +992,26 @@ nlu:
     - Para consultar requerimientos, la materia es [contabilidad](materia)
     - Requerimientos de [estadistica](materia)
     - La materia para consultar requerimientos es [administracion](materia)
-    - Quiero saber los requisitos de [marketing](materia)
+- intent: proporcionar_materia_para_mesas
+  examples: |
+    - La materia para consultar mesas es [matematica](materia)
+    - Quiero ver las mesas de [fisica](materia)
+    - Para consultar mesas, la materia es [programacion](materia)
+    - Mesas de [historia](materia)
+    - Quiero consultar las mesas de [algebra](materia)
+    - La materia para consultar mesas es [quimica](materia)
+    - Quiero ver las mesas de [biologia](materia)
+    - Para ver las mesas, la materia es [literatura](materia)
+    - Mesas de [filosofia](materia)
+    - Quiero ver las mesas de [geografia](materia)
+    - Para consultar mesas, la materia es [economia](materia)
+    - Quiero ver las mesas de [psicologia](materia)
+    - La materia para ver las mesas es [sociologia](materia)
+    - Quiero consultar las mesas de [derecho](materia)
+    - Para ver las mesas, la materia es [contabilidad](materia)
+    - Mesas de [estadistica](materia)
+    - La materia para consultar mesas es [administracion](materia)
+    - Quiero ver las mesas de [marketing](materia)
 - intent: inscribirse_mesa_examen
   examples: |
     - Quiero inscribirme a una mesa de examen
