@@ -269,7 +269,8 @@ stories:
   - slot_was_set:
     - is_authenticated: true
   - intent: consultar_materias
-  - action: utter_solicitar_matricula
+  - action: materias_form
+  - active_loop: materias_form
 
 - story: consultar materias sin matrícula con saludo
   steps:
@@ -278,14 +279,16 @@ stories:
   - slot_was_set:
     - is_authenticated: true
   - intent: consultar_materias
-  - action: utter_solicitar_matricula
+  - action: materias_form
+  - active_loop: materias_form
 
 - story: proporcionar matrícula y consultar materias
   steps:
   - slot_was_set:
     - is_authenticated: true
   - intent: consultar_materias
-  - action: utter_solicitar_matricula
+  - action: materias_form
+  - active_loop: materias_form
   - intent: proporcionar_matricula
     entities:
     - matricula: "66001"
@@ -336,7 +339,8 @@ stories:
     entities:
     - matricula: "66001"
     - materia: "matematica"
-  - action: action_consultar_notas
+  - action: notas_form
+  - active_loop: notas_form
 
 - story: consultar notas con matrícula y materia y saludo
   steps:
@@ -348,7 +352,8 @@ stories:
     entities:
     - matricula: "66022"
     - materia: "fisica"
-  - action: action_consultar_notas
+  - action: notas_form
+  - active_loop: notas_form
   - intent: agradecimiento
   - action: utter_agradecimiento
   - intent: despedida
@@ -359,7 +364,8 @@ stories:
   - slot_was_set:
     - is_authenticated: true
   - intent: consultar_notas
-  - action: utter_solicitar_matricula_y_materia_notas
+  - action: notas_form
+  - active_loop: notas_form
 
 - story: consultar notas sin matrícula ni materia con saludo
   steps:
@@ -368,18 +374,21 @@ stories:
   - slot_was_set:
     - is_authenticated: true
   - intent: consultar_notas
-  - action: utter_solicitar_matricula_y_materia_notas
+  - action: notas_form
+  - active_loop: notas_form
 
 - story: consultar notas y proporcionar matrícula
   steps:
   - slot_was_set:
     - is_authenticated: true
   - intent: consultar_notas
-  - action: utter_solicitar_matricula_y_materia_notas
+  - action: notas_form
+  - active_loop: notas_form
   - intent: proporcionar_matricula
     entities:
     - matricula: "66001"
-  - action: utter_solicitar_materia_notas
+  - action: notas_form
+  - active_loop: notas_form
 
 - story: consultar notas con matrícula pero sin materia
   steps:
@@ -387,7 +396,8 @@ stories:
     - is_authenticated: true
     - matricula: "66017"
   - intent: consultar_notas
-  - action: utter_solicitar_materia_notas
+  - action: notas_form
+  - active_loop: notas_form
 
 - story: consultar notas con matrícula pero sin materia y saludo
   steps:
@@ -397,7 +407,8 @@ stories:
   - intent: saludo
   - action: utter_saludo
   - intent: consultar_notas
-  - action: utter_solicitar_materia_notas
+  - action: notas_form
+  - active_loop: notas_form
 
 - story: consultar notas con materia pero sin matrícula
   steps:
@@ -406,7 +417,8 @@ stories:
   - intent: consultar_notas
     entities:
     - materia: "matematica"
-  - action: utter_solicitar_matricula_notas
+  - action: notas_form
+  - active_loop: notas_form
 
 - story: consultar notas con materia pero sin matrícula y saludo
   steps:
@@ -417,17 +429,19 @@ stories:
   - intent: consultar_notas
     entities:
     - materia: "fisica"
-  - action: utter_solicitar_matricula_notas
+  - action: notas_form
+  - active_loop: notas_form
 
 - story: proporcionar materia para notas
   steps:
   - slot_was_set:
     - is_authenticated: true
     - matricula: "66017"
-  - intent: proporcionar_materia
+  - intent: proporcionar_materia_para_notas
     entities:
     - materia: "matematica"
-  - action: action_consultar_notas
+  - action: notas_form
+  - active_loop: notas_form
 
 - story: múltiples consultas de notas con misma matrícula y materia
   steps:
@@ -436,9 +450,11 @@ stories:
     - matricula: "66017"
     - materia: "fisica"
   - intent: consultar_notas
-  - action: action_consultar_notas
+  - action: notas_form
+  - active_loop: notas_form
   - intent: consultar_notas
-  - action: action_consultar_notas
+  - action: notas_form
+  - active_loop: notas_form
 
 # FLUJO CORRECTO PARA CONSULTAR FECHAS DE MESAS DE EXAMEN
 - story: consultar fechas de mesas de examen sin materia
@@ -483,7 +499,7 @@ stories:
     - is_authenticated: true
   - intent: consultar_fecha_mesas_examen_final
   - action: utter_solicitar_materia_examen
-  - intent: proporcionar_materia
+  - intent: proporcionar_materia_para_mesas
     entities:
     - materia: "matematica"
   - action: action_consultar_mesas_examen
@@ -496,7 +512,7 @@ stories:
     - is_authenticated: true
   - intent: consultar_fecha_mesas_examen_final
   - action: utter_solicitar_materia_examen
-  - intent: proporcionar_materia
+  - intent: proporcionar_materia_para_mesas
     entities:
     - materia: "programacion"
   - action: action_consultar_mesas_examen
@@ -507,13 +523,13 @@ stories:
     - is_authenticated: true
   - intent: consultar_fecha_mesas_examen_final
   - action: utter_solicitar_materia_examen
-  - intent: proporcionar_materia
+  - intent: proporcionar_materia_para_mesas
     entities:
     - materia: "matematica"
   - action: action_consultar_mesas_examen
   - intent: consultar_fecha_mesas_examen_final
   - action: utter_solicitar_materia_examen
-  - intent: proporcionar_materia
+  - intent: proporcionar_materia_para_mesas
     entities:
     - materia: "fisica"
   - action: action_consultar_mesas_examen
@@ -535,7 +551,7 @@ stories:
     - matricula: "66007"
   - intent: consultar_requerimientos_materia
   - action: action_consultar_requerimientos_materia
-  - intent: proporcionar_materia
+  - intent: proporcionar_materia_para_requerimientos
     entities:
     - materia: "fisica 2"
   - action: action_consultar_requerimientos_materia
@@ -546,8 +562,234 @@ stories:
     - is_authenticated: true
     - matricula: "66007"
   - intent: consultar_notas
-  - action: utter_solicitar_materia_notas
-  - intent: proporcionar_materia
+  - action: notas_form
+  - active_loop: notas_form
+  - intent: proporcionar_materia_para_notas
     entities:
     - materia: "matematica"
-  - action: action_consultar_notas 
+  - action: notas_form
+  - active_loop: notas_form
+
+- story: Inscripción a mesa de examen (flujo completo)
+  steps:
+    - intent: inscribirse_mesa_examen
+    - action: action_ofrecer_mesas_examen
+    - intent: seleccionar_mesa_examen
+      entities:
+        - codigo_mesa_examen: "12345"
+    - slot_was_set:
+        - codigo_mesa_examen: "12345"
+    - action: action_inscripcion_mesa_examen
+
+- story: Inscripción a mesa de examen por código
+  steps:
+    - intent: inscribirse_mesa_examen
+      entities:
+        - materia: "matematica"
+    - action: action_ofrecer_mesas_examen
+    - intent: seleccionar_mesa_examen
+      entities:
+        - codigo_mesa_examen: "12345"
+    - slot_was_set:
+        - codigo_mesa_examen: "12345"
+    - action: action_inscripcion_mesa_examen
+
+- story: Inscripción a mesa de examen por fecha
+  steps:
+    - intent: inscribirse_mesa_examen
+      entities:
+        - materia: "fisica"
+    - action: action_ofrecer_mesas_examen
+    - intent: seleccionar_mesa_examen
+      entities:
+        - fecha_mesa: "2024-07-25"
+    - action: action_inscripcion_mesa_examen
+
+- story: Inscripción a mesa de examen sin materia
+  steps:
+    - intent: inscribirse_mesa_examen
+    - action: action_ofrecer_mesas_examen
+    - intent: proporcionar_materia_para_inscripcion
+      entities:
+        - materia: "quimica"
+    - action: action_ofrecer_mesas_examen
+    - intent: seleccionar_mesa_examen
+      entities:
+        - codigo_mesa_examen: "45678"
+    - slot_was_set:
+        - codigo_mesa_examen: "45678"
+    - action: action_inscripcion_mesa_examen
+
+- story: Inscripción a mesa de examen con confirmación
+  steps:
+    - intent: inscribirse_mesa_examen
+      entities:
+        - materia: "biologia"
+    - action: action_ofrecer_mesas_examen
+    - intent: seleccionar_mesa_examen
+      entities:
+        - codigo_mesa_examen: "78901"
+    - slot_was_set:
+        - codigo_mesa_examen: "78901"
+    - action: action_inscripcion_mesa_examen
+    - intent: afirmacion
+    - action: utter_agradecimiento 
+
+- story: consultar asistencia con matrícula y materia
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_asistencia
+    entities:
+    - matricula: "66001"
+    - materia: "matematica"
+  - action: asistencia_form
+  - active_loop: asistencia_form
+
+- story: consultar asistencia con matrícula y materia y saludo
+  steps:
+  - intent: saludo
+  - action: utter_saludo
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_asistencia
+    entities:
+    - matricula: "66022"
+    - materia: "fisica"
+  - action: asistencia_form
+  - active_loop: asistencia_form
+  - intent: agradecimiento
+  - action: utter_agradecimiento
+  - intent: despedida
+  - action: utter_despedida
+
+- story: consultar asistencia sin matrícula ni materia
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_asistencia
+  - action: asistencia_form
+  - active_loop: asistencia_form
+
+- story: consultar asistencia sin matrícula ni materia con saludo
+  steps:
+  - intent: saludo
+  - action: utter_saludo
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_asistencia
+  - action: asistencia_form
+  - active_loop: asistencia_form
+
+- story: consultar asistencia y proporcionar matrícula
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_asistencia
+  - action: asistencia_form
+  - active_loop: asistencia_form
+  - intent: proporcionar_matricula
+    entities:
+    - matricula: "66001"
+  - action: asistencia_form
+  - active_loop: asistencia_form
+
+- story: proporcionar materia para asistencia
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+    - matricula: "66017"
+  - intent: proporcionar_materia_para_asistencia
+    entities:
+    - materia: "matematica"
+  - action: asistencia_form
+  - active_loop: asistencia_form
+
+- story: múltiples consultas de asistencia con misma matrícula y materia
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+    - matricula: "66017"
+    - materia: "fisica"
+  - intent: consultar_asistencia
+  - action: asistencia_form
+  - active_loop: asistencia_form
+  - intent: consultar_asistencia
+  - action: asistencia_form
+  - active_loop: asistencia_form
+
+- story: consultar asistencia y luego proporcionar materia
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+    - matricula: "66007"
+  - intent: consultar_asistencia
+  - action: asistencia_form
+  - active_loop: asistencia_form
+  - intent: proporcionar_materia_para_asistencia
+    entities:
+    - materia: "matematica"
+  - action: asistencia_form
+  - active_loop: asistencia_form
+
+- story: consultar asistencia con porcentaje específico
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_asistencia
+    entities:
+    - matricula: "66001"
+    - materia: "programacion"
+  - action: asistencia_form
+  - active_loop: asistencia_form
+
+- story: consultar asistencia del cuatrimestre
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_asistencia
+    entities:
+    - matricula: "66022"
+    - materia: "ingles"
+  - action: asistencia_form
+  - active_loop: asistencia_form
+
+- story: consultar asistencia actual
+  steps:
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_asistencia
+    entities:
+    - matricula: "66031"
+    - materia: "historia"
+  - action: asistencia_form
+  - active_loop: asistencia_form
+  
+- story: interactive_story_1
+  steps:
+  - intent: autenticar_usuario
+    entities:
+    - auth_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+  - slot_was_set:
+    - auth_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+  - action: action_authenticate_user
+  - slot_was_set:
+    - is_authenticated: true
+  - intent: consultar_asistencia
+    entities:
+    - materia: fisica
+  - slot_was_set:
+    - materia: fisica
+  - action: asistencia_form
+  - active_loop: asistencia_form
+  - slot_was_set:
+    - flujo_actual: consultar_asistencia
+  - intent: proporcionar_matricula
+    entities:
+    - matricula: '66007'
+  - slot_was_set:
+    - matricula: '66007'
+  - action: asistencia_form
+  - active_loop: asistencia_form
+  - slot_was_set:
+    - flujo_actual: null
