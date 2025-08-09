@@ -180,13 +180,16 @@ class ActionInscripcionMesaExamen(Action):
             inscripcion_existente = supabase.table("Inscripcion").select('*').eq("estudiante", matricula).eq("codigo_mesa", codigo_mesa).execute()
             if inscripcion_existente.data:
                 dispatcher.utter_message(f"⚠️ Ya estás inscrito a la mesa de examen de **{nombre_materia}** (código: {codigo_mesa}) que se realizará el {fecha_mesa_final}.")
-                return []
+                return [SlotSet("flujo_actual", None), SlotSet("materia", None)]
             # Realizar la inscripción
             inscripcion_data = {
                 "estudiante": matricula,
                 "codigo_mesa": codigo_mesa,
                 "fecha_inscripcion": "now()"
             }
+            print(f"[LOG] matricula: {matricula}")
+            print(f"[LOG] codigo_mesa: {codigo_mesa}")
+            print(f"[LOG] fecha_inscripcion: {inscripcion_data['fecha_inscripcion']}")
             insert_response = supabase.table("Inscripcion").insert(inscripcion_data).execute()
             if insert_response.data:
                 dispatcher.utter_message(f"✅ **¡Inscripción exitosa!**")

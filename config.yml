@@ -30,6 +30,7 @@ pipeline:
   epochs: 100
   batch_size: 64
   evaluate_every_number_of_epochs: 20
+  constrain_similarities: true
 
 # Mapeo de sinónimos de entidades
 - name: EntitySynonymMapper

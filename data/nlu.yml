@@ -538,7 +538,7 @@ nlu:
     - cuales son mis notas de [programacion](materia)
     - dime que notas tengo en [ingles](materia)
     - quiero saber mis calificaciones de [historia](materia)
-    - cuales son mis notas del [cuatrimestre](materia)
+    - cuales son mis notas del cuatrimestre
     - necesito consultar mis notas de [algebra](materia)
     - quiero ver que notas tengo en [quimica](materia)
     - dime mis calificaciones de [biologia](materia)
@@ -631,155 +631,50 @@ nlu:
     - que necesito para poder cursar [Proyectos Informaticos](materia)
 - intent: consultar_asistencia
   examples: |
+    - quiero consultar mi asistencia
+    - quiero consultar mi asistencia de [biologia](materia)
     - quiero ver mi asistencia
+    - quiero ver mi asistencia de [filosofia](materia)
     - necesito consultar mi asistencia
-    - cuales es mi porcentaje de asistencia
+    - necesito consultar mi asistencia de [estadistica](materia)
+    - necesito ver mi asistencia
     - dime mi asistencia
+    - dime mi asistencia de [literatura](materia)
     - quiero saber mi asistencia
-    - cuales es mi asistencia actual
-    - necesito ver mi porcentaje de asistencia
+    - cual es mi asistencia del cuatrimestre
+    - quiero saber mi asistencia del cuatrimestre
+    - quiero consultar mi asistencia del cuatrimestre
+    - ver mi asistencia de [matematica](materia)
+    - consultar mi asistencia de [fisica](materia)
+    - dime mi asistencia actual
     - quiero consultar mi porcentaje de asistencia
     - dime mi porcentaje de asistencia
-    - quiero saber mi porcentaje de asistencia
-    - cuales es mi asistencia del cuatrimestre
-    - necesito ver mi asistencia del cuatrimestre
-    - quiero consultar mi asistencia del cuatrimestre
-    - dime mi asistencia del cuatrimestre
-    - quiero saber mi asistencia del cuatrimestre
-    - cuales es mi asistencia del semestre
-    - necesito ver mi asistencia del semestre
-    - quiero consultar mi asistencia del semestre
-    - dime mi asistencia del semestre
-    - quiero saber mi asistencia del semestre
-    - necesito ver mi asistencia actual
-    - quiero consultar mi asistencia actual
-    - dime mi asistencia actual
-    - quiero saber mi asistencia actual
-    - cuales es mi asistencia en [matematica](materia)
-    - necesito ver mi asistencia en [fisica](materia)
-    - quiero consultar mi asistencia en [programacion](materia)
-    - dime mi asistencia en [ingles](materia)
-    - quiero saber mi asistencia en [historia](materia)
-    - cuales es mi asistencia de [algebra](materia)
-    - necesito ver mi asistencia de [quimica](materia)
-    - quiero consultar mi asistencia de [biologia](materia)
-    - dime mi asistencia de [literatura](materia)
-    - quiero saber mi asistencia de [filosofia](materia)
-    - cuales es mi asistencia en [geografia](materia)
-    - necesito ver mi asistencia en [economia](materia)
-    - quiero consultar mi asistencia en [psicologia](materia)
-    - dime mi asistencia en [sociologia](materia)
-    - quiero saber mi asistencia en [derecho](materia)
-    - cuales es mi asistencia de [contabilidad](materia)
-    - necesito ver mi asistencia de [estadistica](materia)
-    - quiero consultar mi asistencia de [administracion](materia)
-    - dime mi asistencia de [marketing](materia)
-    - quiero ver mi asistencia con matricula [66001](matricula)
-    - necesito consultar mi asistencia matricula [66022](matricula)
-    - cuales es mi asistencia matricula [66031](matricula)
-    - dime mi asistencia matricula [66001](matricula)
-    - quiero saber mi asistencia matricula [66022](matricula)
-    - consultar asistencia matricula [66031](matricula)
-    - ver asistencia matricula [66001](matricula)
-    - mi asistencia matricula [66022](matricula)
-    - asistencia del cuatrimestre matricula [66031](matricula)
-    - necesito consultar mi asistencia con matricula [66022](matricula)
-    - cuales es mi asistencia con matricula [66031](matricula)
-    - dime mi asistencia con matricula [66001](matricula)
-    - quiero saber mi asistencia con matricula [66022](matricula)
-    - consultar asistencia con matricula [66031](matricula)
-    - ver asistencia con matricula [66001](matricula)
-    - mi asistencia con matricula [66022](matricula)
-    - asistencia del cuatrimestre con matricula [66031](matricula)
-    - quiero ver mi asistencia de [matematica](materia) con matricula [66001](matricula)
-    - necesito ver mi asistencia de [fisica](materia) matricula [66022](matricula)
-    - cuales es mi asistencia de [programacion](materia) matricula [66031](matricula)
-    - dime mi asistencia de [ingles](materia) matricula [66001](matricula)
-    - quiero saber mi asistencia de [historia](materia) matricula [66022](matricula)
-    - consultar asistencia de [algebra](materia) matricula [66031](matricula)
-    - ver asistencia de [quimica](materia) matricula [66001](matricula)
-    - mi asistencia de [biologia](materia) matricula [66022](matricula)
-    - asistencia de [literatura](materia) matricula [66031](matricula)
-    - necesito ver mi asistencia de [fisica](materia) con matricula [66022](matricula)
-    - cuales es mi asistencia de [programacion](materia) con matricula [66031](matricula)
-    - dime mi asistencia de [ingles](materia) con matricula [66001](matricula)
-    - quiero saber mi asistencia de [historia](materia) con matricula [66022](matricula)
-    - consultar asistencia de [algebra](materia) con matricula [66031](matricula)
-    - ver asistencia de [quimica](materia) con matricula [66001](matricula)
-    - mi asistencia de [biologia](materia) con matricula [66022](matricula)
-    - asistencia de [literatura](materia) con matricula [66031](matricula)
-    - quiero ver mi porcentaje de asistencia
-    - necesito consultar mi porcentaje de asistencia
-    - cuales es mi porcentaje de asistencia en [matematica](materia)
-    - necesito ver mi porcentaje de asistencia en [fisica](materia)
-    - quiero consultar mi porcentaje de asistencia en [programacion](materia)
-    - dime mi porcentaje de asistencia en [ingles](materia)
     - quiero saber mi porcentaje de asistencia en [historia](materia)
-    - cuales es mi porcentaje de asistencia de [algebra](materia)
-    - necesito ver mi porcentaje de asistencia de [quimica](materia)
-    - quiero consultar mi porcentaje de asistencia de [biologia](materia)
-    - dime mi porcentaje de asistencia de [literatura](materia)
-    - quiero saber mi porcentaje de asistencia de [filosofia](materia)
-    - cuales es mi porcentaje de asistencia en [geografia](materia)
-    - necesito ver mi porcentaje de asistencia en [economia](materia)
-    - quiero consultar mi porcentaje de asistencia en [psicologia](materia)
-    - dime mi porcentaje de asistencia en [sociologia](materia)
-    - quiero saber mi porcentaje de asistencia en [derecho](materia)
-    - cuales es mi porcentaje de asistencia de [contabilidad](materia)
-    - necesito ver mi porcentaje de asistencia de [estadistica](materia)
-    - quiero consultar mi porcentaje de asistencia de [administracion](materia)
-    - dime mi porcentaje de asistencia de [marketing](materia)
-    - porcentaje de asistencia
-    - mi porcentaje de asistencia
-    - asistencia porcentaje
-    - porcentaje asistencia
-    - asistencia
-    - mi asistencia
-    - consultar asistencia
-    - ver asistencia
-    - asistencia actual
-    - asistencia del cuatrimestre
-    - asistencia del semestre
-    - asistencia en [matematica](materia)
-    - asistencia en [fisica](materia)
-    - asistencia en [programacion](materia)
-    - asistencia en [ingles](materia)
-    - asistencia en [historia](materia)
-    - asistencia de [algebra](materia)
-    - asistencia de [quimica](materia)
-    - asistencia de [biologia](materia)
-    - asistencia de [literatura](materia)
-    - asistencia de [filosofia](materia)
-    - asistencia en [geografia](materia)
-    - asistencia en [economia](materia)
-    - asistencia en [psicologia](materia)
-    - asistencia en [sociologia](materia)
-    - asistencia en [derecho](materia)
-    - asistencia de [contabilidad](materia)
-    - asistencia de [estadistica](materia)
-    - asistencia de [administracion](materia)
-    - asistencia de [marketing](materia)
+    - necesito ver mi asistencia con matricula [66001](matricula)
+    - consultar asistencia con matricula [66031](matricula)
+    - quiero ver mi asistencia de [programacion](materia) con matricula [66001](matricula)
+    - necesito consultar mi asistencia de [fisica](materia) matricula [66022](matricula)
     - hola quiero saber mis asistencia en [fisica](materia)
 - intent: proporcionar_materia_para_asistencia
   examples: |
-    - La materia para consultar mi asistencia es [matematica](materia)
-    - Quiero ver mi asistencia de [fisica](materia)
-    - Para consultar mi asistencia, la materia es [programacion](materia)
-    - Mi asistencia de [historia](materia)
-    - Quiero consultar mi asistencia de [algebra](materia)
-    - La materia para consultar asistencia es [quimica](materia)
-    - Quiero ver mi porcentaje de asistencia de [biologia](materia)
-    - Para ver mi asistencia, la materia es [literatura](materia)
-    - Asistencia de [filosofia](materia)
-    - Quiero ver mi asistencia de [geografia](materia)
-    - Para consultar mi asistencia, la materia es [economia](materia)
-    - Quiero ver mi asistencia de [psicologia](materia)
-    - La materia para ver mi asistencia es [sociologia](materia)
-    - Quiero consultar mi asistencia de [derecho](materia)
-    - Para ver mi asistencia, la materia es [contabilidad](materia)
-    - Asistencia de [estadistica](materia)
-    - La materia para consultar asistencia es [administracion](materia)
-    - Quiero ver mi asistencia de [marketing](materia)
+    - La materia es [matematica](materia)
+    - Es de [fisica](materia)
+    - [programacion](materia)
+    - de [historia](materia)
+    - [algebra](materia)
+    - es [quimica](materia)
+    - de [biologia](materia)
+    - [literatura](materia)
+    - de [filosofia](materia)
+    - [geografia](materia)
+    - es de [economia](materia)
+    - [psicologia](materia)
+    - de [sociologia](materia)
+    - [derecho](materia)
+    - es [contabilidad](materia)
+    - de [estadistica](materia)
+    - [administracion](materia)
+    - de [marketing](materia)
 - intent: consultar_fecha_mesas_examen_final
   examples: |
     - quiero ver las fechas de examen final

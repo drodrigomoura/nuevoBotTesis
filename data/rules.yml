@@ -39,41 +39,39 @@ rules:
   - intent: consultar_materias
   - action: action_consultar_materias
 
-- rule: consultar notas con matrícula y materia existentes
-  condition:
-  - slot_was_set:
-    - matricula: not null
-    - materia: not null
+- rule: activar notas_form al solicitar notas
   steps:
   - intent: consultar_notas
+  - action: notas_form
+  - active_loop: notas_form
+
+- rule: enviar notas_form y ejecutar acción
+  condition:
+  - active_loop: notas_form
+  steps:
+  - action: notas_form
+  - active_loop: null
   - action: action_consultar_notas
 
-- rule: consultar notas con matrícula pero sin materia
-  condition:
-  - slot_was_set:
-    - matricula: not null
-    - materia: null
+- rule: activar materias_form al solicitar materias
   steps:
-  - intent: consultar_notas
-  - action: utter_solicitar_materia_notas
+  - intent: consultar_materias
+  - action: materias_form
+  - active_loop: materias_form
 
-- rule: consultar notas con materia pero sin matrícula
+- rule: enviar materias_form y ejecutar acción
   condition:
-  - slot_was_set:
-    - matricula: null
-    - materia: not null
+  - active_loop: materias_form
   steps:
-  - intent: consultar_notas
-  - action: utter_solicitar_matricula_notas
+  - action: materias_form
+  - active_loop: null
+  - action: action_consultar_materias
 
-- rule: consultar notas sin matrícula ni materia
-  condition:
-  - slot_was_set:
-    - matricula: null
-    - materia: null
+- rule: activar asistencia_form al solicitar asistencia
   steps:
-  - intent: consultar_notas
-  - action: utter_solicitar_matricula_y_materia_notas
+  - intent: consultar_asistencia
+  - action: asistencia_form
+  - active_loop: asistencia_form
 
 - rule: consultar requerimientos de materia
   steps:
@@ -89,6 +87,8 @@ rules:
   steps:
     - intent: seleccionar_mesa_examen
     - action: action_inscripcion_mesa_examen
+
+## Eliminado: ahora materias se gestiona con materias_form
 
 - rule: consultar mesas tras proporcionar_materia_para_mesas
   steps:
@@ -165,35 +165,32 @@ rules:
     - materia: not null
   steps:
   - intent: consultar_asistencia
-  - action: action_consultar_asistencia
+  - action: asistencia_form
+  - active_loop: asistencia_form
 
-- rule: continuar consultar asistencia tras matrícula
+- rule: enviar asistencia_form y ejecutar acción
   condition:
-    - slot_was_set:
-        - flujo_actual: consultar_asistencia
+  - active_loop: asistencia_form
   steps:
-    - action: action_consultar_asistencia
+  - action: asistencia_form
+  - active_loop: null
+  - action: action_consultar_asistencia
 
 - rule: continuar consultar asistencia tras materia
   condition:
     - slot_was_set:
         - flujo_actual: consultar_asistencia
   steps:
-    - action: action_consultar_asistencia
+    - action: asistencia_form
+    - active_loop: asistencia_form
 
-- rule: proporcionar materia para asistencia
+- rule: proporcionar materia para asistencia (mantener)
   steps:
-    - intent: proporcionar_materia_para_asistencia
-    - action: action_consultar_asistencia
+  - intent: proporcionar_materia_para_asistencia
+  - action: asistencia_form
+  - active_loop: asistencia_form
 
-- rule: consultar asistencia sin matrícula ni materia
-  condition:
-  - slot_was_set:
-    - matricula: null
-    - materia: null
-  steps:
-  - intent: consultar_asistencia
-  - action: action_consultar_asistencia
+## Eliminado: ahora asistencia se gestiona con asistencia_form
 
 - rule: consultar asistencia con matrícula pero sin materia
   condition:
@@ -202,7 +199,8 @@ rules:
     - materia: null
   steps:
   - intent: consultar_asistencia
-  - action: action_consultar_asistencia
+  - action: asistencia_form
+  - active_loop: asistencia_form
 
 - rule: consultar asistencia con materia pero sin matrícula
   condition:
@@ -211,7 +209,8 @@ rules:
     - materia: not null
   steps:
   - intent: consultar_asistencia
-  - action: action_consultar_asistencia
+  - action: asistencia_form
+  - active_loop: asistencia_form
 
 
 
