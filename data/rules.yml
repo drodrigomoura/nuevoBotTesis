@@ -1,217 +1,213 @@
 version: "3.1"
 
 rules:
-- rule: saludo directo
-  steps:
-  - intent: saludo
-  - action: utter_saludo
+  - rule: saludo directo
+    steps:
+      - intent: saludo
+      - action: utter_saludo
 
-- rule: despedida directa
-  steps:
-  - intent: despedida
-  - action: utter_despedida
+  - rule: despedida directa
+    steps:
+      - intent: despedida
+      - action: utter_despedida
 
-- rule: agradecimiento directo
-  steps:
-  - intent: agradecimiento
-  - action: utter_agradecimiento
+  - rule: agradecimiento directo
+    steps:
+      - intent: agradecimiento
+      - action: utter_agradecimiento
 
-- rule: Autenticación automática
-  steps:
-    - intent: autenticar_usuario
-    - action: action_authenticate_user
+  - rule: Autenticación automática
+    steps:
+      - intent: autenticar_usuario
+      - action: action_authenticate_user
 
-- rule: fallback para baja confianza
-  steps:
-  - intent: nlu_fallback
-  - action: utter_please_rephrase
+  - rule: fallback para baja confianza
+    steps:
+      - intent: nlu_fallback
+      - action: utter_please_rephrase
 
-- rule: out of scope
-  steps:
-  - intent: out_of_scope
-  - action: utter_out_of_scope
+  - rule: out of scope
+    steps:
+      - intent: out_of_scope
+      - action: utter_out_of_scope
 
-- rule: consultar materias con matrícula existente
-  condition:
-  - slot_was_set:
-    - matricula: not null
-  steps:
-  - intent: consultar_materias
-  - action: action_consultar_materias
+  - rule: consultar materias con matrícula existente
+    condition:
+      - slot_was_set:
+          - matricula: not null
+    steps:
+      - intent: consultar_materias
+      - action: action_consultar_materias
 
-- rule: activar notas_form al solicitar notas
-  steps:
-  - intent: consultar_notas
-  - action: notas_form
-  - active_loop: notas_form
+  - rule: activar notas_form al solicitar notas
+    steps:
+      - intent: consultar_notas
+      - action: notas_form
+      - active_loop: notas_form
 
-- rule: enviar notas_form y ejecutar acción
-  condition:
-  - active_loop: notas_form
-  steps:
-  - action: notas_form
-  - active_loop: null
-  - action: action_consultar_notas
+  - rule: enviar notas_form y ejecutar acción
+    condition:
+      - active_loop: notas_form
+    steps:
+      - action: notas_form
+      - active_loop: null
+      - action: action_consultar_notas
 
-- rule: activar materias_form al solicitar materias
-  steps:
-  - intent: consultar_materias
-  - action: materias_form
-  - active_loop: materias_form
+  - rule: activar materias_form al solicitar materias
+    steps:
+      - intent: consultar_materias
+      - action: materias_form
+      - active_loop: materias_form
 
-- rule: enviar materias_form y ejecutar acción
-  condition:
-  - active_loop: materias_form
-  steps:
-  - action: materias_form
-  - active_loop: null
-  - action: action_consultar_materias
+  - rule: enviar materias_form y ejecutar acción
+    condition:
+      - active_loop: materias_form
+    steps:
+      - action: materias_form
+      - active_loop: null
+      - action: action_consultar_materias
 
-- rule: activar asistencia_form al solicitar asistencia
-  steps:
-  - intent: consultar_asistencia
-  - action: asistencia_form
-  - active_loop: asistencia_form
+  - rule: activar asistencia_form al solicitar asistencia
+    steps:
+      - intent: consultar_asistencia
+      - action: asistencia_form
+      - active_loop: asistencia_form
 
-- rule: consultar requerimientos de materia
-  steps:
-  - intent: consultar_requerimientos_materia
-  - action: action_consultar_requerimientos_materia
+  - rule: consultar requerimientos de materia
+    steps:
+      - intent: consultar_requerimientos_materia
+      - action: action_consultar_requerimientos_materia
 
-- rule: ofrecer mesas de examen para inscripción
-  steps:
-    - intent: inscribirse_mesa_examen
-    - action: action_ofrecer_mesas_examen
+  - rule: ofrecer mesas de examen para inscripción
+    steps:
+      - intent: inscribirse_mesa_examen
+      - action: action_ofrecer_mesas_examen
 
-- rule: inscribir a mesa de examen tras selección
-  steps:
-    - intent: seleccionar_mesa_examen
-    - action: action_inscripcion_mesa_examen
+  - rule: inscribir a mesa de examen tras selección
+    steps:
+      - intent: seleccionar_mesa_examen
+      - action: action_inscripcion_mesa_examen
 
-## Eliminado: ahora materias se gestiona con materias_form
+  ## Eliminado: ahora materias se gestiona con materias_form
 
-- rule: consultar mesas tras proporcionar_materia_para_mesas
-  steps:
-    - intent: proporcionar_materia_para_mesas
-    - action: action_consultar_mesas_examen
+  - rule: consultar mesas tras proporcionar_materia_para_mesas
+    steps:
+      - intent: proporcionar_materia_para_mesas
+      - action: action_consultar_mesas_examen
 
-- rule: ofrecer mesas de examen tras proporcionar materia para inscripcion
-  steps:
-    - intent: proporcionar_materia_para_inscripcion
-    - action: action_ofrecer_mesas_examen
+  - rule: ofrecer mesas de examen tras proporcionar materia para inscripcion
+    steps:
+      - intent: proporcionar_materia_para_inscripcion
+      - action: action_ofrecer_mesas_examen
 
-- rule: continuar inscripcion mesa de examen tras matricula
-  condition:
-    - slot_was_set:
-        - flujo_actual: inscripcion_mesa_examen
-  steps:
-    - action: action_ofrecer_mesas_examen
+  - rule: continuar inscripcion mesa de examen tras matricula
+    condition:
+      - slot_was_set:
+          - flujo_actual: inscripcion_mesa_examen
+    steps:
+      - action: action_ofrecer_mesas_examen
 
-- rule: continuar consultar materias tras matricula
-  condition:
-    - slot_was_set:
-        - flujo_actual: consultar_materias
-  steps:
-    - action: action_consultar_materias
+  - rule: continuar consultar materias tras matricula
+    condition:
+      - slot_was_set:
+          - flujo_actual: consultar_materias
+    steps:
+      - action: action_consultar_materias
 
-- rule: continuar consultar notas tras matricula
-  condition:
-    - slot_was_set:
-        - flujo_actual: consultar_notas
-  steps:
-    - action: action_consultar_notas
+  - rule: continuar consultar notas tras matricula
+    condition:
+      - slot_was_set:
+          - flujo_actual: consultar_notas
+    steps:
+      - action: action_consultar_notas
 
-- rule: continuar consultar notas tras materia
-  condition:
-    - slot_was_set:
-        - flujo_actual: consultar_notas
-  steps:
-    - action: action_consultar_notas
- 
-- rule: continuar consultar notas tras proporcionar_materia genérica
-  condition:
-    - slot_was_set:
-        - flujo_actual: consultar_notas
-  steps:
-    - intent: proporcionar_materia
-    - action: action_consultar_notas
+  - rule: continuar consultar notas tras materia
+    condition:
+      - slot_was_set:
+          - flujo_actual: consultar_notas
+    steps:
+      - action: action_consultar_notas
 
-- rule: continuar consultar notas tras proporcionar_materia_para_notas
-  condition:
-    - slot_was_set:
-        - flujo_actual: consultar_notas
-  steps:
-    - intent: proporcionar_materia_para_notas
-    - action: action_consultar_notas
+  - rule: continuar consultar notas tras proporcionar_materia genérica
+    condition:
+      - slot_was_set:
+          - flujo_actual: consultar_notas
+    steps:
+      - intent: proporcionar_materia
+      - action: action_consultar_notas
 
-- rule: continuar consultar requerimientos tras matricula
-  condition:
-    - slot_was_set:
-        - flujo_actual: consultar_requerimientos_materia
-  steps:
-    - action: action_consultar_requerimientos_materia
+  - rule: continuar consultar notas tras proporcionar_materia_para_notas
+    condition:
+      - slot_was_set:
+          - flujo_actual: consultar_notas
+    steps:
+      - intent: proporcionar_materia_para_notas
+      - action: action_consultar_notas
 
-- rule: continuar consultar requerimientos tras materia
-  condition:
-    - slot_was_set:
-        - flujo_actual: consultar_requerimientos_materia
-  steps:
-    - action: action_consultar_requerimientos_materia
+  - rule: continuar consultar requerimientos tras matricula
+    condition:
+      - slot_was_set:
+          - flujo_actual: consultar_requerimientos_materia
+    steps:
+      - action: action_consultar_requerimientos_materia
 
-- rule: consultar asistencia con matrícula y materia existentes
-  condition:
-  - slot_was_set:
-    - matricula: not null
-    - materia: not null
-  steps:
-  - intent: consultar_asistencia
-  - action: asistencia_form
-  - active_loop: asistencia_form
+  - rule: continuar consultar requerimientos tras materia
+    condition:
+      - slot_was_set:
+          - flujo_actual: consultar_requerimientos_materia
+    steps:
+      - action: action_consultar_requerimientos_materia
 
-- rule: enviar asistencia_form y ejecutar acción
-  condition:
-  - active_loop: asistencia_form
-  steps:
-  - action: asistencia_form
-  - active_loop: null
-  - action: action_consultar_asistencia
+  - rule: consultar asistencia con matrícula y materia existentes
+    condition:
+      - slot_was_set:
+          - matricula: not null
+          - materia: not null
+    steps:
+      - intent: consultar_asistencia
+      - action: asistencia_form
+      - active_loop: asistencia_form
 
-- rule: continuar consultar asistencia tras materia
-  condition:
-    - slot_was_set:
-        - flujo_actual: consultar_asistencia
-  steps:
-    - action: asistencia_form
-    - active_loop: asistencia_form
+  - rule: enviar asistencia_form y ejecutar acción
+    condition:
+      - active_loop: asistencia_form
+    steps:
+      - action: asistencia_form
+      - active_loop: null
+      - action: action_consultar_asistencia
 
-- rule: proporcionar materia para asistencia (mantener)
-  steps:
-  - intent: proporcionar_materia_para_asistencia
-  - action: asistencia_form
-  - active_loop: asistencia_form
+  - rule: continuar consultar asistencia tras materia
+    condition:
+      - slot_was_set:
+          - flujo_actual: consultar_asistencia
+    steps:
+      - action: asistencia_form
+      - active_loop: asistencia_form
 
-## Eliminado: ahora asistencia se gestiona con asistencia_form
+  - rule: proporcionar materia para asistencia (mantener)
+    steps:
+      - intent: proporcionar_materia_para_asistencia
+      - action: asistencia_form
+      - active_loop: asistencia_form
 
-- rule: consultar asistencia con matrícula pero sin materia
-  condition:
-  - slot_was_set:
-    - matricula: not null
-    - materia: null
-  steps:
-  - intent: consultar_asistencia
-  - action: asistencia_form
-  - active_loop: asistencia_form
+  ## Eliminado: ahora asistencia se gestiona con asistencia_form
 
-- rule: consultar asistencia con materia pero sin matrícula
-  condition:
-  - slot_was_set:
-    - matricula: null
-    - materia: not null
-  steps:
-  - intent: consultar_asistencia
-  - action: asistencia_form
-  - active_loop: asistencia_form
+  - rule: consultar asistencia con matrícula pero sin materia
+    condition:
+      - slot_was_set:
+          - matricula: not null
+          - materia: null
+    steps:
+      - intent: consultar_asistencia
+      - action: asistencia_form
+      - active_loop: asistencia_form
 
-
-
-
+  - rule: consultar asistencia con materia pero sin matrícula
+    condition:
+      - slot_was_set:
+          - matricula: null
+          - materia: not null
+    steps:
+      - intent: consultar_asistencia
+      - action: asistencia_form
+      - active_loop: asistencia_form

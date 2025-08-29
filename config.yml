@@ -3,28 +3,22 @@ pipeline:
 # Procesamiento de lenguaje natural en español (DEBE ir primero)
 - name: SpacyNLP
   model: "es_core_news_sm"
-
 # Tokenización específica para español (requiere SpacyNLP)
 - name: SpacyTokenizer
-
 # Características léxicas y sintácticas
 - name: LexicalSyntacticFeaturizer
-
 # Características de regex
 - name: RegexFeaturizer
-
 # Vectorización de palabras para español
 - name: CountVectorsFeaturizer
   analyzer: "word"
   min_ngram: 1
   max_ngram: 2
-
 # Vectorización de caracteres para capturar variaciones morfológicas del español
 - name: CountVectorsFeaturizer
   analyzer: "char_wb"
   min_ngram: 1
   max_ngram: 4
-
 # Clasificador DIET optimizado para español
 - name: DIETClassifier
   epochs: 100
@@ -34,32 +28,25 @@ pipeline:
 
 # Mapeo de sinónimos de entidades
 - name: EntitySynonymMapper
-
-# Selector de respuestas
-- name: ResponseSelector
-  epochs: 100
-  batch_size: 64
-  evaluate_every_number_of_epochs: 20
+@@ -42,7 +43,7 @@ pipeline:
 
 # Clasificador de fallback
 - name: FallbackClassifier
+  threshold: 0.7
   threshold: 0.3
   ambiguity_threshold: 0.1
 
 policies:
 - name: MemoizationPolicy
   max_history: 5
-
 - name: RulePolicy
   core_fallback_threshold: 0.4
   core_fallback_action_name: "action_default_fallback"
   enable_fallback_prediction: true
   max_history: 5
-
 - name: TEDPolicy
   max_history: 5
   epochs: 100
   batch_size: 64
   evaluate_every_number_of_epochs: 20
-
 assistant_id: 20231121-211621-relaxed-bookshelf

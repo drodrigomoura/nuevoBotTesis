@@ -214,51 +214,51 @@ class ActionCancelarInscripcionMesa(Action):
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
         materia = tracker.get_slot('materia')
         matricula = tracker.get_slot('matricula')
-        
+
         if not matricula:
             dispatcher.utter_message("❌ No tengo tu número de matrícula. Por favor, proporciona tu matrícula para poder cancelar la inscripción.")
             return []
-        
+
         if not materia:
             dispatcher.utter_message("❌ No tengo la materia especificada. Por favor, dime de qué materia quieres cancelar la inscripción.")
             return []
-        
+
         try:
             # Primero buscar las mesas de examen para la materia
             mesa_response = supabase.table("MesaExamen").select('codigo, Materia(nombre)').ilike("Materia.nombre", "%" + materia + "%").execute()
-            
+
             if not mesa_response.data:
                 dispatcher.utter_message(f"❌ No se encontraron mesas de examen para la materia '{materia}'.")
                 return []
-            
+
             # Buscar todas las inscripciones del estudiante para las mesas de esa materia
             inscripciones_canceladas = 0
             for mesa in mesa_response.data:
                 codigo_mesa = mesa.get("codigo")
                 nombre_materia = mesa.get("Materia", {}).get("nombre", "Materia")
-                
+
                 # Buscar la inscripción específica
                 inscripcion_response = supabase.table("InscripcionMesa").select('*').eq("estudiante", matricula).eq("mesa_examen", codigo_mesa).execute()
-                
+
                 if inscripcion_response.data:
                     # Eliminar la inscripción
                     delete_response = supabase.table("InscripcionMesa").delete().eq("estudiante", matricula).eq("mesa_examen", codigo_mesa).execute()
-                    
+
                     if delete_response.data:
                         inscripciones_canceladas += 1
                         dispatcher.utter_message(f"✅ Tu inscripción a la mesa de examen de {nombre_materia} (código: {codigo_mesa}) ha sido cancelada exitosamente.")
-            
+
             if inscripciones_canceladas == 0:
                 dispatcher.utter_message(f"❌ No se encontró una inscripción activa para la matrícula {matricula} en ninguna mesa de examen de la materia '{materia}'.")
             elif inscripciones_canceladas == 1:
                 dispatcher.utter_message("✅ Cancelación completada.")
             else:
                 dispatcher.utter_message(f"✅ Se cancelaron {inscripciones_canceladas} inscripciones.")
-                
+
         except Exception as e:
             print(f"Error al cancelar inscripción: {e}")
             dispatcher.utter_message("❌ Hubo un error al procesar la cancelación. Por favor, intenta nuevamente más tarde.")
-        
+
         return []
 
 class ActionConsultarMaterias(Action):
@@ -269,39 +269,39 @@ class ActionConsultarMaterias(Action):
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
         # Verificar si el usuario está autenticado
         is_authenticated = tracker.get_slot('is_authenticated')
-        
+
         if not is_authenticated:
             dispatcher.utter_message("❌ Necesitas estar autenticado para consultar tus materias. Por favor, inicia sesión primero.")
             return []
-        
+
         # Obtener la matrícula del slot
         matricula = tracker.get_slot('matricula')
-        
+
         if not matricula:
             dispatcher.utter_message("❌ No tengo tu número de matrícula. Por favor, proporciona tu matrícula para poder consultar tus materias.")
             return [SlotSet("flujo_actual", "consultar_materias")]
-        
+
         try:
             response = supabase.table("MateriaCursada").select('fecha_cursada, Materia(nombre)').eq("estudiante", matricula).execute()
-            
+
             if not response.data:
                 dispatcher.utter_message(f"📚 No se encontraron materias cursadas para la matrícula {matricula}.")
                 return [SlotSet("flujo_actual", None)]
-            
+
             dispatcher.utter_message(f"📚 **Materias cursadas para la matrícula {matricula}:**")
-            
+
             for materia in response.data:
                 nombre_materia = materia.get("Materia", {}).get("nombre", "Materia sin nombre")
                 fecha_cursada = materia.get("fecha_cursada", "Fecha no disponible")
-                
+
                 dispatcher.utter_message(f"• **{nombre_materia}** - Cursada el: {fecha_cursada}")
-            
+
             dispatcher.utter_message(f"✅ Total de materias encontradas: {len(response.data)}")
             return [SlotSet("flujo_actual", None), SlotSet("materia", None)]
         except Exception as e:
             print(f"Error al consultar materias: {e}")
             dispatcher.utter_message("❌ Hubo un error al consultar tus materias. Por favor, intenta nuevamente más tarde.")
-        
+
         return []
 
 class ActionAuthenticateUser(Action):
@@ -325,25 +325,25 @@ class ActionConsultarNotas(Action):
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
         # Verificar si el usuario está autenticado
         is_authenticated = tracker.get_slot('is_authenticated')
-        
+
         if not is_authenticated:
             dispatcher.utter_message("❌ Necesitas estar autenticado para consultar tus notas. Por favor, inicia sesión primero.")
             return []
-        
+
         # Obtener la matrícula del slot
         matricula = tracker.get_slot('matricula')
-        
+
         if not matricula:
             dispatcher.utter_message("❌ No tengo tu número de matrícula. Por favor, proporciona tu matrícula para poder consultar tus notas.")
             return [SlotSet("flujo_actual", "consultar_notas")]
-        
+
         # Convertir matrícula a entero
         try:
             matricula = int(matricula)
         except ValueError:
             dispatcher.utter_message("❌ El número de matrícula debe ser un número válido.")
             return []
-        
+
         # Obtener la materia del slot
         materia = tracker.get_slot('materia')
         print(f"[LOG] Consultando notas para matrícula: {matricula}, materia: {materia}")
@@ -365,7 +365,7 @@ class ActionConsultarNotas(Action):
             # Buscar las notas usando el id de la materia si está disponible
             print(f"[LOG] Materia codigo: {materia_codigo}")
             print(f"[LOG] Matricula: {matricula}")
-            
+
             if materia_codigo:
                 # Usar query SQL directa con .from_()
                 sql_query = f"SELECT * FROM public.\"Notas\" WHERE materia_codigo = '{materia_codigo}' AND estudiante_id = {matricula}"
@@ -376,15 +376,15 @@ class ActionConsultarNotas(Action):
                 sql_query = f"SELECT * FROM public.\"Notas\" WHERE estudiante_id = {matricula}"
                 print(f"[LOG] SQL Query: {sql_query}")
                 response = supabase.from_('Notas').select("*").eq("estudiante_id", matricula).execute()
-            
+
             print(f"[LOG] Response: {response}")
             print(f"[LOG] Response data: {response.data}")
             print(f"[LOG] Response data length: {len(response.data) if response.data else 0}")
-            
+
             # Verificar si hay errores en la respuesta
             if hasattr(response, 'error') and response.error:
                 print(f"[LOG] Supabase error: {response.error}")
-            
+
             # Si no hay datos, probar una consulta simple sin filtros
             if not response.data:
                 print(f"[LOG] Probando consulta simple sin filtros...")
@@ -394,7 +394,7 @@ class ActionConsultarNotas(Action):
                     print(f"[LOG] Simple response length: {len(simple_response.data) if simple_response.data else 0}")
                 except Exception as e:
                     print(f"[LOG] Error en consulta simple: {e}")
-            
+
             if not response.data:
                 if materia:
                     dispatcher.utter_message(f"📊 No se encontraron notas registradas para la matrícula {matricula} en la materia '{materia}'.")
@@ -430,7 +430,7 @@ class ActionConsultarNotas(Action):
         except Exception as e:
             print(f"Error al consultar notas: {e}")
             dispatcher.utter_message("❌ Hubo un error al consultar tus notas. Por favor, intenta nuevamente más tarde.")
-        
+
         return []
 
 class ActionConsultarRequerimientosMateria(Action):
@@ -441,43 +441,43 @@ class ActionConsultarRequerimientosMateria(Action):
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
         # Verificar si el usuario está autenticado
         is_authenticated = tracker.get_slot('is_authenticated')
-        
+
         if not is_authenticated:
             dispatcher.utter_message("❌ Necesitas estar autenticado para consultar los requerimientos de las materias. Por favor, inicia sesión primero.")
             return []
-        
+
         # Obtener la matrícula del slot
         matricula = tracker.get_slot('matricula')
-        
+
         if not matricula:
             dispatcher.utter_message("❌ No tengo tu número de matrícula. Por favor, proporciona tu matrícula para poder consultar los requerimientos de las materias.")
             return [SlotSet("flujo_actual", "consultar_requerimientos_materia")]
-        
+
         # Obtener la materia del slot
         materia = tracker.get_slot('materia')
-        
+
         if not materia:
             dispatcher.utter_message("❌ No tengo la materia especificada. Por favor, dime de qué materia quieres consultar los requerimientos.")
             return [SlotSet("flujo_actual", "consultar_requerimientos_materia")]
-        
-        try:    
+
+        try:
             # Buscar el id de la materia por nombre
             materia_resp = supabase.table("Materia").select("codigo, nombre").ilike("nombre", "%" + materia + "%").execute()
             if not materia_resp.data:
                 dispatcher.utter_message(f"❌ No se encontró la materia '{materia}' en la base de datos.")
                 return [SlotSet("flujo_actual", None)]
-            
+
             materia_codigo = materia_resp.data[0]["codigo"]
-            
+
             # Buscar los requerimientos de la materia
             requerimientos_resp = supabase.table("MateriaEquivalencia").select('*, Materia!MateriaEquivalencia_equivalencia_id_fkey(nombre)').eq("materia_codigo", materia_codigo).execute()
 
             if not requerimientos_resp.data:
                 dispatcher.utter_message(f"❌ No se encontraron requerimientos para la materia '{materia}'.")
                 return [SlotSet("flujo_actual", None)]
-            
+
             dispatcher.utter_message(f"📊 **Requerimientos de {materia.upper()}:**")
-            
+
             for requerimiento in requerimientos_resp.data:
                 nombre_materia_equivalencia = requerimiento.get("Materia", {}).get("nombre", "Materia sin nombre")
                 dispatcher.utter_message(f"• **{nombre_materia_equivalencia}**")
@@ -487,7 +487,7 @@ class ActionConsultarRequerimientosMateria(Action):
         except Exception as e:
             print(f"Error al consultar requerimientos de la materia: {e}")
             dispatcher.utter_message("❌ Hubo un error al consultar los requerimientos de la materia. Por favor, intenta nuevamente más tarde.")
-        
+
         return []
 
 class ActionConsultarAsistencia(Action):
@@ -498,63 +498,63 @@ class ActionConsultarAsistencia(Action):
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
         # Verificar si el usuario está autenticado
         is_authenticated = tracker.get_slot('is_authenticated')
-        
+
         if not is_authenticated:
             dispatcher.utter_message("❌ Necesitas estar autenticado para consultar tu asistencia. Por favor, inicia sesión primero.")
             return []
-        
+
         # Obtener la matrícula del slot
         matricula = tracker.get_slot('matricula')
-        
+
         if not matricula:
             dispatcher.utter_message("❌ No tengo tu número de matrícula. Por favor, proporciona tu matrícula para poder consultar tu asistencia.")
             return [SlotSet("flujo_actual", "consultar_asistencia")]
-        
+
         # Obtener la materia del slot
         materia = tracker.get_slot('materia')
-        
+
         if not materia:
             dispatcher.utter_message("❌ No tengo la materia especificada. Por favor, dime de qué materia quieres consultar la asistencia.")
             return [SlotSet("flujo_actual", "consultar_asistencia")]
-        
+
         try:
             # Buscar el código de la materia por nombre
             materia_resp = supabase.table("Materia").select("codigo, nombre").ilike("nombre", "%" + materia + "%").execute()
             if not materia_resp.data:
                 dispatcher.utter_message(f"❌ No se encontró la materia '{materia}' en la base de datos.")
                 return [SlotSet("flujo_actual", None)]
-            
+
             materia_codigo = materia_resp.data[0]["codigo"]
             nombre_materia = materia_resp.data[0]["nombre"]
-            
+
             # Buscar las asistencias del estudiante para esa materia
             asistencia_resp = supabase.table("Asistencia").select('*').eq("estudiante", matricula).eq("materia", materia_codigo).execute()
-            
+
             if not asistencia_resp.data:
                 dispatcher.utter_message(f"📊 No se encontraron registros de asistencia para la matrícula {matricula} en la materia '{nombre_materia}'.")
                 return [SlotSet("flujo_actual", None)]
-            
+
             # Calcular estadísticas de asistencia
             clases_asistidas = 0
             clases_ausentes = 0
-            
+
             for registro in asistencia_resp.data:
                 asistio = registro.get("is_present", False)
                 if asistio:
                     clases_asistidas += 1
                 else:
                     clases_ausentes += 1
-            
+
             # Calcular el porcentaje de asistencia usando la fórmula
             # Porcentaje de asistencia = (Clases asistidas / (Clases asistidas + Clases ausentes)) x 100
             total_clases = clases_asistidas + clases_ausentes
-            
+
             if total_clases > 0:
                 porcentaje_asistencia = (clases_asistidas / total_clases) * 100
                 porcentaje_formateado = round(porcentaje_asistencia, 2)
             else:
                 porcentaje_formateado = 0
-            
+
             # Mostrar los resultados
             dispatcher.utter_message(f"📊 **Asistencia en {nombre_materia.upper()}:**")
             dispatcher.utter_message(f"🎓 Matrícula: {matricula}")
@@ -562,7 +562,7 @@ class ActionConsultarAsistencia(Action):
             dispatcher.utter_message(f"❌ Clases ausentes: {clases_ausentes}")
             dispatcher.utter_message(f"📅 Total de clases: {total_clases}")
             dispatcher.utter_message(f"📈 **Porcentaje de asistencia: {porcentaje_formateado}%**")
-            
+
             # Agregar comentario sobre el rendimiento
             if porcentaje_formateado >= 80:
                 dispatcher.utter_message("🎉 ¡Excelente asistencia! Mantén este buen rendimiento.")
@@ -570,17 +570,17 @@ class ActionConsultarAsistencia(Action):
                 dispatcher.utter_message("⚠️ Tu asistencia es regular. Te recomiendo mejorar la asistencia a clases.")
             else:
                 dispatcher.utter_message("🚨 Tu asistencia es baja. Es importante que asistas más a clases para mejorar tu rendimiento académico.")
-            
+
             # # Mostrar la fórmula utilizada
             # dispatcher.utter_message(f"📝 **Fórmula utilizada:**")
             # dispatcher.utter_message(f"Porcentaje = ({clases_asistidas} / {total_clases}) × 100 = {porcentaje_formateado}%")
-            
+
             return [SlotSet("flujo_actual", None), SlotSet("materia", None)]
-            
+
         except Exception as e:
             print(f"Error al consultar asistencia: {e}")
             dispatcher.utter_message("❌ Hubo un error al consultar tu asistencia. Por favor, intenta nuevamente más tarde.")
-        
+
         return []
 
 class ActionConsultarFechasParciales(Action):
@@ -591,49 +591,49 @@ class ActionConsultarFechasParciales(Action):
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
         # Verificar si el usuario está autenticado
         is_authenticated = tracker.get_slot('is_authenticated')
-        
+
         if not is_authenticated:
             dispatcher.utter_message("❌ Necesitas estar autenticado para consultar las fechas de los parciales. Por favor, inicia sesión primero.")
             return []
-        
+
         # Obtener la matrícula del slot
         matricula = tracker.get_slot('matricula')
-        
+
         if not matricula:
             dispatcher.utter_message("❌ No tengo tu número de matrícula. Por favor, proporciona tu matrícula para poder consultar las fechas de los parciales.")
             return [SlotSet("flujo_actual", "consultar_fechas_parciales")]
-        
+
         # Obtener la materia del slot
         materia = tracker.get_slot('materia')
-        
+
         if not materia:
             dispatcher.utter_message("❌ No tengo la materia especificada. Por favor, dime de qué materia quieres consultar las fechas de los parciales.")
             return [SlotSet("flujo_actual", "consultar_fechas_parciales")]
-        
+
         try:
             # Buscar el código de la materia por nombre
             materia_resp = supabase.table("Materia").select("codigo, nombre").ilike("nombre", "%" + materia + "%").execute()
             if not materia_resp.data:
                 dispatcher.utter_message(f"❌ No se encontró la materia '{materia}' en la base de datos.")
                 return [SlotSet("flujo_actual", None)]
-            
+
             materia_codigo = materia_resp.data[0]["codigo"]
             # Buscar las fechas de los parciales
             fechas_parciales_resp = supabase.table("Parciales").select("*").eq("materia_codigo", materia_codigo).execute()
-            
+
             if not fechas_parciales_resp.data:
                 dispatcher.utter_message("❌ No se encontraron fechas de parciales registradas.")
                 return [SlotSet("flujo_actual", None)]
-            
+
             dispatcher.utter_message(f"📊 **Fechas de los parciales:**")
-            
+
             for parcial in fechas_parciales_resp.data:
                 dispatcher.utter_message(f"• **{parcial.get('fecha', 'Parcial sin fecha')}**")
-            
+
             dispatcher.utter_message(f"✅ Total de parciales encontrados: {len(fechas_parciales_resp.data)}")
             return [SlotSet("flujo_actual", None), SlotSet("materia", None)]
         except Exception as e:
             print(f"Error al consultar fechas de parciales: {e}")
             dispatcher.utter_message("❌ Hubo un error al consultar las fechas de los parciales. Por favor, intenta nuevamente más tarde.")
-        
+
         return []
