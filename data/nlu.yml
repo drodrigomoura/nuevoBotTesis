@@ -1,433 +1,985 @@
 version: "3.1"
 nlu:
-- intent: afirmacion
-  examples: |
-    - si
-    - por supuesto
-    - eso suena bien
-    - correcto
-- intent: agradecimiento
-  examples: |
-    - Gracias
-    - Muchas Gracias
-    - gracias
-    - muchas gracias
-- intent: despedida
-  examples: |
-    - Chau
-    - Nos vemos
-    - Nos vemos luego
-    - muchas gracias hasta luego
-    - gracias, chau
-    - chau
-    - adios
-- intent: negacion
-  examples: |
-    - no
-    - nunca
-    - creo que no
-    - eso no me gusta
-    - de ninguna manera
-    - no realmente
-- intent: saludo
-  examples: |
-    - Hola
-    - Hola,uen dia
-    - Buenos dias
-    - Buenas tardes
-    - Buenas noches
-    - hola
-    - buenas tardes
-- intent: requisitos_inscripcion
-  examples: |
-    - buenos dias cuales son los requisitos para inscribirme?
-    - Que necesito para inscribirme?
-    - Requisitos de Inscripción
-    - Hola buen dia! queria saber que papeles tengo que presentar para inscribirme? Gracias
-    - Que requisitos debo presentar para inscripción?
-    - Hola podrían informarme sobre los requisitos de inscripción?
-    - Cómo me inscribo? materia, curso, final qué necesito?
-    - qué documentos se requieren para la inscripción?
-    - Buenos día! Cuáles son los requisitos para la inscripción?
-    - La documentación solicitada en inscripcion
-    - ¿Qué necesito para inscribirme?
-    - ¿Buenos día, quería consultar que requisitos necesito presentar para poder inscribirme?
-    - Hola le escribo para consultar, ¿que documentación se necesita para la inscripción en la facultad?
-    - Qué requisitos necesito para poder inscribirme?
-    - ¿Cuáles son los requisitos de inscripción?
-    - Buenos día, qué papeles debo presentar para inscribirme?
-    - Cuáles son los requisitos de inscripción?
-    - Buenas tardes, para realizar X curso ¿cuales son los requisitos?
-    - ¿Cuál es la documentación a presentar?
-    - Hola, ¿que requisitos tienen para la incorporación ?
-    - ¿ qué documentación debo presentar para inscribirme?
-    - que requisitos son necesarios para poder inscribirme (materias, mesas, talleres)
-    - hola, que documentos necesito para la inscripción
-    - ¿Es necesario presentar alguna documentación para la inscripción?
-    - requisitos de inscripcion
-- intent: plazos_inscripcion
-  examples: |
-    - ¿Me puedo inscribir en cualquier momento
-    - a partir de que fecha puedo presentarme para inscribirme en una carrera?
-    - Cuáles son los plazos de inscripción?
-    - Hasta que tiempo tengo para inscribirme?
-    - Hay una fecha límite de inscripción?
-    - Cuáles los los plazos de inscripción?
-    - Hasta cuando me puedo inscribir?
-    - La inscripción se puede realizar en cualquier momento?
-    - ¿Se puede inscribir en cualquier mes?
-    - ¿Cuando me puedo inscribir?
-    - ¿Cuándo puedo inscribirme?
-    - ¿Aceptan mi documentación en cualquier momento?
-    - Hola, le consulto ¿hasta cuándo tengo tiempo para inscribirme?
-    - Hasta que fecha es el plazo de inscripción?
-    - ¿Cuál es la fecha o el plazo de inscripción?
-    - ¿Cuándo son las inscripciones?
-    - Cuáles son las fechas de inscripción?
-    - Fecha de inscripción?
-    - ¿Cuando debo inscribirme?
-    - ¿Cuál es la fecha límite de inscripción?
-    - ¿Qué días están habilitados para inscripciones?
-    - Cuando se habilitan las inscripciones?
-    - hay fechas para inscribirse?
-    - ¿Existen fechas preestablecidas de inscripción?
-    - Puedo inscribirme en cualquier momento del año?
-    - Hay un plazo para la inscripción?
-- intent: evaluacion_coneau
-  examples: |
-    - ¿La UGD y las carreras que ofrece fueron evaluadas por la CONEAU?
-    - las carreras que ofrece la universidad están certificadas por la entidad coneau?
-    - La Coneau evaluo la Institucion?
-    - La oferta academia de la UGD fue evaluada por la CONEAU?
-    - La carrera que elegi esta evaluada por la coneau?
-    - La UGD y sus carreras que ofrecen fueron evaluados por la CONEAU
-    - Las carreras fueron aprobadas por la coneau?
-    - La UGD y las carreras que ofrece tienen el aval de la CONEAU?
-    - La universidad está avalada por la CONEAU?
-    - ¿La IGD posee aval de la CONEAU?
-    - ¿Las carreras de la UGD son aprobadas por la CONEAU?
-    - ¿Tienen validez académica la universidad y sus carreras?
-    - ¿Las carreras que ofrece la facultad tienen validez nacional?
-    - Buenos días, quisiera saber si ¿las carreras actuales son evaluadas por la CONEAU?
-    - La universidad, al igual que las carreras, son evaluadas por la CONEAU ?
-    - ¿La oferta académica de la UGD fue evaluada por la CONEAU?
-    - Tengo una consulta, ¿la UGD fue evaluada por la CONEAU?
-    - Quiénes evaluan la carrera?
-    - Su aprobación ¿tiene reconocimiento nacional? o solo provincial?
-    - ¿Tienen certificación por la CONEAU?
-    - ¿ Las carreras que ofrece la Universidad fueron evaluadas por la CONEAU?
-    - Que avales tiene la carrera
-    - Las carreras que ofrece la UGD ¿tienen el aval de la CONEAU?
-    - Las carreras de la ugd están avaladas por la CONEAU?
-    - la coneau aprueba las carreras del dachary?
-    - ¿Porque organismo está avalada la universidad y propuestas académicas?
-    - Las carreras ofrecidas por la UGD cuentan con el aval o la aprobación de la CONEAU
-    - Las carreras están acreditadas por la CONEAU o en proceso de acreditación?
-- intent: curso_ingreso
-  examples: |
-    - ¿Hay ingreso sin limitaciones o hay que hacer algún curso?
-    - Hay curso de ingreso?
-    - Existe cursillo de Ingreso?
-    - hace falta rendir curso de ingreso?
-    - Para el ingreso hay algún cursillo?
-    - Hay cursillo de ingreso?
-    - Tengo que hcer un cursillo de ingreso/ nivelatorio?
-    - Hay que rendir ingreso?
-    - ¿Se rinde algún cursillo ?
-    - ¿Hay cursillo de ingreso o examen?
-    - ¿Hay un curso de ingreso?
-    - ¿El ingreso es eliminatorio o nivelatorio?
-    - Hola, buenas tardes ¿es necesario la realización de algún cursillo?
-    - Para el ingreso se debe realizar un cursillo con examen eliminatorio o simplemente es nivelatorio?
-    - ¿El ingreso a las carreras es con un exámen nivelatorio o eliminatorio?
-    - ¿El cursillo de  ingreso es eliminatorio?
-    - Hay curso de nivelación de ingreso?
-    - Los cursos: ¿son eliminatorios? ¿Cuenta con charlas previas u otra particularidad?
-    - ¿Hay un cupo de inscripciones  o curso de ingreso?
-    - Elcursado de ingreso es nivelatorio?
-    - ¿Hay cursillo de ingreso?
-    - Hay que hacer un cursillo de ingreso
-    - ¿La universidas exige como condición de ingreso la realización de talleres de nivelación por carrera?
-    - Para cursar las carreras en la U.G.D.¿existe examen de ingreso eliminatorio?
-    - Para Inscribirme a una carrera hay cursillo de ingreso?
-    - hola, tengo que hacer un cursillo de ingreso?
-    - ¿Existe curso de ingreso eliminatorio?
-    - Para ingresar se solicita realizar algún curso de ingreso o nivelación?
-    - Hay que realizar un cursillo para el ingreso?
-    - hay curso de ingreso?
-    - para ingresar hay un curso de ingreso o nivelatorio?
-- intent: informar_modalidad_inscripcion
-  examples: |
-    - ¿Tengo que inscribirme personalmente o puedo hacerlo a distancia?
-    - Puedo inscribirme a distancia?
-    - Cuáles son las modalidades de inscripción?
-    - si vivo lejos puedo inscribirme desde aca?
-    - La inscripción es personal o virtual
-    - Puedo inscribirme vía online?
-    - Cómo me puedo inscribir?
-    - La inscripción se puede realizar de forma virtual?
-    - ¿Para la inscripción debo acercarme a la institución o lo puedo hacer on line?
-    - ¿Se puede inscribir virtualmente?
-    - ¿Tengo que presentarme de forma personal para inscribirme?
-    - ¿Qué canales existen disponibles para poder inscribirme?
-    - Hola, quisiera saber si ¿es necesario inscribirme personalmente o lo puedo hacer de manera virtual?
-    - La inscripción es online o presencial?
-    - ¿Las inscripciones son virtuales?
-    - ¿Puedo inscribirme online?
-    - Tengonque ir personalmente a incribirme o puede ir alguien en representación
-    - Modalidad de inscripción?
-    - ¿Puedo realizar la inscripción. A travé de la página?
-    - Puedo inscribirme de manera virtual y abonar de la misma forma
-    - ¿Existe algún formulario de inscripción online?
-    - ¿la inscripciones online?
-    - ¿Las inscripciones son presenciales o virtuales?
-    - Si vivo en el interior, Las inscripciones a las carreras se realizan personalmente?
-    - debo inscribirme en el edificio de la facultad o lo puedo hacer desde casa?
-    - ¿El proceso de inscripción es presencial o es posible realizarlo vía online?
-    - Puedo realizar inscripción a distancia o solamente de manera presencial?
-    - Puede inscribirme de manera online o requieren necesariamente que me presente en persona a realizarlo?
-- intent: visitas_consultas
-  examples: |
-    - ¿Puedo visitar la Universidad? ¿Puedo hablar con un profesor o con el Rector?
-    - Necesito hablar con el rector, lo puedo hacer?
-    - Cómo puedo comunicarme con profesores o autoridades de la Universidad? Puedo acceder a las instalaciones para conocer?
-    - hay algun directivo que me deje hablar con el?
-    - Se podria visitar la univ. El acceso a los Directivos es flexible?
-    - Puedo hacer una visita a la universidad y hablar con algún profesor?
-    - Quiero conocer la universidad y conocer a mis posibles profesores. Que tengo que hacer?
-    - Se puede realizar una visita a la universidad?
-    - ¿Se puede visitar la Institución y se puede acercar a algún docente?
-    - ¿Se puede visitar la universidad? ¿Se puede hablar con las autoridades?
-    - ¿Puedo conocer antes la facultad o algún docente o directivo?
-    - ¿A quién me tengo que dirigir para visitar la universidad?
-    - Hola, le consulto ¿puedo visitar la universidad? ¿existe la posibilidad de una entrevista o charla con el rector o algún profesor?
-    - Se puede realizar visitas a la Universidad y charlar con algún profesor o con el Rector?
-    - ¿Las visitas a la universidad son programadas?¿Puedo entrevistarme con el rector de la institución?
-    - ¿Puedo pasar a conocer la Universidad y hablar con algún Profesor?
-    - Tienen un personal asistente para contestar inquietudes?
-    - ¿De que manera puedo conocer la Universidad y a su claustro directivo y docentes?
-    - ¿Puedo ir a conocer la Universidad y conversar con los docentes?
-    - Pueso presenciar una clase para ver las dinámicas grupales
-    - ¿Puedo  conocer las instalaciones de la Universidad? ¿ y a sus docentes?
-    - Si necesitase asesoramiento puntual sobre la carrera ¿podría entrevistarme con algún profesor, o cualquier otro personal autorizado para ese fin?
-    - Me puedo acercar a la universidad para conocer o para que me den mas info?
-    - puedo ir a ver la facultad para hablar con el rector?
-    - ¿Es posible realiza algún tipo de visita previa para conocer la universidad? ¿Hay posibilidades de tener contacto con profesores o rectores?
-    - Se puede realizar una visita guiada en la universidad a cargo de algún docente o el rector?
-    - Es posible conocer la Universidad y si hay oportunidad, hablar con algún profesor o con el Rector de la misma?
-- intent: informar_becas_hermanos
-  examples: |
-    - Cuáles son las becas o beneficios existentes para estudiantes y familiares de estudiantes?
-    - si tengo un hermano que tambien quiere estudiar ahi, hay alguna beca para los dos?
-    - Se pueden adquirir becas, algun descuento por grupo fliar estudiantil
-    - Tiene algún sistema de becas?
-    - Necesito una beca para estudiar Cómo accedo a ella? Si estudiamos con mis hermanos en la UGD, tenemos algún beneficio?
-    - La universidad ofrece becas? Tiene descuento por grupo familiar?
-    - ¿Existen becas? ¿Descuentos por hermanos?
-    - ¿Que becas hay? ¿Hay descuento para hermanos?
-    - ¿Hay posibilidad de reducir el costo de las cuotas?
-    - ¿Tienen becas disponibles?
-    - Hola, le escribo para consultar lo siguiente: ¿que becas hay? ¿hay alguna para hermanos?
-    - Existe la posibilidad de obtener una beca o bonificacion para hermanos?
-    - ¿La UGD otorga becas? ¿Cuáles son los requisitos para acceder a una beca? ¿Existe algún tipo de bonificación para hermanos?
-    - Tengo una consulta que hacer, ¿hay becas? ¿hay bonificación para hermanos?
-    - La Institución tiene alguna oferta de beneficios para los alumnos?
-    - Cuento con un hermano estudiando en la misma ¿ ofrecen descuentos? ¿Algun beneficio por estudiar aqui?
-    - ¿Tienen becas? Tengo un hermano que cursa en la universidad ¿Hay algún descuento si me inscribo?
-    - Las becas son nivelatorias?
-    - ¿Existen becas? ¿Existen bonificación para hermanos?
-    - ¿Hay algún descuento?
-    - Si mi situación familiar, económica o académica favorecieran para postularme a alguna beca ¿qué trámite debería realizar? Si tuviese un/a hermano/a cursando en la Universidad, ¿podría acceder a alguna - bonificación en las cuotas?
-    - Existen otorgamientos de becas? Que tipo?
-    - hola, quisiera saber si tienen becas para las carreras?
-    - ¿Que tipo se beneficios brinda la universidad a los estudiantes?
-    - Con que beneficios cuantan los estudiantes a la hora de inscribirse?
-    - La universidad otorga algún tipo de beca o bonificacion para hermanos en las cuotas?
-- intent: informar_horarios_trabajadores
-  examples: |
-    - Existen horarios diferenciados para trabajadores?
-    - Existe algúna resolución que ampare a estudiantes que trabajan?
-    - existe alguna flexibilidad para los que trabajamos aparte de estudiar?
-    - Hay flexibilidad de horarios en la cursada si trabajo.
-    - Existe consideración por las personas que trabajan?
-    - Si trabajo y estudio, puedo tener horarios flexibles?
-    - Hay flexibilidad horaria para las personas que trabajan y estudian?
-    - ¿Existe contemplación con el tema de los horarios, en el caso de trabajo?
-    - ¿Cual es la flexibilidad de horarios si tengo un trabajo?
-    - ¿Flexibilizan las asistencias debido a que trabajo?
-    - Hola, le escribo para consultar. En el caso de que trabaje y estudie en la universidad ¿debo presentar certificado? ¿justifica mis faltas a clases?
-    - En relación a los horarios, como trabajo y estudio, existe alguna posibilidad respecto a los horarios y las asistencias?
-    - ¿La UGD contempla las diferentes condiciones de los estudiantes? Por ejemplo, si trabajo ¿cuento con un respaldo para que eso no sea un impedimento para estudiar? En el caso de que cuente con respaldos ¿Cuáles son?
-    - Hay flexibilidad en los horarios?
-    - Cuenta con flexibilidad en horarios o cursados? ya q actualmente trabajo media jornada.
-    - Tengo una alternativa de cursado e-learning y otros días presencial?
-    - Si trabajo y estudio ¿ Cuáles son mis posibilidades con respecto a los horarios de cursada?
-    - ¿Hay libertad horaria?
-    - Si mis obligaciones laborales se superpusieran al horario de la cursada, ¿podría acceder a consideraciones excepcionales que contemplen esa situación para asistir a las clases? ¿Puedo elegir los horarios de cursado?
-    - Existe flexibilidad horaria para el cursado en el caso que trabaje?
-    - estudiar en el dachary me permite tener un trabajo aparte?
-    - En cuanto a mi situación laboral ¿Que ayuda me brinda la universidad, con respecto a las faltas y horarios?
-    - Las carreras poseen flexibilidad en los horarios?
-    - Hola,quiero consultarle respecto a los horarios y asistencias porque trabajo y estudio? Tienen algún tipo de contemplación en este caso?
-- intent: informar_equivalencias
-  examples: |
-    - ¿Me reconocen las materias ya aprobadas en otra universidad?
-    - ¿Reconocen las materias ya aprobadas en otros lugares?
-    - Cómo podría hacer para que me reconozcan las materias aprobadas de otra facultad?
-    - que equivalencias me toman de mi universidad
-    - Me reconocen las materias que ya aprobé en la otra universidad?
-    - Buenas tardes, quisiera saber si la facultad cuenta con algún convenio con otras facultades, con el fin de saber si realizo el cambio de facultad, reconoce ciertas materias aprobadas
-    - Reconocen materias aprobadas en una universidad pública como la UNAM?
-    - Si ya aprobé algunas materias me las tienen en cuenta?
-    - Hola buenos días, estoy en segundo año y aprobé todas las materias de primero de abogacía y aprobé las materias del primer cuatrimestre del segundo, no puedo seguir pagando la universidad por cuestiones familiares, si me cambio de facultad, me reconocen las materias en otra universidad?
-    - Hola quería saber si me reconocen las materias del cursado en el Dachary de la carrera ING de sistemas
-    - ¿Me toman las materias de otra carrera?
-    - Siempre y cuando sea "Universidad" y la cátedra correspondiente considere que se abordaron todos los temas.
-    - Otra universidad me reconoce las materias ya aprobabas?
-    - ¿Puedo validar mis materias aprobadas de otra universidad y así continuar la cursada?
-    - me reconocen las materias aprobadas en otra universidad?
-- intent: informar_intercambio_de_estudio
-  examples: |
-    - ¿Puedo hacer intercambio de estudios? ¿Dónde? ¿Con qué valor?
-    - ¿Puedo realizar intercambio de estudios? ¿Dónde? ¿Cuanto costaría?
-    - Hola , podría realizar un intercambio de estudios y de ser así que costo tendría ?
-    - estan permitidos los intercambios con otras universidades?
-    - Buenas tardes, será que me pueden decir como hago para hacer un intercambio de estudios? Cómo lo haría y cuanto saldría?
-    - Hola, quisiera cambiar de carrera, debería abonar nuevamente la inscripción? Si es así, de cuanto es el valor de la misma?
-    - Es posible hacer una experiencia de intercambio de estudio en Australia?
-    - Se pueden hacer intercambios? Me pasas la lista de lugares? Precio? Gracias
-    - Si estoy estudiando en la universidad, puedo ir de intercambio a otra? Si es posible a dónde puedo ir? Y cuál es el costo?
-    - Buenas quería saber si tienen disponible algún programa de intercambio. De ser asi, a qué costó. Gracias
-    - ¿Puedo hacer intercambios académicos en otro centro de estudios? Donde y precios
-    - Hola, puedo un intercambio de estudios? Donde? que valor tiene?
-    - ¿Existe el intercambio universitario? ¿Tiene algún costo o requisito?
-    - puedo hacer intercambio de estudio?
-- intent: informar_asistencia
-  examples: |
-    - ¿La asistencia a clases es obligatoria?
-    - ¿Es presencial?
-    - El cursado es obligatorio?
-    - cual es el porcentaje de asistencia obligatoria
-    - Es obligatorio asistir a clases?
-    - Hola buenas tardes, la asistencia a cada clase es obligatoria o depende de cada profesor?
-    - Es obligatorio asistir a clases presenciales?
-    - Las materias son presenciales?
-    - La cursada de la carrera es presencial? Hay un margen de asistencia obligatoria?
-    - Que porcentaje de asistencia tengo que cumplir?
-    - ¿La asistencia presencial es obligatoria?
-    - Es obligatorio ir a clases?
-    - ¿La cursada es presencial o a distancia?
-    - es obligatorio asistir a clases?
-- intent: informar_examen_recuperatorio
-  examples: |
-    - ¿Cómo son los exámenes? ¿Existen recuperatorios?
-    - ¿Cómo toman los exámenes? ¿Hay recuperatorios?
-    - Que modalidad de exámen utilizan ? Existe un recuperatorio por cada uno o solo un global?
-    - cual es el plan de estudios
-    - Como son los exámenes? Tienen recuperatorios?
-    - Cuantos exámenes tenes el cuatrimestre? Cada examen tiene su recuperatorio o existe solo uno para todos los exámenes?
-    - Los exámenes son escritos u orales? Se puede rendir libre?
-    - En que forma se toman los exámenes? Se pueden recuperar?
-    - Cómo es el método de evaluación? Hay trabajos prácticos obligatorios? Parciales y recuperatorios? - Con cuánto se aprueba?
-    - Me pueden explicar cómo y cuántos exámenes tengo para cada materia?
-    - ¿Cuales son los modelos de parciales y como son?¿Cuentan con recuperatorios?
-    - Como es el tema de los examenes?como puedo rendirlos? Tienen recuperatorios?
-    - ¿Los exámenes son presenciales ? ¿Cuantos recuperatorios tengo por materia?
-    - como son los examenes?
-- intent: informar_ayuda_informatica_ingles
-  examples: |
-    - ¿Me ayudan en Informática y en Inglés?
-    - ¿Tienen clases de apoyo en Informática y en Inglés?
-    - Hay ayudas para los alumnos en las cátedras de informática y inglés ?
-    - Hay clases de apoyo en inglés e informática?
-    - Es necesario tener una buena base en el idioma inglés o la carrera cuenta con esa materia dentro de su programa?
-    - Recibiré apoyo en asignaturas con informática o inglés por parte de un profesor?
-    - Existen tutorías de informática e ingles?
-    - En mi escuela no me enseñaron sobre algunas materias, no tengo una buena base, me proporcionan ayuda en esas materias, por ejemplo informática?
-    - Quería saber si tienen algún tipo de profes de apoyo para ciertas materias
-    - Necesito ayuda en informática e inglés.
-    - Dan ayuda en informatica y en ingles?
-    - ¿Cuento con clases de apoyo en las áreas que tenga complicaciones?
-- intent: informar_nivel_profesores
-  examples: |
-    - ¿Cuál es el nivel académico de los profesores?
-    - ¿Qué nivel académico tienen los profesores?
-    - Con que validaciones o titulaciones cuentan los profesores ?
-    - los profesores son buenos
-    - Los profesores son idóneos?
-    - Buenas noches, quisiera saber si se puede obtener el historial académico de cada profesor?
-    - Que nivel de estudios y experiencia tienen los profesores?
-    - Que nivel tienen los profesores? Hay acceso a sus currículums?
-    - Los profesores que me van a dar clases son profesores con experiencia? O  son recién recibidos? Hay algún doctor que nos enseñe en las clases?
-    - Quería saber si los profesores son ingenieros o qué título tienen. Gracias
-    - ¿Que estudios tienen los profesores?
-    - que nivel academico tienen los profesores?
-    - ¿Todos los profesores son idóneos en sus áreas?
-- intent: informar_equipamiento_tecnologico
-  examples: |
-    - ¿Cómo es el equipamiento tecnológico de la Universidad ?
-    - ¿Qué equipamiento tecnológico tiene la Universidad Gastón Dachary?
-    - Que clase de equipos posee la universidad Gastón dachary?
-    - cuentan con aulas equipadas tecnologicamente
-    - Cómo es el equipamiento de la Facultad?
-    - Hola, la facultad cuenta con un laboratorio informático para utilizar las pc's? Por que no cuento con notebook para poder llevar a clases
-    - Como son los equipos de cómputo y la infraestructura tecnología de la universidad? Los laboratorios cuentan con computadoras de última generación?
-    - Buenas tardes, el Dachary cuenta con laboratorio tecnológico? Que tiene?
-    - Con que elementos contamos para nuestra educación o futura educación? Con que equipamiento cuenta la facultad ? O debemos adquirir los elementos para el estudio?
-    - Quería saber que tipo de máquinas tienen en el laboratorio
-    - ¿Con qué tecnología cuentan en la Universidad?
-    - Que equpamiento tecnologico tiene la UGD?
-    - ¿Cómo funcionan las instalaciones de la universidad?
-- intent: informar_servicios
-  examples: |
-    - ¿Con qué servicios cuenta la Universidad?
-    - ¿Qué servicios ofrece la Universidad?
-    - Que servicios ofrece la universidad ?
-    - existen servicios como bufet?
-    - Que servicios ofrece la Universidad?
-    - Buenas tardes, la facultad cuenta con gimnasio propio? O presenta algún tipo de servicio para poder ocupar dentro del establecimiento? Cancha de fútbol, piscina, biblioteca, etc?
-    - Brindan algún servicio de comedor o albergue temporal?
-    - Hola, me podrías enviar la lista de servicios?
-    - Además de lo que ya pregunté, que otras cosas nos ofrece la universidad? A qué podemos acceder al cursar una carrera? Que beneficios tengo?
-    - Hola, me gustaría saber cuáles son los servicios de los que puedo disponer como alumno
-    - ¿Que carreras tiene la Facultad?
-    - que servicios tiene la universidad?
-    - ¿Que comodidades brinda la universidad a sus estudiantes?
-- intent: out_of_scope
-  examples: |
-    - Quiero ordenar comida
-    - ¿Cuanto es 2 + 2?
-    - Quien es el presidente de Argentina?
-- intent: contactos
-  examples: |
-    - Hola a que numero puedo comunicarme?
-    - A que contacto puedo comunicarme?
-    - Cuál es el numero de contacto?
-    - A que mail puedo mandar mi consulta?
-    - Cual es el mail de administración?
-- intent: materia
-  examples: |
-    - quiero saber mis materias [materias](materia)
-    - hola quiero saber mis materias
-    - quiero saber mis materias
-    - de [fisica 1](materia)
-    - [fisica](materia)
-    - [analisis matematico](materia)
-- intent: datos
-  examples: |
-    - quiero saber los datos del [alumno](alumno)
-- intent: matricula
-  examples: |
-    - [66022](matricula)
-    - [66031](matricula)
-    - [66007](matricula)
-    - [66007](matricula)
-- intent: mesa_examen
-  examples: |
-    - me gustaria saber las [mesa de examen](mesa_examen) disponibles
-    - hola quiero saber las [mesas de examen](mesa_examen)
-    - me gustaria saber las fechas de las [mesas deexamen](mesa_examen)
-- intent: codigo_mesa_examen
-  examples: |
-    - [cod1001](codigo_mesa_examen)
-    - [cod1001](codigo_mesa_examen)
+  - intent: afirmacion
+    examples: |
+      - si
+      - por supuesto
+      - eso suena bien
+      - correcto
+  - intent: agradecimiento
+    examples: |
+      - Gracias
+      - Muchas Gracias
+      - gracias
+      - muchas gracias
+  - intent: despedida
+    examples: |
+      - Chau
+      - Nos vemos
+      - Nos vemos luego
+      - muchas gracias hasta luego
+      - gracias, chau
+      - chau
+      - adios
+  - intent: negacion
+    examples: |
+      - no
+      - nunca
+      - creo que no
+      - eso no me gusta
+      - de ninguna manera
+      - no realmente
+  - intent: saludo
+    examples: |
+      - Hola
+      - Hola,uen dia
+      - Buenos dias
+      - Buenas tardes
+      - Buenas noches
+      - hola
+      - buenas tardes
+  - intent: requisitos_inscripcion
+    examples: |
+      - buenos dias cuales son los requisitos para inscribirme?
+      - Que necesito para inscribirme?
+      - Requisitos de Inscripción
+      - Hola buen dia! queria saber que papeles tengo que presentar para inscribirme? Gracias
+      - Que requisitos debo presentar para inscripción?
+      - Hola podrían informarme sobre los requisitos de inscripción?
+      - Cómo me inscribo? materia, curso, final qué necesito?
+      - qué documentos se requieren para la inscripción?
+      - Buenos día! Cuáles son los requisitos para la inscripción?
+      - La documentación solicitada en inscripcion
+      - ¿Qué necesito para inscribirme?
+      - ¿Buenos día, quería consultar que requisitos necesito presentar para poder inscribirme?
+      - Hola le escribo para consultar, ¿que documentación se necesita para la inscripción en la facultad?
+      - Qué requisitos necesito para poder inscribirme?
+      - ¿Cuáles son los requisitos de inscripción?
+      - Buenos día, qué papeles debo presentar para inscribirme?
+      - Cuáles son los requisitos de inscripción?
+      - Buenas tardes, para realizar X curso ¿cuales son los requisitos?
+      - ¿Cuál es la documentación a presentar?
+      - Hola, ¿que requisitos tienen para la incorporación ?
+      - ¿ qué documentación debo presentar para inscribirme?
+      - que requisitos son necesarios para poder inscribirme (materias, mesas, talleres)
+      - hola, que documentos necesito para la inscripción
+      - ¿Es necesario presentar alguna documentación para la inscripción?
+      - requisitos de inscripcion
+  - intent: plazos_inscripcion
+    examples: |
+      - ¿Me puedo inscribir en cualquier momento
+      - a partir de que fecha puedo presentarme para inscribirme en una carrera?
+      - Cuáles son los plazos de inscripción?
+      - Hasta que tiempo tengo para inscribirme?
+      - Hay una fecha límite de inscripción?
+      - Cuáles los los plazos de inscripción?
+      - Hasta cuando me puedo inscribir?
+      - La inscripción se puede realizar en cualquier momento?
+      - ¿Se puede inscribir en cualquier mes?
+      - ¿Cuando me puedo inscribir?
+      - ¿Cuándo puedo inscribirme?
+      - ¿Aceptan mi documentación en cualquier momento?
+      - Hola, le consulto ¿hasta cuándo tengo tiempo para inscribirme?
+      - Hasta que fecha es el plazo de inscripción?
+      - ¿Cuál es la fecha o el plazo de inscripción?
+      - ¿Cuándo son las inscripciones?
+      - Cuáles son las fechas de inscripción?
+      - Fecha de inscripción?
+      - ¿Cuando debo inscribirme?
+      - ¿Cuál es la fecha límite de inscripción?
+      - ¿Qué días están habilitados para inscripciones?
+      - Cuando se habilitan las inscripciones?
+      - hay fechas para inscribirse?
+      - ¿Existen fechas preestablecidas de inscripción?
+      - Puedo inscribirme en cualquier momento del año?
+      - Hay un plazo para la inscripción?
+  - intent: evaluacion_coneau
+    examples: |
+      - ¿La UGD y las carreras que ofrece fueron evaluadas por la CONEAU?
+      - las carreras que ofrece la universidad están certificadas por la entidad coneau?
+      - La Coneau evaluo la Institucion?
+      - La oferta academia de la UGD fue evaluada por la CONEAU?
+      - La carrera que elegi esta evaluada por la coneau?
+      - La UGD y sus carreras que ofrecen fueron evaluados por la CONEAU
+      - Las carreras fueron aprobadas por la coneau?
+      - La UGD y las carreras que ofrece tienen el aval de la CONEAU?
+      - La universidad está avalada por la CONEAU?
+      - ¿La IGD posee aval de la CONEAU?
+      - ¿Las carreras de la UGD son aprobadas por la CONEAU?
+      - ¿Tienen validez académica la universidad y sus carreras?
+      - ¿Las carreras que ofrece la facultad tienen validez nacional?
+      - Buenos días, quisiera saber si ¿las carreras actuales son evaluadas por la CONEAU?
+      - La universidad, al igual que las carreras, son evaluadas por la CONEAU ?
+      - ¿La oferta académica de la UGD fue evaluada por la CONEAU?
+      - Tengo una consulta, ¿la UGD fue evaluada por la CONEAU?
+      - Quiénes evaluan la carrera?
+      - Su aprobación ¿tiene reconocimiento nacional? o solo provincial?
+      - ¿Tienen certificación por la CONEAU?
+      - ¿ Las carreras que ofrece la Universidad fueron evaluadas por la CONEAU?
+      - Que avales tiene la carrera
+      - Las carreras que ofrece la UGD ¿tienen el aval de la CONEAU?
+      - Las carreras de la ugd están avaladas por la CONEAU?
+      - la coneau aprueba las carreras del dachary?
+      - ¿Porque organismo está avalada la universidad y propuestas académicas?
+      - Las carreras ofrecidas por la UGD cuentan con el aval o la aprobación de la CONEAU
+      - Las carreras están acreditadas por la CONEAU o en proceso de acreditación?
+  - intent: curso_ingreso
+    examples: |
+      - ¿Hay ingreso sin limitaciones o hay que hacer algún curso?
+      - Hay curso de ingreso?
+      - Existe cursillo de Ingreso?
+      - hace falta rendir curso de ingreso?
+      - Para el ingreso hay algún cursillo?
+      - Hay cursillo de ingreso?
+      - Tengo que hcer un cursillo de ingreso/ nivelatorio?
+      - Hay que rendir ingreso?
+      - ¿Se rinde algún cursillo ?
+      - ¿Hay cursillo de ingreso o examen?
+      - ¿Hay un curso de ingreso?
+      - ¿El ingreso es eliminatorio o nivelatorio?
+      - Hola, buenas tardes ¿es necesario la realización de algún cursillo?
+      - Para el ingreso se debe realizar un cursillo con examen eliminatorio o simplemente es nivelatorio?
+      - ¿El ingreso a las carreras es con un exámen nivelatorio o eliminatorio?
+      - ¿El cursillo de  ingreso es eliminatorio?
+      - Hay curso de nivelación de ingreso?
+      - Los cursos: ¿son eliminatorios? ¿Cuenta con charlas previas u otra particularidad?
+      - ¿Hay un cupo de inscripciones  o curso de ingreso?
+      - Elcursado de ingreso es nivelatorio?
+      - ¿Hay cursillo de ingreso?
+      - Hay que hacer un cursillo de ingreso
+      - ¿La universidas exige como condición de ingreso la realización de talleres de nivelación por carrera?
+      - Para cursar las carreras en la U.G.D.¿existe examen de ingreso eliminatorio?
+      - Para Inscribirme a una carrera hay cursillo de ingreso?
+      - hola, tengo que hacer un cursillo de ingreso?
+      - ¿Existe curso de ingreso eliminatorio?
+      - Para ingresar se solicita realizar algún curso de ingreso o nivelación?
+      - Hay que realizar un cursillo para el ingreso?
+      - hay curso de ingreso?
+      - para ingresar hay un curso de ingreso o nivelatorio?
+  - intent: informar_modalidad_inscripcion
+    examples: |
+      - ¿Tengo que inscribirme personalmente o puedo hacerlo a distancia?
+      - Puedo inscribirme a distancia?
+      - Cuáles son las modalidades de inscripción?
+      - si vivo lejos puedo inscribirme desde aca?
+      - La inscripción es personal o virtual
+      - Puedo inscribirme vía online?
+      - Cómo me puedo inscribir?
+      - La inscripción se puede realizar de forma virtual?
+      - ¿Para la inscripción debo acercarme a la institución o lo puedo hacer on line?
+      - ¿Se puede inscribir virtualmente?
+      - ¿Tengo que presentarme de forma personal para inscribirme?
+      - ¿Qué canales existen disponibles para poder inscribirme?
+      - Hola, quisiera saber si ¿es necesario inscribirme personalmente o lo puedo hacer de manera virtual?
+      - La inscripción es online o presencial?
+      - ¿Las inscripciones son virtuales?
+      - ¿Puedo inscribirme online?
+      - Tengonque ir personalmente a incribirme o puede ir alguien en representación
+      - Modalidad de inscripción?
+      - ¿Puedo realizar la inscripción. A travé de la página?
+      - Puedo inscribirme de manera virtual y abonar de la misma forma
+      - ¿Existe algún formulario de inscripción online?
+      - ¿la inscripciones online?
+      - ¿Las inscripciones son presenciales o virtuales?
+      - Si vivo en el interior, Las inscripciones a las carreras se realizan personalmente?
+      - debo inscribirme en el edificio de la facultad o lo puedo hacer desde casa?
+      - ¿El proceso de inscripción es presencial o es posible realizarlo vía online?
+      - Puedo realizar inscripción a distancia o solamente de manera presencial?
+      - Puede inscribirme de manera online o requieren necesariamente que me presente en persona a realizarlo?
+  - intent: visitas_consultas
+    examples: |
+      - ¿Puedo visitar la Universidad? ¿Puedo hablar con un profesor o con el Rector?
+      - Necesito hablar con el rector, lo puedo hacer?
+      - Cómo puedo comunicarme con profesores o autoridades de la Universidad? Puedo acceder a las instalaciones para conocer?
+      - hay algun directivo que me deje hablar con el?
+      - Se podria visitar la univ. El acceso a los Directivos es flexible?
+      - Puedo hacer una visita a la universidad y hablar con algún profesor?
+      - Quiero conocer la universidad y conocer a mis posibles profesores. Que tengo que hacer?
+      - Se puede realizar una visita a la universidad?
+      - ¿Se puede visitar la Institución y se puede acercar a algún docente?
+      - ¿Se puede visitar la universidad? ¿Se puede hablar con las autoridades?
+      - ¿Puedo conocer antes la facultad o algún docente o directivo?
+      - ¿A quién me tengo que dirigir para visitar la universidad?
+      - Hola, le consulto ¿puedo visitar la universidad? ¿existe la posibilidad de una entrevista o charla con el rector o algún profesor?
+      - Se puede realizar visitas a la Universidad y charlar con algún profesor o con el Rector?
+      - ¿Las visitas a la universidad son programadas?¿Puedo entrevistarme con el rector de la institución?
+      - ¿Puedo pasar a conocer la Universidad y hablar con algún Profesor?
+      - Tienen un personal asistente para contestar inquietudes?
+      - ¿De que manera puedo conocer la Universidad y a su claustro directivo y docentes?
+      - ¿Puedo ir a conocer la Universidad y conversar con los docentes?
+      - Pueso presenciar una clase para ver las dinámicas grupales
+      - ¿Puedo  conocer las instalaciones de la Universidad? ¿ y a sus docentes?
+      - Si necesitase asesoramiento puntual sobre la carrera ¿podría entrevistarme con algún profesor, o cualquier otro personal autorizado para ese fin?
+      - Me puedo acercar a la universidad para conocer o para que me den mas info?
+      - puedo ir a ver la facultad para hablar con el rector?
+      - ¿Es posible realiza algún tipo de visita previa para conocer la universidad? ¿Hay posibilidades de tener contacto con profesores o rectores?
+      - Se puede realizar una visita guiada en la universidad a cargo de algún docente o el rector?
+      - Es posible conocer la Universidad y si hay oportunidad, hablar con algún profesor o con el Rector de la misma?
+  - intent: informar_becas_hermanos
+    examples: |
+      - Cuáles son las becas o beneficios existentes para estudiantes y familiares de estudiantes?
+      - si tengo un hermano que tambien quiere estudiar ahi, hay alguna beca para los dos?
+      - Se pueden adquirir becas, algun descuento por grupo fliar estudiantil
+      - Tiene algún sistema de becas?
+      - Necesito una beca para estudiar Cómo accedo a ella? Si estudiamos con mis hermanos en la UGD, tenemos algún beneficio?
+      - La universidad ofrece becas? Tiene descuento por grupo familiar?
+      - ¿Existen becas? ¿Descuentos por hermanos?
+      - ¿Que becas hay? ¿Hay descuento para hermanos?
+      - ¿Hay posibilidad de reducir el costo de las cuotas?
+      - ¿Tienen becas disponibles?
+      - Hola, le escribo para consultar lo siguiente: ¿que becas hay? ¿hay alguna para hermanos?
+      - Existe la posibilidad de obtener una beca o bonificacion para hermanos?
+      - ¿La UGD otorga becas? ¿Cuáles son los requisitos para acceder a una beca? ¿Existe algún tipo de bonificación para hermanos?
+      - Tengo una consulta que hacer, ¿hay becas? ¿hay bonificación para hermanos?
+      - La Institución tiene alguna oferta de beneficios para los alumnos?
+      - Cuento con un hermano estudiando en la misma ¿ ofrecen descuentos? ¿Algun beneficio por estudiar aqui?
+      - ¿Tienen becas? Tengo un hermano que cursa en la universidad ¿Hay algún descuento si me inscribo?
+      - Las becas son nivelatorias?
+      - ¿Existen becas? ¿Existen bonificación para hermanos?
+      - ¿Hay algún descuento?
+      - Si mi situación familiar, económica o académica favorecieran para postularme a alguna beca ¿qué trámite debería realizar? Si tuviese un/a hermano/a cursando en la Universidad, ¿podría acceder a alguna - bonificación en las cuotas?
+      - Existen otorgamientos de becas? Que tipo?
+      - hola, quisiera saber si tienen becas para las carreras?
+      - ¿Que tipo se beneficios brinda la universidad a los estudiantes?
+      - Con que beneficios cuentan los estudiantes a la hora de inscribirse?
+      - La universidad otorga algún tipo de beca o bonificacion para hermanos en las cuotas?
+  - intent: informar_horarios_trabajadores
+    examples: |
+      - Existen horarios diferenciados para trabajadores?
+      - Existe algúna resolución que ampare a estudiantes que trabajan?
+      - existe alguna flexibilidad para los que trabajamos aparte de estudiar?
+      - Hay flexibilidad de horarios en la cursada si trabajo.
+      - Existe consideración por las personas que trabajan?
+      - Si trabajo y estudio, puedo tener horarios flexibles?
+      - Hay flexibilidad horaria para las personas que trabajan y estudian?
+      - ¿Existe contemplación con el tema de los horarios, en el caso de trabajo?
+      - ¿Cual es la flexibilidad de horarios si tengo un trabajo?
+      - ¿Flexibilizan las asistencias debido a que trabajo?
+      - Hola, le escribo para consultar. En el caso de que trabaje y estudie en la universidad ¿debo presentar certificado? ¿justifica mis faltas a clases?
+      - En relación a los horarios, como trabajo y estudio, existe alguna posibilidad respecto a los horarios y las asistencias?
+      - ¿La UGD contempla las diferentes condiciones de los estudiantes? Por ejemplo, si trabajo ¿cuento con un respaldo para que eso no sea un impedimento para estudiar? En el caso de que cuente con respaldos ¿Cuáles son?
+      - Hay flexibilidad en los horarios?
+      - Cuenta con flexibilidad en horarios o cursados? ya q actualmente trabajo media jornada.
+      - Tengo una alternativa de cursado e-learning y otros días presencial?
+      - Si trabajo y estudio ¿ Cuáles son mis posibilidades con respecto a los horarios de cursada?
+      - ¿Hay libertad horaria?
+      - Si mis obligaciones laborales se superpusieran al horario de la cursada, ¿podría acceder a consideraciones excepcionales que contemplen esa situación para asistir a las clases? ¿Puedo elegir los horarios de cursado?
+      - Existe flexibilidad horaria para el cursado en el caso que trabaje?
+      - estudiar en el dachary me permite tener un trabajo aparte?
+      - En cuanto a mi situación laboral ¿Que ayuda me brinda la universidad, con respecto a las faltas y horarios?
+      - Las carreras poseen flexibilidad en los horarios?
+      - Hola,quiero consultarle respecto a los horarios y asistencias porque trabajo y estudio? Tienen algún tipo de contemplación en este caso?
+  - intent: informar_equivalencias
+    examples: |
+      - ¿Me reconocen las materias ya aprobadas en otra universidad?
+      - ¿Reconocen las materias ya aprobadas en otros lugares?
+      - Cómo podría hacer para que me reconozcan las materias aprobadas de otra facultad?
+      - que equivalencias me toman de mi universidad
+      - Me reconocen las materias que ya aprobé en la otra universidad?
+      - Buenas tardes, quisiera saber si la facultad cuenta con algún convenio con otras facultades, con el fin de saber si realizo el cambio de facultad, reconoce ciertas materias aprobadas
+      - Reconocen materias aprobadas en una universidad pública como la UNAM?
+      - Si ya aprobé algunas materias me las tienen en cuenta?
+      - Hola buenos días, estoy en segundo año y aprobé todas las materias de primero de abogacía y aprobé las materias del primer cuatrimestre del segundo, no puedo seguir pagando la universidad por cuestiones familiares, si me cambio de facultad, me reconocen las materias en otra universidad?
+      - Hola quería saber si me reconocen las materias del cursado en el Dachary de la carrera ING de sistemas
+      - ¿Me toman las materias de otra carrera?
+      - Siempre y cuando sea "Universidad" y la cátedra correspondiente considere que se abordaron todos los temas.
+      - Otra universidad me reconoce las materias ya aprobabas?
+      - ¿Puedo validar mis materias aprobadas de otra universidad y así continuar la cursada?
+      - me reconocen las materias aprobadas en otra universidad?
+  - intent: informar_intercambio_de_estudio
+    examples: |
+      - ¿Puedo hacer intercambio de estudios? ¿Dónde? ¿Con qué valor?
+      - ¿Puedo realizar intercambio de estudios? ¿Dónde? ¿Cuanto costaría?
+      - Hola , podría realizar un intercambio de estudios y de ser así que costo tendría ?
+      - estan permitidos los intercambios con otras universidades?
+      - Buenas tardes, será que me pueden decir como hago para hacer un intercambio de estudios? Cómo lo haría y cuanto saldría?
+      - Hola, quisiera cambiar de carrera, debería abonar nuevamente la inscripción? Si es así, de cuanto es el valor de la misma?
+      - Es posible hacer una experiencia de intercambio de estudio en Australia?
+      - Se pueden hacer intercambios? Me pasas la lista de lugares? Precio? Gracias
+      - Si estoy estudiando en la universidad, puedo ir de intercambio a otra? Si es posible a dónde puedo ir? Y cuál es el costo?
+      - Buenas quería saber si tienen disponible algún programa de intercambio. De ser asi, a qué costó. Gracias
+      - ¿Puedo hacer intercambios académicos en otro centro de estudios? Donde y precios
+      - Hola, puedo un intercambio de estudios? Donde? que valor tiene?
+      - ¿Existe el intercambio universitario? ¿Tiene algún costo o requisito?
+      - puedo hacer intercambio de estudio?
+  - intent: informar_asistencia
+    examples: |
+      - ¿La asistencia a clases es obligatoria?
+      - ¿Es presencial?
+      - El cursado es obligatorio?
+      - cual es el porcentaje de asistencia obligatoria
+      - Es obligatorio asistir a clases?
+      - Hola buenas tardes, la asistencia a cada clase es obligatoria o depende de cada profesor?
+      - Es obligatorio asistir a clases presenciales?
+      - Las materias son presenciales?
+      - La cursada de la carrera es presencial? Hay un margen de asistencia obligatoria?
+      - Que porcentaje de asistencia tengo que cumplir?
+      - ¿La asistencia presencial es obligatoria?
+      - Es obligatorio ir a clases?
+      - ¿La cursada es presencial o a distancia?
+      - es obligatorio asistir a clases?
+  - intent: informar_examen_recuperatorio
+    examples: |
+      - ¿Cómo son los exámenes? ¿Existen recuperatorios?
+      - ¿Cómo toman los exámenes? ¿Hay recuperatorios?
+      - Que modalidad de exámen utilizan ? Existe un recuperatorio por cada uno o solo un global?
+      - cual es el plan de estudios
+      - Como son los exámenes? Tienen recuperatorios?
+      - Cuantos exámenes tenes el cuatrimestre? Cada examen tiene su recuperatorio o existe solo uno para todos los exámenes?
+      - Los exámenes son escritos u orales? Se puede rendir libre?
+      - En que forma se toman los exámenes? Se pueden recuperar?
+      - Cómo es el método de evaluación? Hay trabajos prácticos obligatorios? Parciales y recuperatorios? - Con cuánto se aprueba?
+      - Me pueden explicar cómo y cuántos exámenes tengo para cada materia?
+      - ¿Cuales son los modelos de parciales y como son?¿Cuentan con recuperatorios?
+      - Como es el tema de los examenes?como puedo rendirlos? Tienen recuperatorios?
+      - ¿Los exámenes son presenciales ? ¿Cuantos recuperatorios tengo por materia?
+      - como son los examenes?
+  - intent: informar_ayuda_informatica_ingles
+    examples: |
+      - ¿Me ayudan en Informática y en Inglés?
+      - ¿Tienen clases de apoyo en Informática y en Inglés?
+      - Hay ayudas para los alumnos en las cátedras de informática y inglés ?
+      - Hay clases de apoyo en inglés e informática?
+      - Es necesario tener una buena base en el idioma inglés o la carrera cuenta con esa materia dentro de su programa?
+      - Recibiré apoyo en asignaturas con informática o inglés por parte de un profesor?
+      - Existen tutorías de informática e ingles?
+      - En mi escuela no me enseñaron sobre algunas materias, no tengo una buena base, me proporcionan ayuda en esas materias, por ejemplo informática?
+      - Quería saber si tienen algún tipo de profes de apoyo para ciertas materias
+      - Necesito ayuda en informática e inglés.
+      - Dan ayuda en informatica y en ingles?
+      - ¿Cuento con clases de apoyo en las áreas que tenga complicaciones?
+  - intent: informar_nivel_profesores
+    examples: |
+      - ¿Cuál es el nivel académico de los profesores?
+      - ¿Qué nivel académico tienen los profesores?
+      - Con que validaciones o titulaciones cuentan los profesores ?
+      - los profesores son buenos
+      - Los profesores son idóneos?
+      - Buenas noches, quisiera saber si se puede obtener el historial académico de cada profesor?
+      - Que nivel de estudios y experiencia tienen los profesores?
+      - Que nivel tienen los profesores? Hay acceso a sus currículums?
+      - Los profesores que me van a dar clases son profesores con experiencia? O  son recién recibidos? Hay algún doctor que nos enseñe en las clases?
+      - Quería saber si los profesores son ingenieros o qué título tienen. Gracias
+      - ¿Que estudios tienen los profesores?
+      - que nivel academico tienen los profesores?
+      - ¿Todos los profesores son idóneos en sus áreas?
+  - intent: informar_equipamiento_tecnologico
+    examples: |
+      - ¿Cómo es el equipamiento tecnológico de la Universidad ?
+      - ¿Qué equipamiento tecnológico tiene la Universidad Gastón Dachary?
+      - Que clase de equipos posee la universidad Gastón dachary?
+      - cuentan con aulas equipadas tecnologicamente
+      - Cómo es el equipamiento de la Facultad?
+      - Hola, la facultad cuenta con un laboratorio informático para utilizar las pc's? Por que no cuento con notebook para poder llevar a clases
+      - Como son los equipos de cómputo y la infraestructura tecnología de la universidad? Los laboratorios cuentan con computadoras de última generación?
+      - Buenas tardes, el Dachary cuenta con laboratorio tecnológico? Que tiene?
+      - Con que elementos contamos para nuestra educación o futura educación? Con que equipamiento cuenta la facultad ? O debemos adquirir los elementos para el estudio?
+      - Quería saber que tipo de máquinas tienen en el laboratorio
+      - ¿Con qué tecnología cuentan en la Universidad?
+      - Que equpamiento tecnologico tiene la UGD?
+      - ¿Cómo funcionan las instalaciones de la universidad?
+  - intent: informar_servicios
+    examples: |
+      - ¿Con qué servicios cuenta la Universidad?
+      - ¿Qué servicios ofrece la Universidad?
+      - Que servicios ofrece la universidad ?
+      - existen servicios como bufet?
+      - Que servicios ofrece la Universidad?
+      - Buenas tardes, la facultad cuenta con gimnasio propio? O presenta algún tipo de servicio para poder ocupar dentro del establecimiento? Cancha de fútbol, piscina, biblioteca, etc?
+      - Brindan algún servicio de comedor o albergue temporal?
+      - Hola, me podrías enviar la lista de servicios?
+      - Además de lo que ya pregunté, que otras cosas nos ofrece la universidad? A qué podemos acceder al cursar una carrera? Que beneficios tengo?
+      - Hola, me gustaría saber cuáles son los servicios de los que puedo disponer como alumno
+      - ¿Que carreras tiene la Facultad?
+      - que servicios tiene la universidad?
+      - ¿Que comodidades brinda la universidad a sus estudiantes?
+  - intent: out_of_scope
+    examples: |
+      - Quiero ordenar comida
+      - ¿Cuanto es 2 + 2?
+      - Quien es el presidente de Argentina?
+  - intent: contactos
+    examples: |
+      - Hola a que numero puedo comunicarme?
+      - A que contacto puedo comunicarme?
+      - Cuál es el numero de contacto?
+      - A que mail puedo mandar mi consulta?
+      - Cual es el mail de administración?
+  - intent: autenticar_usuario
+    examples: |
+      - [eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c](auth_token)
+      - [eyJ0b2tlbiI6IjEyMzQ1Njc4OTAiLCJ1c2VyX2lkIjoiMTIzNDU2Nzg5MCIsImV4cCI6MTYzNDU2Nzg5MH0.abc123def456ghi789](auth_token)
+      - [eyJ1c2VyX2lkIjoiNjYwMDciLCJtYXRyaWN1bGEiOiI2NjAwNyIsImV4cCI6MTYzNDU2Nzg5MH0.xyz789abc123def456](auth_token)
+      - [eyJhbHVtbm9faWQiOiI2NjAwNyIsIm5vbWJyZSI6Ikp1YW4gUGVyZXoiLCJleHAiOjE2MzQ1Njc4OTB9.ghi789jkl012mno345](auth_token)
+      - [eyJjb2RpZ29fZXN0dWRpYW50ZSI6IjEyMzQ1Iiwibm9tYnJlX2VzdHVkaWFudGUiOiJNYXJpYSBHb256YWxleiIsImV4cCI6MTYzNDU2Nzg5MH0.pqr678stu901vwx234](auth_token)
+      - [eyJ0b2tlbl9hdXRoIjoiYXV0aGVudGljYXRlZCIsInVzZXJfaWQiOiI2NjAwNyIsImV4cCI6MTYzNDU2Nzg5MH0.yza567bcd890efg123](auth_token)
+      - [eyJhdXRoZW50aWNhdGVkIjp0cnVlLCJ1c2VyX2lkIjoiNjYwMDciLCJleHAiOjE2MzQ1Njc4OTB9.hij456klm789nop012](auth_token)
+      - [eyJ0b2tlbiI6ImF1dGhlbnRpY2F0ZWQiLCJ1c2VyX2lkIjoiNjYwMDciLCJleHAiOjE2MzQ1Njc4OTB9.qrs345tuv678wxy901](auth_token)
+      - [eyJjb2RpZ29fYXV0aGVudGljYXRpb24iOiI2NjAwNyIsImV4cCI6MTYzNDU2Nzg5MH0.zab234cde567fgh890](auth_token)
+      - [eyJ1c2VyX2F1dGhlbnRpY2F0ZWQiOiJ0cnVlIiwidXNlcl9pZCI6IjY2MDA3IiwiZXhwIjoxNjM0NTY3ODkwfQ.ijk345lmn678opq901](auth_token)
+      - [eyJ0b2tlbl9kZV9hdXRoZW50aWNhY2lvbiI6IjY2MDA3IiwiZXhwIjoxNjM0NTY3ODkwfQ.rst234uvw567xyz890](auth_token)
+      - [eyJhdXRoZW50aWNhdGVkX3VzZXIiOiI2NjAwNyIsImV4cCI6MTYzNDU2Nzg5MH0.abc123def456ghi789](auth_token)
+      - [eyJjb2RpZ29fZGVfYXV0aGVudGljYWNpb24iOiI2NjAwNyIsImV4cCI6MTYzNDU2Nzg5MH0.jkl234mno567pqr890](auth_token)
+      - [eyJ1c2VyX2F1dGhlbnRpY2F0ZWQiOiJ0cnVlIiwidXNlcl9pZCI6IjY2MDA3IiwiZXhwIjoxNjM0NTY3ODkwfQ.stu234vwx567yza890](auth_token)
+      - [eyJ0b2tlbl9kZV9hdXRoZW50aWNhY2lvbiI6IjY2MDA3IiwiZXhwIjoxNjM0NTY3ODkwfQ.bcd234efg567hij890](auth_token)
+      - [eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c](auth_token)
+  - intent: proporcionar_matricula
+    examples: |
+      - mi matricula es [66001](matricula)
+      - mi matricula es [66022](matricula)
+      - mi matricula es [66031](matricula)
+      - mi matricula es [66007](matricula)
+      - mi matricula es [66015](matricula)
+      - mi matricula es [66028](matricula)
+      - mi matricula es [66042](matricula)
+      - mi matricula es [66055](matricula)
+      - mi matricula es [66068](matricula)
+      - mi matricula es [66081](matricula)
+      - [66001](matricula)
+      - [66022](matricula)
+      - [66031](matricula)
+      - [66007](matricula)
+      - [66015](matricula)
+      - [66028](matricula)
+      - [66042](matricula)
+      - [66055](matricula)
+      - [66068](matricula)
+      - [66081](matricula)
+      - matricula [66001](matricula)
+      - matricula [66022](matricula)
+      - matricula [66031](matricula)
+      - matricula [66007](matricula)
+      - matricula [66015](matricula)
+      - matricula [66028](matricula)
+      - matricula [66042](matricula)
+      - matricula [66055](matricula)
+      - matricula [66068](matricula)
+      - matricula [66081](matricula)
+      - mi numero de matricula es [66001](matricula)
+      - mi numero de matricula es [66022](matricula)
+      - mi numero de matricula es [66031](matricula)
+      - mi numero de matricula es [66007](matricula)
+      - mi numero de matricula es [66015](matricula)
+      - mi numero de matricula es [66028](matricula)
+      - mi numero de matricula es [66042](matricula)
+      - mi numero de matricula es [66055](matricula)
+      - mi numero de matricula es [66068](matricula)
+      - mi numero de matricula es [66081](matricula)
+      - [66017](matricula)
+      - [66025](matricula)
+      - [66033](matricula)
+      - [66044](matricula)
+      - [66056](matricula)
+      - [66067](matricula)
+      - [66078](matricula)
+      - [66089](matricula)
+      - mi matricula es [66007](matricula)
+  - intent: consultar_materias
+    examples: |
+      - quiero ver mis materias
+      - necesito ver mis materias en curso
+      - cuales son mis materias actuales
+      - dime que materias estoy cursando
+      - quiero saber mis materias
+      - cuales son mis materias del cuatrimestre
+      - necesito consultar mis materias
+      - quiero ver que materias tengo
+      - dime mis materias en curso
+      - cuales son las materias que estoy cursando
+      - quiero saber que materias tengo este cuatrimestre
+      - necesito ver mi lista de materias
+      - quiero consultar que materias estoy cursando
+      - dime cuales son mis materias
+      - necesito saber mis materias en curso
+      - quiero ver cuales son mis materias
+      - cuales materias tengo este semestre
+      - quiero consultar mis materias actuales
+      - dime que materias tengo en curso
+      - quiero ver mis materias con matricula [66001](matricula)
+      - necesito consultar mis materias matricula [66022](matricula)
+      - cuales son mis materias matricula [66031](matricula)
+      - dime que materias tengo matricula [66001](matricula)
+      - quiero saber mis materias matricula [66022](matricula)
+      - consultar materias matricula [66031](matricula)
+      - ver materias matricula [66001](matricula)
+      - mis materias matricula [66022](matricula)
+      - materias en curso matricula [66031](matricula)
+      - necesito consultar mis materias con matricula [66022](matricula)
+      - cuales son mis materias con matricula [66031](matricula)
+      - dime que materias tengo con matricula [66001](matricula)
+      - quiero saber mis materias con matricula [66022](matricula)
+      - consultar materias con matricula [66031](matricula)
+      - ver materias con matricula [66001](matricula)
+      - mis materias con matricula [66022](matricula)
+      - materias en curso con matricula [66031](matricula)
+  - intent: consultar_notas
+    examples: |
+      - quiero ver mis notas
+      - necesito ver mis calificaciones
+      - cuales son mis notas actuales
+      - dime que notas tengo
+      - quiero saber mis calificaciones
+      - cuales son mis notas del cuatrimestre
+      - necesito consultar mis notas
+      - quiero ver que notas tengo
+      - dime mis calificaciones
+      - cuales son las notas que tengo
+      - quiero saber que notas tengo este cuatrimestre
+      - necesito ver mi lista de notas
+      - cuales son mis calificaciones actuales
+      - quiero consultar que notas tengo
+      - dime cuales son mis notas
+      - necesito saber mis calificaciones
+      - quiero ver cuales son mis notas
+      - cuales notas tengo este semestre
+      - quiero consultar mis calificaciones actuales
+      - quiero ver mis notas de [matematica](materia)
+      - necesito ver mis calificaciones de [fisica](materia)
+      - cuales son mis notas de [programacion](materia)
+      - dime que notas tengo en [ingles](materia)
+      - quiero saber mis calificaciones de [historia](materia)
+      - cuales son mis notas del cuatrimestre
+      - necesito consultar mis notas de [algebra](materia)
+      - quiero ver que notas tengo en [quimica](materia)
+      - dime mis calificaciones de [biologia](materia)
+      - cuales son las notas que tengo en [literatura](materia)
+      - quiero saber que notas tengo en [filosofia](materia)
+      - necesito ver mi lista de notas de [geografia](materia)
+      - cuales son mis calificaciones de [economia](materia)
+      - quiero consultar que notas tengo en [psicologia](materia)
+      - dime cuales son mis notas de [sociologia](materia)
+      - necesito saber mis calificaciones de [derecho](materia)
+      - quiero ver cuales son mis notas de [contabilidad](materia)
+      - cuales notas tengo en [estadistica](materia)
+      - quiero consultar mis calificaciones de [administracion](materia)
+      - dime que notas tengo en [marketing](materia)
+      - quiero ver mis notas con matricula [66001](matricula)
+      - necesito consultar mis notas matricula [66022](matricula)
+      - cuales son mis notas matricula [66031](matricula)
+      - dime que notas tengo matricula [66001](matricula)
+      - quiero saber mis calificaciones matricula [66022](matricula)
+      - consultar notas matricula [66031](matricula)
+      - ver notas matricula [66001](matricula)
+      - mis calificaciones matricula [66022](matricula)
+      - notas del cuatrimestre matricula [66031](matricula)
+      - necesito consultar mis notas con matricula [66022](matricula)
+      - cuales son mis notas con matricula [66031](matricula)
+      - dime que notas tengo con matricula [66001](matricula)
+      - quiero saber mis calificaciones con matricula [66022](matricula)
+      - consultar notas con matricula [66031](matricula)
+      - ver notas con matricula [66001](matricula)
+      - mis calificaciones con matricula [66022](matricula)
+      - notas del cuatrimestre con matricula [66031](matricula)
+      - quiero ver mis notas de [matematica](materia) con matricula [66001](matricula)
+      - necesito ver mis calificaciones de [fisica](materia) matricula [66022](matricula)
+      - cuales son mis notas de [programacion](materia) matricula [66031](matricula)
+      - dime que notas tengo en [ingles](materia) matricula [66001](matricula)
+      - quiero saber mis calificaciones de [historia](materia) matricula [66022](matricula)
+      - consultar notas de [algebra](materia) matricula [66031](matricula)
+      - ver notas de [quimica](materia) matricula [66001](matricula)
+      - mis calificaciones de [biologia](materia) matricula [66022](matricula)
+      - notas de [literatura](materia) matricula [66031](matricula)
+      - necesito ver mis calificaciones de [fisica](materia) con matricula [66022](matricula)
+      - cuales son mis notas de [programacion](materia) con matricula [66031](matricula)
+      - dime que notas tengo en [ingles](materia) con matricula [66001](matricula)
+      - quiero saber mis calificaciones de [historia](materia) con matricula [66022](matricula)
+      - consultar notas de [algebra](materia) con matricula [66031](matricula)
+      - ver notas de [quimica](materia) con matricula [66001](matricula)
+      - mis calificaciones de [biologia](materia) con matricula [66022](matricula)
+      - notas de [literatura](materia) con matricula [66031](matricula)
+  - intent: consultar_requerimientos_materia
+    examples: |
+      - cuales son los requerimientos para cursar [Redes de computadoras 1](materia)
+      - que necesito para cursar [Algoritmos 1](materia)
+      - cuales son los prerequisitos de [Programacion Estructurada](materia)
+      - que materias necesito para cursar [Analisis de sistemas](materia)
+      - cuales son los requerimientos para [Algebra](materia)
+      - que necesito para inscribirme en [Algoritmos 2](materia)
+      - cuales son los prerequisitos para [Analisis Matematico 3](materia)
+      - que materias debo tener aprobadas para [Diseno de sistemas](materia)
+      - cuales son los requerimientos para cursar [Fisica 2](materia)
+      - que necesito para inscribirme en [Analisis Matematico 1](materia)
+      - cuales son los prerequisitos de [Ingenieria de Software](materia)
+      - que materias necesito para cursar [Fisica](materia)
+      - cuales son los requerimientos para [Inteligencia Artificial 1](materia)
+      - que necesito para inscribirme en [Calculo Numerico](materia)
+      - cuales son los prerequisitos para [Redes de computadoras 2](materia)
+      - que materias debo tener aprobadas para [Programacion Avanzada](materia)
+      - cuales son los requerimientos para cursar [Analisis Matematico 2](materia)
+      - que necesito para inscribirme en [Investigacion Operativa](materia)
+      - cuales son los prerequisitos de [Inteligencia Artificial 2](materia)
+      - que materias necesito para cursar [Proyectos Informaticos](materia)
+      - dime los requerimientos para [Redes de computadoras 1](materia)
+      - necesito saber que materias debo tener para [Algoritmos 1](materia)
+      - cuales son los prerequisitos para cursar [Programacion Estructurada](materia)
+      - que necesito para poder cursar [Analisis de sistemas](materia)
+      - dime los requerimientos de [Algebra](materia)
+      - necesito saber que materias debo tener aprobadas para [Algoritmos 2](materia)
+      - cuales son los prerequisitos para inscribirme en [Analisis Matematico 3](materia)
+      - que necesito para cursar [Diseno de sistemas](materia)
+      - dime los requerimientos para [Fisica 2](materia)
+      - necesito saber que materias debo tener para [Analisis Matematico 1](materia)
+      - cuales son los prerequisitos para cursar [Ingenieria de Software](materia)
+      - que necesito para poder cursar [Fisica](materia)
+      - dime los requerimientos de [Inteligencia Artificial 1](materia)
+      - necesito saber que materias debo tener aprobadas para [Calculo Numerico](materia)
+      - cuales son los prerequisitos para inscribirme en [Redes de computadoras 2](materia)
+      - que necesito para cursar [Programacion Avanzada](materia)
+      - dime los requerimientos para [Analisis Matematico 2](materia)
+      - necesito saber que materias debo tener para [Investigacion Operativa](materia)
+      - cuales son los prerequisitos para cursar [Inteligencia Artificial 2](materia)
+      - que necesito para poder cursar [Proyectos Informaticos](materia)
+  - intent: consultar_asistencia
+    examples: |
+      - quiero consultar mi asistencia
+      - quiero consultar mi asistencia de [biologia](materia)
+      - quiero ver mi asistencia
+      - quiero ver mi asistencia de [filosofia](materia)
+      - necesito consultar mi asistencia
+      - necesito consultar mi asistencia de [estadistica](materia)
+      - necesito ver mi asistencia
+      - dime mi asistencia
+      - dime mi asistencia de [literatura](materia)
+      - quiero saber mi asistencia
+      - cual es mi asistencia del cuatrimestre
+      - quiero saber mi asistencia del cuatrimestre
+      - quiero consultar mi asistencia del cuatrimestre
+      - ver mi asistencia de [matematica](materia)
+      - consultar mi asistencia de [fisica](materia)
+      - dime mi asistencia actual
+      - quiero consultar mi porcentaje de asistencia
+      - dime mi porcentaje de asistencia
+      - quiero saber mi porcentaje de asistencia en [historia](materia)
+      - necesito ver mi asistencia con matricula [66001](matricula)
+      - consultar asistencia con matricula [66031](matricula)
+      - quiero ver mi asistencia de [programacion](materia) con matricula [66001](matricula)
+      - necesito consultar mi asistencia de [fisica](materia) matricula [66022](matricula)
+      - hola quiero saber mis asistencia en [fisica](materia)
+  - intent: proporcionar_materia_para_asistencia
+    examples: |
+      - La materia es [matematica](materia)
+      - Es de [fisica](materia)
+      - [programacion](materia)
+      - de [historia](materia)
+      - [algebra](materia)
+      - es [quimica](materia)
+      - de [biologia](materia)
+      - [literatura](materia)
+      - de [filosofia](materia)
+      - [geografia](materia)
+      - es de [economia](materia)
+      - [psicologia](materia)
+      - de [sociologia](materia)
+      - [derecho](materia)
+      - es [contabilidad](materia)
+      - de [estadistica](materia)
+      - [administracion](materia)
+      - de [marketing](materia)
+  - intent: consultar_fecha_mesas_examen_final
+    examples: |
+      - quiero ver las fechas de examen final
+      - necesito consultar las fechas de examen final
+      - cuales son las fechas de examen final
+      - dime las fechas de examen final
+      - quiero saber las fechas de examen final
+      - cuales son las fechas de los examenes finales
+      - necesito ver las fechas de los examenes finales
+      - quiero consultar las fechas de los examenes finales
+      - dime las fechas de los examenes finales
+      - quiero saber las fechas de los examenes finales
+      - cuales son las fechas de examen final disponibles
+      - necesito ver las fechas de examen final disponibles
+      - quiero consultar las fechas de examen final disponibles
+      - dime las fechas de examen final disponibles
+      - quiero saber las fechas de examen final disponibles
+      - cuando son los examenes finales
+      - cuales son las fechas para rendir examen final
+      - necesito ver las fechas para rendir examen final
+      - quiero consultar las fechas para rendir examen final
+      - dime las fechas para rendir examen final
+      - quiero saber las fechas para rendir examen final
+      - cuando puedo rendir examen final
+      - cuales son las fechas de mesas de examen
+      - necesito ver las fechas de mesas de examen
+      - quiero consultar las fechas de mesas de examen
+      - dime las fechas de mesas de examen
+      - quiero saber las fechas de mesas de examen
+      - cuando son las mesas de examen
+      - cuales son las fechas para rendir
+      - necesito ver las fechas para rendir
+      - quiero consultar las fechas para rendir
+      - dime las fechas para rendir
+      - quiero saber las fechas para rendir
+      - cuando puedo rendir
+      - fechas de examen final
+      - fechas de examenes finales
+      - fechas de mesas de examen
+      - fechas para rendir
+      - fechas de examen
+      - fechas de examenes
+      - fechas de mesas
+      - fechas de rendir
+      - fechas de finales
+      - fechas de final
+      - fechas de mesa
+      - fechas de mesa de examen
+      - fechas de mesa de examenes
+      - fechas de mesa de final
+      - fechas de mesa de finales
+      - fechas de mesa de rendir
+      - fechas de mesa de rendir examen
+      - fechas de mesa de rendir examenes
+      - fechas de mesa de rendir final
+      - fechas de mesa de rendir finales
+      - quiero ver las fechas de examen final de [matematica](materia)
+      - necesito consultar las fechas de examen final de [fisica](materia)
+      - cuales son las fechas de examen final de [programacion](materia)
+      - dime las fechas de examen final de [ingles](materia)
+      - quiero saber las fechas de examen final de [historia](materia)
+      - cuales son las fechas de examen final de [algebra](materia)
+      - necesito ver las fechas de examen final de [quimica](materia)
+      - quiero consultar las fechas de examen final de [biologia](materia)
+      - dime las fechas de examen final de [literatura](materia)
+      - quiero saber las fechas de examen final de [filosofia](materia)
+      - cuales son las fechas de examen final de [geografia](materia)
+      - necesito ver las fechas de examen final de [economia](materia)
+      - quiero consultar las fechas de examen final de [psicologia](materia)
+      - dime las fechas de examen final de [sociologia](materia)
+      - quiero saber las fechas de examen final de [derecho](materia)
+      - cuales son las fechas de examen final de [contabilidad](materia)
+      - necesito ver las fechas de examen final de [estadistica](materia)
+      - quiero consultar las fechas de examen final de [administracion](materia)
+      - dime las fechas de examen final de [marketing](materia)
+      - cuando son los examenes finales de [matematica](materia)
+      - cuales son las fechas para rendir examen final de [fisica](materia)
+      - necesito ver las fechas para rendir examen final de [programacion](materia)
+      - quiero consultar las fechas para rendir examen final de [ingles](materia)
+      - dime las fechas para rendir examen final de [historia](materia)
+      - quiero saber las fechas para rendir examen final de [algebra](materia)
+      - cuando puedo rendir examen final de [quimica](materia)
+      - cuales son las fechas de mesas de examen de [biologia](materia)
+      - necesito ver las fechas de mesas de examen de [literatura](materia)
+      - quiero consultar las fechas de mesas de examen de [filosofia](materia)
+      - dime las fechas de mesas de examen de [geografia](materia)
+      - quiero saber las fechas de mesas de examen de [economia](materia)
+      - cuando son las mesas de examen de [psicologia](materia)
+      - cuales son las fechas para rendir de [sociologia](materia)
+      - necesito ver las fechas para rendir de [derecho](materia)
+      - quiero consultar las fechas para rendir de [contabilidad](materia)
+      - dime las fechas para rendir de [estadistica](materia)
+      - quiero saber las fechas para rendir de [administracion](materia)
+      - cuando puedo rendir de [marketing](materia)
+      - fechas de examen final de [matematica](materia)
+      - fechas de examenes finales de [fisica](materia)
+      - fechas de mesas de examen de [programacion](materia)
+      - fechas para rendir de [ingles](materia)
+      - fechas de examen de [historia](materia)
+      - fechas de examenes de [algebra](materia)
+      - fechas de mesas de [quimica](materia)
+      - fechas de rendir de [biologia](materia)
+      - fechas de finales de [literatura](materia)
+      - fechas de final de [filosofia](materia)
+      - fechas de mesa de [geografia](materia)
+      - fechas de mesa de examen de [economia](materia)
+      - fechas de mesa de examenes de [psicologia](materia)
+      - fechas de mesa de final de [sociologia](materia)
+      - fechas de mesa de finales de [derecho](materia)
+      - fechas de mesa de rendir de [contabilidad](materia)
+      - fechas de mesa de rendir examen de [estadistica](materia)
+      - fechas de mesa de rendir examenes de [administracion](materia)
+      - fechas de mesa de rendir final de [marketing](materia)
+      - fechas de mesa de rendir finales de [matematica](materia)
+  - intent: proporcionar_materia
+    examples: |
+      - [matematica](materia)
+      - [fisica](materia)
+      - [programacion](materia)
+      - [ingles](materia)
+      - [historia](materia)
+      - [algebra](materia)
+      - [quimica](materia)
+      - [biologia](materia)
+      - [literatura](materia)
+      - [filosofia](materia)
+      - [geografia](materia)
+      - [economia](materia)
+      - [psicologia](materia)
+      - [sociologia](materia)
+      - [derecho](materia)
+      - [contabilidad](materia)
+      - [estadistica](materia)
+      - [administracion](materia)
+      - [marketing](materia)
+      - [redes de computadoras 1](materia)
+      - [algoritmos 1](materia)
+      - [programacion estructurada](materia)
+      - [analisis de sistemas](materia)
+      - [algoritmos 2](materia)
+      - [analisis matematico 3](materia)
+      - [diseno de sistemas](materia)
+      - [fisica 2](materia)
+      - [analisis matematico 1](materia)
+      - [ingenieria de software](materia)
+      - [calculo numerico](materia)
+      - [redes de computadoras 2](materia)
+      - [programacion avanzada](materia)
+      - [analisis matematico 2](materia)
+      - [investigacion operativa](materia)
+      - [inteligencia artificial 2](materia)
+      - [proyectos informaticos](materia)
+      - [inteligencia artificial 1](materia)
+  - intent: proporcionar_materia_para_inscripcion
+    examples: |
+      - La materia para inscribirme es [matematica](materia)
+      - Quiero inscribirme a la mesa de [fisica](materia)
+      - Me quiero anotar a la mesa de [programacion](materia)
+      - Para la inscripción, la materia es [historia](materia)
+      - Inscribirme a la mesa de [algebra](materia)
+      - La materia para la inscripción es [quimica](materia)
+      - Quiero inscribirme a la mesa de [biologia](materia)
+      - Para inscribirme, la materia es [literatura](materia)
+      - Me gustaría inscribirme a la mesa de [filosofia](materia)
+      - Inscribirme a la mesa de [geografia](materia)
+      - Para la inscripción, la materia es [economia](materia)
+      - Quiero inscribirme a la mesa de [psicologia](materia)
+      - La materia para inscribirme es [sociologia](materia)
+      - Me quiero anotar a la mesa de [derecho](materia)
+      - Para inscribirme, la materia es [contabilidad](materia)
+      - Inscribirme a la mesa de [estadistica](materia)
+      - La materia para la inscripción es [administracion](materia)
+      - Quiero inscribirme a la mesa de [marketing](materia)
+  - intent: proporcionar_materia_para_notas
+    examples: |
+      - La materia para ver mis notas es [matematica](materia)
+      - Quiero ver mis notas de [fisica](materia)
+      - Para consultar mis notas, la materia es [programacion](materia)
+      - Mis notas de [historia](materia)
+      - Quiero consultar mis notas de [algebra](materia)
+      - La materia para consultar notas es [quimica](materia)
+      - Quiero ver mis calificaciones de [biologia](materia)
+      - Para ver mis notas, la materia es [literatura](materia)
+      - Notas de [filosofia](materia)
+      - Quiero ver mis notas de [geografia](materia)
+      - Para consultar mis notas, la materia es [economia](materia)
+      - Quiero ver mis notas de [psicologia](materia)
+      - La materia para ver mis notas es [sociologia](materia)
+      - Quiero consultar mis notas de [derecho](materia)
+      - Para ver mis notas, la materia es [contabilidad](materia)
+      - Notas de [estadistica](materia)
+      - La materia para consultar notas es [administracion](materia)
+      - Quiero ver mis notas de [marketing](materia)
+  - intent: proporcionar_materia_para_requerimientos
+    examples: |
+      - La materia para consultar requerimientos es [matematica](materia)
+      - Quiero saber los requisitos de [fisica](materia)
+      - Para consultar requerimientos, la materia es [programacion](materia)
+      - Requerimientos de [historia](materia)
+      - Quiero consultar los requisitos de [algebra](materia)
+      - La materia para consultar requerimientos es [quimica](materia)
+      - Quiero saber los requerimientos de [biologia](materia)
+      - Para consultar requerimientos, la materia es [literatura](materia)
+      - Requisitos de [filosofia](materia)
+      - Quiero consultar los requerimientos de [geografia](materia)
+      - Para consultar requerimientos, la materia es [economia](materia)
+      - Quiero saber los requisitos de [psicologia](materia)
+      - La materia para consultar requerimientos es [sociologia](materia)
+      - Quiero consultar los requisitos de [derecho](materia)
+      - Para consultar requerimientos, la materia es [contabilidad](materia)
+      - Requerimientos de [estadistica](materia)
+      - La materia para consultar requerimientos es [administracion](materia)
+  - intent: proporcionar_materia_para_mesas
+    examples: |
+      - La materia para consultar mesas es [matematica](materia)
+      - Quiero ver las mesas de [fisica](materia)
+      - Para consultar mesas, la materia es [programacion](materia)
+      - Mesas de [historia](materia)
+      - Quiero consultar las mesas de [algebra](materia)
+      - La materia para consultar mesas es [quimica](materia)
+      - Quiero ver las mesas de [biologia](materia)
+      - Para ver las mesas, la materia es [literatura](materia)
+      - Mesas de [filosofia](materia)
+      - Quiero ver las mesas de [geografia](materia)
+      - Para consultar mesas, la materia es [economia](materia)
+      - Quiero ver las mesas de [psicologia](materia)
+      - La materia para ver las mesas es [sociologia](materia)
+      - Quiero consultar las mesas de [derecho](materia)
+      - Para ver las mesas, la materia es [contabilidad](materia)
+      - Mesas de [estadistica](materia)
+      - La materia para consultar mesas es [administracion](materia)
+      - Quiero ver las mesas de [marketing](materia)
+  - intent: inscribirse_mesa_examen
+    examples: |
+      - Quiero inscribirme a una mesa de examen
+      - Me quiero anotar a un final
+      - Deseo inscribirme a la mesa de examen de [matematica](materia)
+      - Inscribirme a la mesa de [fisica](materia)
+      - Quiero anotarme a la mesa de examen
+      - Me gustaría inscribirme a un examen final
+      - Necesito anotarme a la mesa de [programacion](materia)
+      - Quiero rendir un final, ¿puedo inscribirme?
+      - ¿Cómo me inscribo a la mesa de [historia](materia)?
+      - Inscribirme a la próxima mesa de examen
+      - Quiero anotarme a la próxima mesa de [algebra](materia)
+      - Me gustaría inscribirme a la mesa de examen de [ingles](materia)
+      - Quiero inscribirme a la mesa de examen de [quimica](materia)
+      - Deseo anotarme a la mesa de examen
+      - ¿Me podés inscribir a la mesa de [biologia](materia)?
+      - Quiero inscribirme a la mesa de examen de [literatura](materia)
+      - Me quiero anotar a la mesa de examen de [filosofia](materia)
+      - Inscribirme a la mesa de examen de [geografia](materia)
+      - Quiero anotarme a la mesa de examen de [economia](materia)
+      - Necesito inscribirme a la mesa de examen de [psicologia](materia)
+      - ¿Cómo hago para inscribirme a la mesa de examen?
+      - Quiero inscribirme a la mesa de examen de [sociologia](materia)
+      - Me gustaría anotarme a la mesa de examen de [derecho](materia)
+      - Inscribirme a la mesa de examen de [contabilidad](materia)
+      - Quiero anotarme a la mesa de examen de [estadistica](materia)
+      - Me quiero inscribir a la mesa de examen de [administracion](materia)
+      - Quiero inscribirme a la mesa de examen de [marketing](materia)
+      - ¿Puedo inscribirme a una mesa de examen?
+      - ¿Me inscribís a la mesa de examen?
+      - Quiero anotarme a un examen final
+      - Deseo inscribirme a la próxima mesa de examen
+      - Me gustaría anotarme a la próxima mesa de examen
+      - Necesito inscribirme a un final
+      - ¿Cómo me anoto a la mesa de examen?
+      - ¿Me podés anotar a la mesa de examen?
+      - Quiero inscribirme a la mesa de examen de [redes de computadoras 1](materia)
+      - Quiero inscribirme a la mesa de examen de [algoritmos 1](materia)
+      - Quiero inscribirme a la mesa de examen de [programacion estructurada](materia)
+      - Quiero inscribirme a la mesa de examen de [analisis de sistemas](materia)
+      - Quiero inscribirme a la mesa de examen de [algoritmos 2](materia)
+      - Quiero inscribirme a la mesa de examen de [analisis matematico 3](materia)
+      - Quiero inscribirme a la mesa de examen de [diseno de sistemas](materia)
+      - Quiero inscribirme a la mesa de examen de [fisica 2](materia)
+      - Quiero inscribirme a la mesa de examen de [analisis matematico 1](materia)
+      - Quiero inscribirme a la mesa de examen de [ingenieria de software](materia)
+      - Quiero inscribirme a la mesa de examen de [calculo numerico](materia)
+      - Quiero inscribirme a la mesa de examen de [redes de computadoras 2](materia)
+      - Quiero inscribirme a la mesa de examen de [programacion avanzada](materia)
+      - Quiero inscribirme a la mesa de examen de [analisis matematico 2](materia)
+      - Quiero inscribirme a la mesa de examen de [investigacion operativa](materia)
+      - Quiero inscribirme a la mesa de examen de [inteligencia artificial 2](materia)
+      - Quiero inscribirme a la mesa de examen de [proyectos informaticos](materia)
+      - Quiero inscribirme a la mesa de examen de [inteligencia artificial 1](materia)
+  - intent: seleccionar_mesa_examen
+    examples: |
+      - Quiero inscribirme a la mesa del [25 de julio](fecha_mesa)
+      - A la del [10 de agosto](fecha_mesa)
+      - Al código [12345](codigo_mesa_examen)
+      - Inscribirme a la mesa con código [45678](codigo_mesa_examen)
+      - A la mesa del [2024-07-25](fecha_mesa)
+      - Quiero la mesa [78901](codigo_mesa_examen)
+      - Me quiero inscribir en la mesa con codigo [cod1003](codigo_mesa_examen)
+      - Inscribirme a la mesa con código [cod1003](codigo_mesa_examen)
+      - Quiero la mesa [cod1003](codigo_mesa_examen)
+      - Al código [cod1003](codigo_mesa_examen)
+      - Me quiero inscribir en la mesa con codigo [COD2024](codigo_mesa_examen)
+      - Inscribirme a la mesa con código [COD2024](codigo_mesa_examen)
+      - Quiero la mesa [COD2024](codigo_mesa_examen)
+      - Al código [COD2024](codigo_mesa_examen)
+  - regex: codigo_mesa_examen
+    examples: |
+      - COD[0-9]{4}
+      - [a-zA-Z0-9]+
+      - cod[0-9]{4}

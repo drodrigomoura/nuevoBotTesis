@@ -1,244 +1,794 @@
 version: "3.1"
 
 stories:
+  - story: requisitos
+    steps:
+      - intent: requisitos_inscripcion
+      - action: utter_respuesta_requisito_inscripcion
 
-- story: requisitos
-  steps:
-  - intent: requisitos_inscripcion
-  - action: utter_respuesta_requisito_inscripcion
+  - story: requisitos
+    steps:
+      - intent: saludo
+      - action: utter_saludo
+      - intent: requisitos_inscripcion
+      - action: utter_respuesta_requisito_inscripcion
+      - intent: despedida
+      - action: utter_despedida
 
-- story: requisitos
-  steps:
-  - intent: saludo
-  - action: utter_saludo
-  - intent: requisitos_inscripcion
-  - action: utter_respuesta_requisito_inscripcion
-  - intent: despedida
-  - action: utter_despedida
+  - story: plazo inscripcion
+    steps:
+      - intent: saludo
+      - action: utter_saludo
+      - intent: plazos_inscripcion
+      - action: utter_respuesta_plazos_inscripcion
+      - intent: despedida
+      - action: utter_despedida
 
-- story: plazo inscripcion
-  steps:
-  - intent: saludo
-  - action: utter_saludo
-  - intent: plazos_inscripcion
-  - action: utter_respuesta_plazos_inscripcion
-  - intent: despedida
-  - action: utter_despedida
+  - story: evaluacion coneau
+    steps:
+      - intent: evaluacion_coneau
+      - action: utter_respuesta_evaluacion_coneau
 
-- story: evaluacion coneau
-  steps:
-  - intent: evaluacion_coneau
-  - action: utter_respuesta_evaluacion_coneau
+  - story: evaluacion coneau
+    steps:
+      - intent: saludo
+      - action: utter_saludo
+      - intent: evaluacion_coneau
+      - action: utter_respuesta_evaluacion_coneau
+      - intent: despedida
+      - action: utter_despedida
 
-- story: evaluacion coneau
-  steps:
-  - intent: saludo
-  - action: utter_saludo
-  - intent: evaluacion_coneau
-  - action: utter_respuesta_evaluacion_coneau
-  - intent: despedida
-  - action: utter_despedida
+  - story: agradecimiento
+    steps:
+      - intent: agradecimiento
+      - action: utter_agradecimiento
 
-- story: agradecimiento
-  steps:
-  - intent: agradecimiento
-  - action: utter_agradecimiento
+  - story: despedida
+    steps:
+      - intent: despedida
+      - action: utter_despedida
 
-- story: despedida
-  steps:
-  - intent: despedida
-  - action: utter_despedida
+  - story: curso de ingreso
+    steps:
+      - intent: saludo
+      - action: utter_saludo
+      - intent: curso_ingreso
+      - action: utter_respuesta_curso_ingreso
+      - intent: agradecimiento
+      - action: utter_agradecimiento
+      - intent: despedida
+      - action: utter_despedida
 
-- story: curso de ingreso
-  steps:
-  - intent: saludo
-  - action: utter_saludo
-  - intent: curso_ingreso
-  - action: utter_respuesta_curso_ingreso
-  - intent: agradecimiento
-  - action: utter_agradecimiento
-  - intent: despedida
-  - action: utter_despedida
+  - story: modalidad inscripcion
+    steps:
+      - intent: informar_modalidad_inscripcion
+      - action: utter_respuesta_informar_modalidad_inscripcion
 
-- story: modalidad inscripcion
-  steps:
-  - intent: informar_modalidad_inscripcion
-  - action: utter_respuesta_informar_modalidad_inscripcion
+  - story: modalidad inscripcion
+    steps:
+      - intent: saludo
+      - action: utter_saludo
+      - intent: informar_modalidad_inscripcion
+      - action: utter_respuesta_informar_modalidad_inscripcion
+      - intent: agradecimiento
+      - action: utter_agradecimiento
+      - intent: despedida
+      - action: utter_despedida
 
-- story: modalidad inscripcion
-  steps:
-  - intent: saludo
-  - action: utter_saludo
-  - intent: informar_modalidad_inscripcion
-  - action: utter_respuesta_informar_modalidad_inscripcion
-  - intent: agradecimiento
-  - action: utter_agradecimiento
-  - intent: despedida
-  - action: utter_despedida
+  - story: visitas consultas
+    steps:
+      - intent: visitas_consultas
+      - action: utter_respuesta_visitas_consultas
 
-- story: visitas consultas
-  steps:
-  - intent: visitas_consultas
-  - action: utter_respuesta_visitas_consultas
+  - story: visitas consultas
+    steps:
+      - intent: saludo
+      - action: utter_saludo
+      - intent: visitas_consultas
+      - action: utter_respuesta_visitas_consultas
+      - intent: agradecimiento
+      - action: utter_agradecimiento
+      - intent: despedida
+      - action: utter_despedida
 
-- story: visitas consultas
-  steps:
-  - intent: saludo
-  - action: utter_saludo
-  - intent: visitas_consultas
-  - action: utter_respuesta_visitas_consultas
-  - intent: agradecimiento
-  - action: utter_agradecimiento
-  - intent: despedida
-  - action: utter_despedida
+  - story: becas hermanos
+    steps:
+      - intent: informar_becas_hermanos
+      - action: utter_respuesta_informar_becas_hermanos
 
-- story: becas hermanos
-  steps:
-  - intent: becas_hermanos
-  - action: utter_respuesta_informar_becas_hermanos
+  - story: becas hermanos
+    steps:
+      - intent: saludo
+      - action: utter_saludo
+      - intent: informar_becas_hermanos
+      - action: utter_respuesta_informar_becas_hermanos
+      - intent: agradecimiento
+      - action: utter_agradecimiento
+      - intent: despedida
+      - action: utter_despedida
 
-- story: becas hermanos
-  steps:
-  - intent: saludo
-  - action: utter_saludo
-  - intent: becas_hermanos
-  - action: utter_respuesta_informar_becas_hermanos
-  - intent: agradecimiento
-  - action: utter_agradecimiento
-  - intent: despedida
-  - action: utter_despedida
+  - story: horarios trabajadores
+    steps:
+      - intent: informar_horarios_trabajadores
+      - action: utter_respuesta_informar_horarios_trabajadores
 
-- story: horarios trabajadores
-  steps:
-  - intent: horarios_trabajadores
-  - action: utter_respuesta_informar_horarios_trabajadores
+  - story: horarios trabajadores
+    steps:
+      - intent: saludo
+      - action: utter_saludo
+      - intent: informar_horarios_trabajadores
+      - action: utter_respuesta_informar_horarios_trabajadores
+      - intent: agradecimiento
+      - action: utter_agradecimiento
+      - intent: despedida
+      - action: utter_despedida
 
-- story: horarios trabajadores
-  steps:
-  - intent: saludo
-  - action: utter_saludo
-  - intent: horarios_trabajadores
-  - action: utter_respuesta_informar_horarios_trabajadores
-  - intent: agradecimiento
-  - action: utter_agradecimiento
-  - intent: despedida
-  - action: utter_despedida
+  - story: intercambio de estudio
+    steps:
+      - intent: informar_intercambio_de_estudio
+      - action: utter_respuesta_intercambio_de_estudio
 
-- story: intercambio de estudio
-  steps:
-  - intent: informar_intercambio_de_estudio
-  - action: utter_respuesta_intercambio_de_estudio
+  - story: equivalencias
+    steps:
+      - intent: informar_equivalencias
+      - action: utter_respuesta_equivalencias
 
-- story: equivalencias
-  steps:
-  - intent: informar_equivalencias
-  - action: utter_respuesta_equivalencias
+  - story: examen recuperatorio
+    steps:
+      - intent: informar_examen_recuperatorio
+      - action: utter_respuesta_examen_recuperatorio
 
-- story: examen recuperatorio
-  steps:
-  - intent: informar_examen_recuperatorio
-  - action: utter_respuesta_examen_recuperatorio
+  - story: equivalencias
+    steps:
+      - intent: saludo
+      - action: utter_saludo
+      - intent: informar_equivalencias
+      - action: utter_respuesta_equivalencias
+      - intent: agradecimiento
+      - action: utter_agradecimiento
+      - intent: despedida
+      - action: utter_despedida
 
-- story: equivalencias
-  steps:
-  - intent: saludo
-  - action: utter_saludo
-  - intent: informar_equivalencias
-  - action: utter_respuesta_equivalencias
-  - intent: agradecimiento
-  - action: utter_agradecimiento
-  - intent: despedida
-  - action: utter_despedida
+  - story: examen recuperatorio
+    steps:
+      - intent: saludo
+      - action: utter_saludo
+      - intent: informar_examen_recuperatorio
+      - action: utter_respuesta_examen_recuperatorio
+      - intent: agradecimiento
+      - action: utter_agradecimiento
+      - intent: despedida
+      - action: utter_despedida
 
-- story: examen recuperatorio
-  steps:
-  - intent: saludo
-  - action: utter_saludo
-  - intent: informar_examen_recuperatorio
-  - action: utter_respuesta_examen_recuperatorio
-  - intent: agradecimiento
-  - action: utter_agradecimiento
-  - intent: despedida
-  - action: utter_despedida
+  - story: equivalencias
+    steps:
+      - intent: informar_equivalencias
+      - action: utter_respuesta_equivalencias
 
-- story: equivalencias
-  steps:
-  - intent: informar_equivalencias
-  - action: utter_respuesta_equivalencias
+  - story: asistencias
+    steps:
+      - intent: informar_asistencia
+      - action: utter_respuesta_asistencia
 
-- story: asistencias
-  steps:
-  - intent: informar_asistencia
-  - action: utter_respuesta_asistencia
+  - story: asistencias
+    steps:
+      - intent: saludo
+      - action: utter_saludo
+      - intent: informar_asistencia
+      - action: utter_respuesta_asistencia
+      - intent: agradecimiento
+      - action: utter_agradecimiento
+      - intent: despedida
+      - action: utter_despedida
 
-- story: asistencias
-  steps:
-  - intent: saludo
-  - action: utter_saludo
-  - intent: informar_asistencia
-  - action: utter_respuesta_asistencia
-  - intent: agradecimiento
-  - action: utter_agradecimiento
-  - intent: despedida
-  - action: utter_despedida
+  - story: ayuda en informatica e ingles
+    steps:
+      - intent: informar_ayuda_informatica_ingles
+      - action: utter_respuesta_informar_ayuda_informatica_ingles
 
-- story: ayuda en informatica e ingles
-  steps:
-  - intent: informar_ayuda_informatica_ingles
-  - action: utter_respuesta_informar_ayuda_informatica_ingles
+  - story: ayuda en informatica e ingles
+    steps:
+      - intent: saludo
+      - action: utter_saludo
+      - intent: informar_ayuda_informatica_ingles
+      - action: utter_respuesta_informar_ayuda_informatica_ingles
+      - intent: agradecimiento
+      - action: utter_agradecimiento
+      - intent: despedida
+      - action: utter_despedida
 
-- story: ayuda en informatica e ingles
-  steps:
-  - intent: saludo
-  - action: utter_saludo
-  - intent: informar_ayuda_informatica_ingles
-  - action: utter_respuesta_informar_ayuda_informatica_ingles
-  - intent: agradecimiento
-  - action: utter_agradecimiento
-  - intent: despedida
-  - action: utter_despedida
+  - story: equipamiento tecnologico
+    steps:
+      - intent: informar_equipamiento_tecnologico
+      - action: utter_respuesta_informar_equipamiento_tecnologico
 
-- story: equipamiento tecnologico
-  steps:
-  - intent: informar_equipamiento_tecnologico
-  - action: utter_respuesta_informar_equipamiento_tecnologico
+  - story: servicios
+    steps:
+      - intent: informar_servicios
+      - action: utter_respuesta_informar_servicios
 
-- story: servicios
-  steps:
-  - intent: informar_servicios
-  - action: utter_respuesta_informar_servicios
+  - story: contactos
+    steps:
+      - intent: contactos
+      - action: utter_contactos
 
-- story: contactos
-  steps:
-  - intent: contactos
-  - action: utter_contactos
+  - story: autenticación automática exitosa
+    steps:
+      - intent: autenticar_usuario
+        entities:
+          - auth_token: "12345"
+      - action: action_authenticate_user
+      - slot_was_set:
+          - is_authenticated: true
 
-- story: ver mis materias
-  steps:
-  - intent: materia
-  - action: utter_ask_matricula
-  - intent: matricula
-    entities:
-    - matricula: '66007'
-  - slot_was_set:
-    - matricula: '66007'
-  - action: action_materia
+  - story: autenticación automática fallida
+    steps:
+      - intent: autenticar_usuario
+      - action: action_authenticate_user
+      - slot_was_set:
+          - is_authenticated: false
 
-- story: buscar mesa de examen por asignatura
-  steps:
-  - intent: mesa_examen
-    entities:
-    - mesa_examen: mesas de examen
-  - action: utter_ask_mesa_examen
-  - intent: materia
-    entities:
-    - materia: fisica 1
-  - slot_was_set:
-    - materia: fisica 1
-  - action: action_mesas_examen
-  - intent: codigo_mesa_examen
-    entities:
-    - codigo_mesa_examen: 'cod1001'
-  - slot_was_set:
-    - codigo_mesa_examen: 'cod1001'
-  - action: action_inscripcion_mesa
+  - story: flujo con autenticación automática
+    steps:
+      - intent: autenticar_usuario
+        entities:
+          - auth_token: "token123"
+      - action: action_authenticate_user
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: saludo
+      - action: utter_saludo
+
+  - story: consultar materias con matrícula
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: consultar_materias
+        entities:
+          - matricula: "66001"
+      - action: action_consultar_materias
+
+  - story: consultar materias con matrícula y saludo
+    steps:
+      - intent: saludo
+      - action: utter_saludo
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: consultar_materias
+        entities:
+          - matricula: "66022"
+      - action: action_consultar_materias
+      - intent: agradecimiento
+      - action: utter_agradecimiento
+      - intent: despedida
+      - action: utter_despedida
+
+  - story: consultar materias sin matrícula
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: consultar_materias
+      - action: materias_form
+      - active_loop: materias_form
+
+  - story: consultar materias sin matrícula con saludo
+    steps:
+      - intent: saludo
+      - action: utter_saludo
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: consultar_materias
+      - action: materias_form
+      - active_loop: materias_form
+
+  - story: proporcionar matrícula y consultar materias
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: consultar_materias
+      - action: materias_form
+      - active_loop: materias_form
+      - intent: proporcionar_matricula
+        entities:
+          - matricula: "66001"
+      - action: action_consultar_materias
+
+  - story: proporcionar matrícula directamente
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: proporcionar_matricula
+        entities:
+          - matricula: "66022"
+      - action: action_consultar_materias
+
+  - story: consultar materias con matrícula ya proporcionada
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+          - matricula: "66017"
+      - intent: consultar_materias
+      - action: action_consultar_materias
+
+  - story: consultar materias con matrícula ya proporcionada y saludo
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+          - matricula: "66017"
+      - intent: saludo
+      - action: utter_saludo
+      - intent: consultar_materias
+      - action: action_consultar_materias
+
+  - story: múltiples consultas con misma matrícula
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+          - matricula: "66017"
+      - intent: consultar_materias
+      - action: action_consultar_materias
+      - intent: consultar_materias
+      - action: action_consultar_materias
+
+  - story: consultar notas con matrícula y materia
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: consultar_notas
+        entities:
+          - matricula: "66001"
+          - materia: "matematica"
+      - action: notas_form
+      - active_loop: notas_form
+
+  - story: consultar notas con matrícula y materia y saludo
+    steps:
+      - intent: saludo
+      - action: utter_saludo
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: consultar_notas
+        entities:
+          - matricula: "66022"
+          - materia: "fisica"
+      - action: notas_form
+      - active_loop: notas_form
+      - intent: agradecimiento
+      - action: utter_agradecimiento
+      - intent: despedida
+      - action: utter_despedida
+
+  - story: consultar notas sin matrícula ni materia
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: consultar_notas
+      - action: notas_form
+      - active_loop: notas_form
+
+  - story: consultar notas sin matrícula ni materia con saludo
+    steps:
+      - intent: saludo
+      - action: utter_saludo
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: consultar_notas
+      - action: notas_form
+      - active_loop: notas_form
+
+  - story: consultar notas y proporcionar matrícula
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: consultar_notas
+      - action: notas_form
+      - active_loop: notas_form
+      - intent: proporcionar_matricula
+        entities:
+          - matricula: "66001"
+      - action: notas_form
+      - active_loop: notas_form
+
+  - story: consultar notas con matrícula pero sin materia
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+          - matricula: "66017"
+      - intent: consultar_notas
+      - action: notas_form
+      - active_loop: notas_form
+
+  - story: consultar notas con matrícula pero sin materia y saludo
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+          - matricula: "66017"
+      - intent: saludo
+      - action: utter_saludo
+      - intent: consultar_notas
+      - action: notas_form
+      - active_loop: notas_form
+
+  - story: consultar notas con materia pero sin matrícula
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: consultar_notas
+        entities:
+          - materia: "matematica"
+      - action: notas_form
+      - active_loop: notas_form
+
+  - story: consultar notas con materia pero sin matrícula y saludo
+    steps:
+      - intent: saludo
+      - action: utter_saludo
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: consultar_notas
+        entities:
+          - materia: "fisica"
+      - action: notas_form
+      - active_loop: notas_form
+
+  - story: proporcionar materia para notas
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+          - matricula: "66017"
+      - intent: proporcionar_materia_para_notas
+        entities:
+          - materia: "matematica"
+      - action: notas_form
+      - active_loop: notas_form
+
+  - story: múltiples consultas de notas con misma matrícula y materia
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+          - matricula: "66017"
+          - materia: "fisica"
+      - intent: consultar_notas
+      - action: notas_form
+      - active_loop: notas_form
+      - intent: consultar_notas
+      - action: notas_form
+      - active_loop: notas_form
+
+  # FLUJO CORRECTO PARA CONSULTAR FECHAS DE MESAS DE EXAMEN
+  - story: consultar fechas de mesas de examen sin materia
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: consultar_fecha_mesas_examen_final
+      - action: utter_solicitar_materia_examen
+
+  - story: consultar fechas de mesas de examen sin materia con saludo
+    steps:
+      - intent: saludo
+      - action: utter_saludo
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: consultar_fecha_mesas_examen_final
+      - action: utter_solicitar_materia_examen
+
+  - story: consultar fechas de mesas de examen con materia
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: consultar_fecha_mesas_examen_final
+        entities:
+          - materia: "matematica"
+      - action: action_consultar_mesas_examen
+
+  - story: consultar fechas de mesas de examen con materia y saludo
+    steps:
+      - intent: saludo
+      - action: utter_saludo
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: consultar_fecha_mesas_examen_final
+        entities:
+          - materia: "fisica"
+      - action: action_consultar_mesas_examen
+
+  - story: consultar fechas de mesas de examen y luego proporcionar materia
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: consultar_fecha_mesas_examen_final
+      - action: utter_solicitar_materia_examen
+      - intent: proporcionar_materia_para_mesas
+        entities:
+          - materia: "matematica"
+      - action: action_consultar_mesas_examen
+
+  - story: consultar fechas de mesas de examen y luego proporcionar materia con saludo
+    steps:
+      - intent: saludo
+      - action: utter_saludo
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: consultar_fecha_mesas_examen_final
+      - action: utter_solicitar_materia_examen
+      - intent: proporcionar_materia_para_mesas
+        entities:
+          - materia: "programacion"
+      - action: action_consultar_mesas_examen
+
+  - story: múltiples consultas de fechas de mesas de examen
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: consultar_fecha_mesas_examen_final
+      - action: utter_solicitar_materia_examen
+      - intent: proporcionar_materia_para_mesas
+        entities:
+          - materia: "matematica"
+      - action: action_consultar_mesas_examen
+      - intent: consultar_fecha_mesas_examen_final
+      - action: utter_solicitar_materia_examen
+      - intent: proporcionar_materia_para_mesas
+        entities:
+          - materia: "fisica"
+      - action: action_consultar_mesas_examen
+
+  - story: consultar requerimientos de materia con matrícula y materia
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+          - matricula: "66007"
+      - intent: consultar_requerimientos_materia
+        entities:
+          - materia: "fisica 2"
+      - action: action_consultar_requerimientos_materia
+
+  - story: consultar requerimientos de materia y luego proporcionar materia
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+          - matricula: "66007"
+      - intent: consultar_requerimientos_materia
+      - action: action_consultar_requerimientos_materia
+      - intent: proporcionar_materia_para_requerimientos
+        entities:
+          - materia: "fisica 2"
+      - action: action_consultar_requerimientos_materia
+
+  - story: consultar notas y luego proporcionar materia
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+          - matricula: "66007"
+      - intent: consultar_notas
+      - action: notas_form
+      - active_loop: notas_form
+      - intent: proporcionar_materia_para_notas
+        entities:
+          - materia: "matematica"
+      - action: notas_form
+      - active_loop: notas_form
+
+  - story: Inscripción a mesa de examen (flujo completo)
+    steps:
+      - intent: inscribirse_mesa_examen
+      - action: action_ofrecer_mesas_examen
+      - intent: seleccionar_mesa_examen
+        entities:
+          - codigo_mesa_examen: "12345"
+      - slot_was_set:
+          - codigo_mesa_examen: "12345"
+      - action: action_inscripcion_mesa_examen
+
+  - story: Inscripción a mesa de examen por código
+    steps:
+      - intent: inscribirse_mesa_examen
+        entities:
+          - materia: "matematica"
+      - action: action_ofrecer_mesas_examen
+      - intent: seleccionar_mesa_examen
+        entities:
+          - codigo_mesa_examen: "12345"
+      - slot_was_set:
+          - codigo_mesa_examen: "12345"
+      - action: action_inscripcion_mesa_examen
+
+  - story: Inscripción a mesa de examen por fecha
+    steps:
+      - intent: inscribirse_mesa_examen
+        entities:
+          - materia: "fisica"
+      - action: action_ofrecer_mesas_examen
+      - intent: seleccionar_mesa_examen
+        entities:
+          - fecha_mesa: "2024-07-25"
+      - action: action_inscripcion_mesa_examen
+
+  - story: Inscripción a mesa de examen sin materia
+    steps:
+      - intent: inscribirse_mesa_examen
+      - action: action_ofrecer_mesas_examen
+      - intent: proporcionar_materia_para_inscripcion
+        entities:
+          - materia: "quimica"
+      - action: action_ofrecer_mesas_examen
+      - intent: seleccionar_mesa_examen
+        entities:
+          - codigo_mesa_examen: "45678"
+      - slot_was_set:
+          - codigo_mesa_examen: "45678"
+      - action: action_inscripcion_mesa_examen
+
+  - story: Inscripción a mesa de examen con confirmación
+    steps:
+      - intent: inscribirse_mesa_examen
+        entities:
+          - materia: "biologia"
+      - action: action_ofrecer_mesas_examen
+      - intent: seleccionar_mesa_examen
+        entities:
+          - codigo_mesa_examen: "78901"
+      - slot_was_set:
+          - codigo_mesa_examen: "78901"
+      - action: action_inscripcion_mesa_examen
+      - intent: afirmacion
+      - action: utter_agradecimiento
+
+  - story: consultar asistencia con matrícula y materia
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: consultar_asistencia
+        entities:
+          - matricula: "66001"
+          - materia: "matematica"
+      - action: asistencia_form
+      - active_loop: asistencia_form
+
+  - story: consultar asistencia con matrícula y materia y saludo
+    steps:
+      - intent: saludo
+      - action: utter_saludo
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: consultar_asistencia
+        entities:
+          - matricula: "66022"
+          - materia: "fisica"
+      - action: asistencia_form
+      - active_loop: asistencia_form
+      - intent: agradecimiento
+      - action: utter_agradecimiento
+      - intent: despedida
+      - action: utter_despedida
+
+  - story: consultar asistencia sin matrícula ni materia
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: consultar_asistencia
+      - action: asistencia_form
+      - active_loop: asistencia_form
+
+  - story: consultar asistencia sin matrícula ni materia con saludo
+    steps:
+      - intent: saludo
+      - action: utter_saludo
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: consultar_asistencia
+      - action: asistencia_form
+      - active_loop: asistencia_form
+
+  - story: consultar asistencia y proporcionar matrícula
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: consultar_asistencia
+      - action: asistencia_form
+      - active_loop: asistencia_form
+      - intent: proporcionar_matricula
+        entities:
+          - matricula: "66001"
+      - action: asistencia_form
+      - active_loop: asistencia_form
+
+  - story: proporcionar materia para asistencia
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+          - matricula: "66017"
+      - intent: proporcionar_materia_para_asistencia
+        entities:
+          - materia: "matematica"
+      - action: asistencia_form
+      - active_loop: asistencia_form
+
+  - story: múltiples consultas de asistencia con misma matrícula y materia
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+          - matricula: "66017"
+          - materia: "fisica"
+      - intent: consultar_asistencia
+      - action: asistencia_form
+      - active_loop: asistencia_form
+      - intent: consultar_asistencia
+      - action: asistencia_form
+      - active_loop: asistencia_form
+
+  - story: consultar asistencia y luego proporcionar materia
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+          - matricula: "66007"
+      - intent: consultar_asistencia
+      - action: asistencia_form
+      - active_loop: asistencia_form
+      - intent: proporcionar_materia_para_asistencia
+        entities:
+          - materia: "matematica"
+      - action: asistencia_form
+      - active_loop: asistencia_form
+
+  - story: consultar asistencia con porcentaje específico
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: consultar_asistencia
+        entities:
+          - matricula: "66001"
+          - materia: "programacion"
+      - action: asistencia_form
+      - active_loop: asistencia_form
+
+  - story: consultar asistencia del cuatrimestre
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: consultar_asistencia
+        entities:
+          - matricula: "66022"
+          - materia: "ingles"
+      - action: asistencia_form
+      - active_loop: asistencia_form
+
+  - story: consultar asistencia actual
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: consultar_asistencia
+        entities:
+          - matricula: "66031"
+          - materia: "historia"
+      - action: asistencia_form
+      - active_loop: asistencia_form
+
+  - story: interactive_story_1
+    steps:
+      - intent: autenticar_usuario
+        entities:
+          - auth_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+      - slot_was_set:
+          - auth_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+      - action: action_authenticate_user
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: consultar_asistencia
+        entities:
+          - materia: fisica
+      - slot_was_set:
+          - materia: fisica
+      - action: asistencia_form
+      - active_loop: asistencia_form
+      - slot_was_set:
+          - flujo_actual: consultar_asistencia
+      - intent: proporcionar_matricula
+        entities:
+          - matricula: "66007"
+      - slot_was_set:
+          - matricula: "66007"
+      - action: asistencia_form
+      - active_loop: asistencia_form
+      - slot_was_set:
+          - flujo_actual: null

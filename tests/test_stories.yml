@@ -1,91 +1,97 @@
-#### This file contains tests to evaluate that your bot behaves as expected.
-#### If you want to learn more, please see the docs: https://rasa.com/docs/rasa/testing-your-assistant
+version: "3.1"
 
 stories:
-- story: happy path 1
-  steps:
-  - user: |
-      hello there!
-    intent: greet
-  - action: utter_greet
-  - user: |
-      amazing
-    intent: mood_great
-  - action: utter_happy
+  - story: saludo directo
+    steps:
+      - user: |
+          hola
+        intent: saludo
+      - action: utter_saludo
 
-- story: happy path 2
-  steps:
-  - user: |
-      hello there!
-    intent: greet
-  - action: utter_greet
-  - user: |
-      amazing
-    intent: mood_great
-  - action: utter_happy
-  - user: |
-      bye-bye!
-    intent: goodbye
-  - action: utter_goodbye
+  - story: despedida directa
+    steps:
+      - user: |
+          chau
+        intent: despedida
+      - action: utter_despedida
 
-- story: sad path 1
-  steps:
-  - user: |
-      hello
-    intent: greet
-  - action: utter_greet
-  - user: |
-      not good
-    intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - user: |
-      yes
-    intent: affirm
-  - action: utter_happy
+  - story: consultar notas pide materia y permanece en notas
+    steps:
+      - user: |
+          [eyJ0b2tlbiI6ImF1dGgiXX0.abc](auth_token)
+        intent: autenticar_usuario
+      - action: action_authenticate_user
+      - user: |
+          quiero ver mis notas
+        intent: consultar_notas
+      - action: notas_form
+      - active_loop: notas_form
+      - user: |
+          La materia para ver mis notas es [matematica](materia)
+        intent: proporcionar_materia_para_notas
+      - action: action_consultar_notas
 
-- story: sad path 2
-  steps:
-  - user: |
-      hello
-    intent: greet
-  - action: utter_greet
-  - user: |
-      not good
-    intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - user: |
-      not really
-    intent: deny
-  - action: utter_goodbye
+  - story: consultar mesas de examen solicitando materia
+    steps:
+      - user: |
+          [eyJ0b2tlbiI6ImF1dGgiXX0.def](auth_token)
+        intent: autenticar_usuario
+      - action: action_authenticate_user
+      - user: |
+          quiero ver las fechas de mesas de examen
+        intent: consultar_fecha_mesas_examen_final
+      - action: utter_solicitar_materia_examen
+      - user: |
+          La materia para consultar mesas es [fisica](materia)
+        intent: proporcionar_materia_para_mesas
+      - action: action_consultar_mesas_examen
 
-- story: sad path 3
-  steps:
-  - user: |
-      hi
-    intent: greet
-  - action: utter_greet
-  - user: |
-      very terrible
-    intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - user: |
-      no
-    intent: deny
-  - action: utter_goodbye
+  - story: consultar materias y luego proporcionar matricula
+    steps:
+      - user: |
+          [eyJ0b2tlbiI6ImF1dGgiXX0.ghi](auth_token)
+        intent: autenticar_usuario
+      - action: action_authenticate_user
+      - user: |
+          quiero ver mis materias
+        intent: consultar_materias
+      - action: materias_form
+      - active_loop: materias_form
+      - user: |
+          mi matricula es [66001](matricula)
+        intent: proporcionar_matricula
+      - action: action_consultar_materias
 
-- story: say goodbye
-  steps:
-  - user: |
-      bye-bye!
-    intent: goodbye
-  - action: utter_goodbye
+  - story: consultar asistencia proporcionando datos
+    steps:
+      - user: |
+          [eyJ0b2tlbiI6ImF1dGgiXX0.jkl](auth_token)
+        intent: autenticar_usuario
+      - action: action_authenticate_user
+      - user: |
+          quiero ver mi asistencia
+        intent: consultar_asistencia
+      - action: asistencia_form
+      - active_loop: asistencia_form
+      - user: |
+          mi matricula es [66001](matricula)
+        intent: proporcionar_matricula
+      - action: action_consultar_asistencia
+      - user: |
+          La materia para consultar mi asistencia es [programacion](materia)
+        intent: proporcionar_materia_para_asistencia
+      - action: action_consultar_asistencia
 
-- story: bot challenge
-  steps:
-  - user: |
-      are you a bot?
-    intent: bot_challenge
-  - action: utter_iamabot
+  - story: contactos directo
+    steps:
+      - user: |
+          contactos
+        intent: contactos
+      - action: utter_contactos
+
+  - story: agradecimiento directo
+    steps:
+      - user: |
+          gracias
+        intent: agradecimiento
+      - action: utter_agradecimiento
