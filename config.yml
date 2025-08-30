@@ -28,11 +28,9 @@ pipeline:
 
 # Mapeo de sinónimos de entidades
 - name: EntitySynonymMapper
-@@ -42,7 +43,7 @@ pipeline:
 
 # Clasificador de fallback
 - name: FallbackClassifier
-  threshold: 0.7
   threshold: 0.3
   ambiguity_threshold: 0.1
 
