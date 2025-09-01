@@ -30,6 +30,7 @@ intents:
   - informar_nivel_profesores
   - informar_servicios
   - inscribirse_mesa_examen
+  - cancelar_inscripcion_mesa_examen
   - nlu_fallback
   - out_of_scope
   - plazos_inscripcion
@@ -197,6 +198,31 @@ responses:
   utter_ask_asistencia_form_materia:
     - text: |
         Para consultar tu asistencia necesito saber de qué materia. Por favor, especifica la materia (por ejemplo: matematica, fisica, programacion).
+  
+  # Preguntas para formularios de mesas de examen
+  utter_ask_consultar_mesas_form_materia:
+    - text: |
+        Para consultar las mesas de examen necesito saber de qué materia. Por favor, especifica la materia (por ejemplo: matematica, fisica, programacion).
+  
+  utter_ask_inscripcion_mesa_form_matricula:
+    - text: |
+        Para inscribirte a una mesa de examen necesito tu número de matrícula. Por favor, proporciona tu matrícula (por ejemplo: 66001, 66022, 66031).
+  
+  utter_ask_inscripcion_mesa_form_materia:
+    - text: |
+        Para inscribirte a una mesa de examen necesito saber de qué materia. Por favor, especifica la materia (por ejemplo: matematica, fisica, programacion).
+  
+  utter_ask_seleccionar_mesa_form_fecha_mesa:
+    - text: |
+        Por favor, proporciona la fecha de la mesa de examen a la que deseas inscribirte (ej: 2025-08-25).
+  
+  utter_ask_cancelar_mesa_form_matricula:
+    - text: |
+        Para cancelar tu inscripción a una mesa de examen necesito tu número de matrícula. Por favor, proporciona tu matrícula (por ejemplo: 66001, 66022, 66031).
+  
+  utter_ask_cancelar_mesa_form_materia:
+    - text: |
+        Para cancelar tu inscripción necesito saber de qué materia. Por favor, especifica la materia (por ejemplo: matematica, fisica, programacion).
 
 forms:
   notas_form:
@@ -210,6 +236,20 @@ forms:
     required_slots:
       - matricula
       - materia
+  consultar_mesas_form:
+    required_slots:
+      - materia
+  inscripcion_mesa_form:
+    required_slots:
+      - matricula
+      - materia
+  seleccionar_mesa_form:
+    required_slots:
+      - fecha_mesa
+  cancelar_mesa_form:
+    required_slots:
+      - matricula
+      - materia
 actions:
   - action_consultar_asistencia
   - action_authenticate_user
@@ -219,3 +259,4 @@ actions:
   - action_consultar_mesas_examen
   - action_ofrecer_mesas_examen
   - action_inscripcion_mesa_examen
+  - action_cancelar_inscripcion_mesa_examen

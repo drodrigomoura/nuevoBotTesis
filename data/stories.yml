@@ -455,13 +455,14 @@ stories:
       - action: notas_form
       - active_loop: notas_form
 
-  # FLUJO CORRECTO PARA CONSULTAR FECHAS DE MESAS DE EXAMEN
+  # FLUJO CORRECTO PARA CONSULTAR FECHAS DE MESAS DE EXAMEN CON FORMS
   - story: consultar fechas de mesas de examen sin materia
     steps:
       - slot_was_set:
           - is_authenticated: true
       - intent: consultar_fecha_mesas_examen_final
-      - action: utter_solicitar_materia_examen
+      - action: consultar_mesas_form
+      - active_loop: consultar_mesas_form
 
   - story: consultar fechas de mesas de examen sin materia con saludo
     steps:
@@ -470,7 +471,8 @@ stories:
       - slot_was_set:
           - is_authenticated: true
       - intent: consultar_fecha_mesas_examen_final
-      - action: utter_solicitar_materia_examen
+      - action: consultar_mesas_form
+      - active_loop: consultar_mesas_form
 
   - story: consultar fechas de mesas de examen con materia
     steps:
@@ -479,7 +481,8 @@ stories:
       - intent: consultar_fecha_mesas_examen_final
         entities:
           - materia: "matematica"
-      - action: action_consultar_mesas_examen
+      - action: consultar_mesas_form
+      - active_loop: consultar_mesas_form
 
   - story: consultar fechas de mesas de examen con materia y saludo
     steps:
@@ -490,48 +493,21 @@ stories:
       - intent: consultar_fecha_mesas_examen_final
         entities:
           - materia: "fisica"
-      - action: action_consultar_mesas_examen
+      - action: consultar_mesas_form
+      - active_loop: consultar_mesas_form
 
-  - story: consultar fechas de mesas de examen y luego proporcionar materia
+  - story: proporcionar materia para consultar mesas
     steps:
       - slot_was_set:
           - is_authenticated: true
       - intent: consultar_fecha_mesas_examen_final
-      - action: utter_solicitar_materia_examen
+      - action: consultar_mesas_form
+      - active_loop: consultar_mesas_form
       - intent: proporcionar_materia_para_mesas
         entities:
           - materia: "matematica"
-      - action: action_consultar_mesas_examen
-
-  - story: consultar fechas de mesas de examen y luego proporcionar materia con saludo
-    steps:
-      - intent: saludo
-      - action: utter_saludo
-      - slot_was_set:
-          - is_authenticated: true
-      - intent: consultar_fecha_mesas_examen_final
-      - action: utter_solicitar_materia_examen
-      - intent: proporcionar_materia_para_mesas
-        entities:
-          - materia: "programacion"
-      - action: action_consultar_mesas_examen
-
-  - story: múltiples consultas de fechas de mesas de examen
-    steps:
-      - slot_was_set:
-          - is_authenticated: true
-      - intent: consultar_fecha_mesas_examen_final
-      - action: utter_solicitar_materia_examen
-      - intent: proporcionar_materia_para_mesas
-        entities:
-          - materia: "matematica"
-      - action: action_consultar_mesas_examen
-      - intent: consultar_fecha_mesas_examen_final
-      - action: utter_solicitar_materia_examen
-      - intent: proporcionar_materia_para_mesas
-        entities:
-          - materia: "fisica"
-      - action: action_consultar_mesas_examen
+      - action: consultar_mesas_form
+      - active_loop: consultar_mesas_form
 
   - story: consultar requerimientos de materia con matrícula y materia
     steps:
@@ -569,70 +545,107 @@ stories:
       - action: notas_form
       - active_loop: notas_form
 
-  - story: Inscripción a mesa de examen (flujo completo)
+  # FLUJO PARA INSCRIPCIÓN A MESA DE EXAMEN CON FORMS
+  - story: Inscripción a mesa de examen sin datos
     steps:
-      - intent: inscribirse_mesa_examen
-      - action: action_ofrecer_mesas_examen
-      - intent: seleccionar_mesa_examen
-        entities:
-          - codigo_mesa_examen: "12345"
       - slot_was_set:
-          - codigo_mesa_examen: "12345"
-      - action: action_inscripcion_mesa_examen
+          - is_authenticated: true
+      - intent: inscribirse_mesa_examen
+      - action: inscripcion_mesa_form
+      - active_loop: inscripcion_mesa_form
 
-  - story: Inscripción a mesa de examen por código
+  - story: Inscripción a mesa de examen con materia
     steps:
+      - slot_was_set:
+          - is_authenticated: true
       - intent: inscribirse_mesa_examen
         entities:
           - materia: "matematica"
-      - action: action_ofrecer_mesas_examen
-      - intent: seleccionar_mesa_examen
-        entities:
-          - codigo_mesa_examen: "12345"
+      - action: inscripcion_mesa_form
+      - active_loop: inscripcion_mesa_form
+
+  - story: Inscripción a mesa de examen con matrícula
+    steps:
       - slot_was_set:
-          - codigo_mesa_examen: "12345"
-      - action: action_inscripcion_mesa_examen
-
-  - story: Inscripción a mesa de examen por fecha
-    steps:
+          - is_authenticated: true
+          - matricula: "66001"
       - intent: inscribirse_mesa_examen
-        entities:
-          - materia: "fisica"
-      - action: action_ofrecer_mesas_examen
-      - intent: seleccionar_mesa_examen
-        entities:
-          - fecha_mesa: "2024-07-25"
-      - action: action_inscripcion_mesa_examen
+      - action: inscripcion_mesa_form
+      - active_loop: inscripcion_mesa_form
 
-  - story: Inscripción a mesa de examen sin materia
+  - story: Inscripción a mesa de examen completa con forms
     steps:
+      - slot_was_set:
+          - is_authenticated: true
       - intent: inscribirse_mesa_examen
-      - action: action_ofrecer_mesas_examen
+      - action: inscripcion_mesa_form
+      - active_loop: inscripcion_mesa_form
+      - intent: proporcionar_matricula
+        entities:
+          - matricula: "66001"
+      - action: inscripcion_mesa_form
+      - active_loop: inscripcion_mesa_form
       - intent: proporcionar_materia_para_inscripcion
         entities:
-          - materia: "quimica"
-      - action: action_ofrecer_mesas_examen
-      - intent: seleccionar_mesa_examen
-        entities:
-          - codigo_mesa_examen: "45678"
-      - slot_was_set:
-          - codigo_mesa_examen: "45678"
-      - action: action_inscripcion_mesa_examen
+          - materia: "fisica"
+      - action: inscripcion_mesa_form
+      - active_loop: inscripcion_mesa_form
 
-  - story: Inscripción a mesa de examen con confirmación
+  - story: Seleccionar mesa de examen por código
     steps:
-      - intent: inscribirse_mesa_examen
-        entities:
-          - materia: "biologia"
-      - action: action_ofrecer_mesas_examen
+      - slot_was_set:
+          - is_authenticated: true
       - intent: seleccionar_mesa_examen
         entities:
-          - codigo_mesa_examen: "78901"
+          - codigo_mesa_examen: "12345"
+      - action: seleccionar_mesa_form
+      - active_loop: seleccionar_mesa_form
+
+  # FLUJO PARA CANCELAR INSCRIPCIÓN A MESA DE EXAMEN CON FORMS
+  - story: Cancelar inscripción a mesa de examen sin datos
+    steps:
       - slot_was_set:
-          - codigo_mesa_examen: "78901"
-      - action: action_inscripcion_mesa_examen
-      - intent: afirmacion
-      - action: utter_agradecimiento
+          - is_authenticated: true
+      - intent: cancelar_inscripcion_mesa_examen
+      - action: cancelar_mesa_form
+      - active_loop: cancelar_mesa_form
+
+  - story: Cancelar inscripción a mesa de examen con materia
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: cancelar_inscripcion_mesa_examen
+        entities:
+          - materia: "matematica"
+      - action: cancelar_mesa_form
+      - active_loop: cancelar_mesa_form
+
+  - story: Cancelar inscripción a mesa de examen con matrícula
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+          - matricula: "66001"
+      - intent: cancelar_inscripcion_mesa_examen
+      - action: cancelar_mesa_form
+      - active_loop: cancelar_mesa_form
+
+  - story: Cancelar inscripción completa con forms
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: cancelar_inscripcion_mesa_examen
+      - action: cancelar_mesa_form
+      - active_loop: cancelar_mesa_form
+      - intent: proporcionar_matricula
+        entities:
+          - matricula: "66001"
+      - action: cancelar_mesa_form
+      - active_loop: cancelar_mesa_form
+      - intent: proporcionar_materia
+        entities:
+          - materia: "fisica"
+      - action: cancelar_mesa_form
+      - active_loop: cancelar_mesa_form
 
   - story: consultar asistencia con matrícula y materia
     steps:
