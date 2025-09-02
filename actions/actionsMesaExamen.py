@@ -114,7 +114,6 @@ class ActionOfrecerMesasExamen(Action):
                     f"📅 Fecha: {fecha_mesa}\n"
                     f"-----------------------------"
                 )
-            dispatcher.utter_message("Por favor, dime la fecha de la mesa a la que deseas inscribirte.")
             # Mantener la materia para el flujo de formularios, solo limpiar flujo_actual
             return [SlotSet("flujo_actual", None)]
         except Exception as e:
@@ -179,7 +178,7 @@ class ActionInscripcionMesaExamen(Action):
             inscripcion_existente = supabase.table("Inscripcion").select('*').eq("estudiante", matricula).eq("codigo_mesa", codigo_mesa).execute()
             if inscripcion_existente.data:
                 dispatcher.utter_message(f"⚠️ Ya estás inscrito a la mesa de examen de **{nombre_materia}** (código: {codigo_mesa}) que se realizará el {fecha_mesa_final}.")
-                return [SlotSet("flujo_actual", None), SlotSet("materia", None)]
+                return [SlotSet("flujo_actual", None), SlotSet("materia", None), SlotSet("fecha_mesa", None), SlotSet("codigo_mesa_examen", None)]
             # Realizar la inscripción
             inscripcion_data = {
                 "estudiante": matricula,
@@ -196,8 +195,8 @@ class ActionInscripcionMesaExamen(Action):
                 dispatcher.utter_message(f"📋 Código de mesa: `{codigo_mesa}`")
                 dispatcher.utter_message(f"📅 Fecha del examen: {fecha_mesa_final}")
                 dispatcher.utter_message(f"🎓 Matrícula: {matricula}")
-                dispatcher.utter_message("📝 Recuerda presentarte con tu DNI y los materiales necesarios para el examen.")
-                return [SlotSet("flujo_actual", None), SlotSet("materia", None)]
+                dispatcher.utter_message("📝 Recuerda presentarte con tu libreta y los materiales necesarios para el examen.")
+                return [SlotSet("flujo_actual", None), SlotSet("materia", None), SlotSet("fecha_mesa", None), SlotSet("codigo_mesa_examen", None)]
             else:
                 dispatcher.utter_message("❌ Hubo un problema al procesar tu inscripción. Por favor, intenta nuevamente.")
         except Exception as e:

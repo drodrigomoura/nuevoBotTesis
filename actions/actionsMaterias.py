@@ -153,7 +153,19 @@ class ActionConsultarNotas(Action):
 
             for nota in response.data:
                 calificacion = nota.get("nota", "Sin calificar")
-                fecha_nota = nota.get("created_at", "Fecha no disponible")
+                fecha_raw = nota.get("created_at", "Fecha no disponible")
+                # Formatear fecha a dd/mm/yyyy
+                try:
+                    from datetime import datetime
+                    if fecha_raw != "Fecha no disponible":
+                        # Parsear la fecha ISO (ej: 2024-07-25T10:30:00+00:00)
+                        fecha_obj = datetime.fromisoformat(fecha_raw.replace('Z', '+00:00'))
+                        fecha_nota = fecha_obj.strftime("%d/%m/%Y")
+                    else:
+                        fecha_nota = fecha_raw
+                except Exception as e:
+                    print(f"Error formateando fecha: {e}")
+                    fecha_nota = fecha_raw
                 descripcion = nota.get("descripcion", "Sin descripción")
                 # Formatear la nota con emoji según la calificación
                 if isinstance(calificacion, (int, float)):

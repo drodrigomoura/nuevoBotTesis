@@ -45,6 +45,7 @@ intents:
   - saludo
   - seleccionar_mesa_examen
   - visitas_consultas
+  - consultar_fechas_parciales
 entities:
   - matricula
   - materia
@@ -223,6 +224,14 @@ responses:
   utter_ask_cancelar_mesa_form_materia:
     - text: |
         Para cancelar tu inscripción necesito saber de qué materia. Por favor, especifica la materia (por ejemplo: matematica, fisica, programacion).
+  
+  utter_ask_fechas_parciales_form_matricula:
+    - text: |
+        Para consultar las fechas de parciales necesito tu número de matrícula. Por favor, proporciona tu matrícula (por ejemplo: 66001, 66022, 66031).
+  
+  utter_ask_fechas_parciales_form_materia:
+    - text: |
+        Para consultar las fechas de parciales necesito saber de qué materia. Por favor, especifica la materia (por ejemplo: matematica, fisica, programacion).
 
 forms:
   notas_form:
@@ -250,6 +259,10 @@ forms:
     required_slots:
       - matricula
       - materia
+  fechas_parciales_form:
+    required_slots:
+      - matricula
+      - materia
 actions:
   - action_consultar_asistencia
   - action_authenticate_user
@@ -260,3 +273,4 @@ actions:
   - action_ofrecer_mesas_examen
   - action_inscripcion_mesa_examen
   - action_cancelar_inscripcion_mesa_examen
+  - action_consultar_fechas_parciales

@@ -509,6 +509,37 @@ stories:
       - action: consultar_mesas_form
       - active_loop: consultar_mesas_form
 
+  - story: consultar fechas de parciales sin datos
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: consultar_fechas_parciales
+      - action: fechas_parciales_form
+      - active_loop: fechas_parciales_form
+
+  - story: consultar fechas de parciales con materia especificada
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: consultar_fechas_parciales
+        entities:
+        - materia: "fisica"
+      - action: fechas_parciales_form
+      - active_loop: fechas_parciales_form
+
+  - story: proporcionar matricula para fechas parciales
+    steps:
+      - slot_was_set:
+          - is_authenticated: true
+      - intent: consultar_fechas_parciales
+      - action: fechas_parciales_form
+      - active_loop: fechas_parciales_form
+      - intent: proporcionar_matricula
+        entities:
+          - matricula: "66001"
+      - action: fechas_parciales_form
+      - active_loop: fechas_parciales_form
+
   - story: consultar requerimientos de materia con matrícula y materia
     steps:
       - slot_was_set:

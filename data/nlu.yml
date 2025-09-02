@@ -629,6 +629,43 @@ nlu:
       - necesito saber que materias debo tener para [Investigacion Operativa](materia)
       - cuales son los prerequisitos para cursar [Inteligencia Artificial 2](materia)
       - que necesito para poder cursar [Proyectos Informaticos](materia)
+      - que correlativas tiene [fisica](materia)
+      - que correlativas tiene [fisica 2](materia)
+  - intent: consultar_fechas_parciales
+    examples: |
+      - quiero consultar las fechas de parciales
+      - necesito saber las fechas de los parciales
+      - cuando son los parciales
+      - fechas de examenes parciales
+      - quiero ver las fechas de los examenes parciales
+      - necesito las fechas de parciales de [matematica](materia)
+      - cuando son los parciales de [fisica](materia)
+      - fechas de parciales de [programacion](materia)
+      - quiero saber cuando son los parciales de [historia](materia)
+      - necesito consultar las fechas de parciales de [algebra](materia)
+      - cuando rindo los parciales de [quimica](materia)
+      - fechas de examenes parciales de [biologia](materia)
+      - quiero ver las fechas de parciales de [literatura](materia)
+      - necesito saber las fechas de parciales de [filosofia](materia)
+      - cuando son los parciales de [geografia](materia)
+      - fechas de parciales de [economia](materia)
+      - quiero consultar los parciales de [psicologia](materia)
+      - necesito las fechas de parciales de [sociologia](materia)
+      - cuando rindo parciales de [derecho](materia)
+      - fechas de examenes parciales de [contabilidad](materia)
+      - quiero ver cuando son los parciales de [estadistica](materia)
+      - necesito saber las fechas de parciales de [administracion](materia)
+      - cuando son los parciales de [marketing](materia)
+      - fechas de parciales
+      - examenes parciales
+      - cuando rindo parciales
+      - necesito fechas de parciales
+      - quiero saber cuando son los parciales
+      - consultar fechas de examenes parciales
+      - ver fechas de parciales
+      - cuando tengo parciales
+      - fechas de los examenes parciales
+      - quiero consultar parciales
   - intent: consultar_asistencia
     examples: |
       - quiero consultar mi asistencia

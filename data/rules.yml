@@ -129,6 +129,20 @@ rules:
       - action: consultar_mesas_form
       - active_loop: consultar_mesas_form
 
+  - rule: activar fechas_parciales_form
+    steps:
+      - intent: consultar_fechas_parciales
+      - action: fechas_parciales_form
+      - active_loop: fechas_parciales_form
+
+  - rule: enviar fechas_parciales_form y ejecutar acción
+    condition:
+      - active_loop: fechas_parciales_form
+    steps:
+      - action: fechas_parciales_form
+      - active_loop: null
+      - action: action_consultar_fechas_parciales
+
   - rule: continuar inscripción tras proporcionar materia para inscripción
     steps:
       - intent: proporcionar_materia_para_inscripcion
