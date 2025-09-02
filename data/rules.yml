@@ -78,27 +78,90 @@ rules:
       - intent: consultar_requerimientos_materia
       - action: action_consultar_requerimientos_materia
 
-  - rule: ofrecer mesas de examen para inscripción
+  # Reglas para formularios de mesas de examen
+  - rule: activar consultar_mesas_form al solicitar fechas de mesas
+    steps:
+      - intent: consultar_fecha_mesas_examen_final
+      - action: consultar_mesas_form
+      - active_loop: consultar_mesas_form
+
+  - rule: enviar consultar_mesas_form y ejecutar acción
+    condition:
+      - active_loop: consultar_mesas_form
+    steps:
+      - action: consultar_mesas_form
+      - active_loop: null
+      - action: action_consultar_mesas_examen
+
+  - rule: activar inscripcion_mesa_form al solicitar inscripción
     steps:
       - intent: inscribirse_mesa_examen
-      - action: action_ofrecer_mesas_examen
+      - action: inscripcion_mesa_form
+      - active_loop: inscripcion_mesa_form
 
-  - rule: inscribir a mesa de examen tras selección
+  - rule: enviar inscripcion_mesa_form y ejecutar acción ofrecer mesas
+    condition:
+      - active_loop: inscripcion_mesa_form
+    steps:
+      - action: inscripcion_mesa_form
+      - active_loop: null
+      - action: action_ofrecer_mesas_examen
+      - action: seleccionar_mesa_form
+      - active_loop: seleccionar_mesa_form
+
+  - rule: activar seleccionar_mesa_form al seleccionar mesa
     steps:
       - intent: seleccionar_mesa_examen
-      - action: action_inscripcion_mesa_examen
+      - action: seleccionar_mesa_form
+      - active_loop: seleccionar_mesa_form
 
-  ## Eliminado: ahora materias se gestiona con materias_form
+  - rule: enviar seleccionar_mesa_form y ejecutar inscripción
+    condition:
+      - active_loop: seleccionar_mesa_form
+    steps:
+      - action: seleccionar_mesa_form
+      - active_loop: null
+      - action: action_inscripcion_mesa_examen
 
   - rule: consultar mesas tras proporcionar_materia_para_mesas
     steps:
       - intent: proporcionar_materia_para_mesas
-      - action: action_consultar_mesas_examen
+      - action: consultar_mesas_form
+      - active_loop: consultar_mesas_form
 
-  - rule: ofrecer mesas de examen tras proporcionar materia para inscripcion
+  - rule: activar fechas_parciales_form
+    steps:
+      - intent: consultar_fechas_parciales
+      - action: fechas_parciales_form
+      - active_loop: fechas_parciales_form
+
+  - rule: enviar fechas_parciales_form y ejecutar acción
+    condition:
+      - active_loop: fechas_parciales_form
+    steps:
+      - action: fechas_parciales_form
+      - active_loop: null
+      - action: action_consultar_fechas_parciales
+
+  - rule: continuar inscripción tras proporcionar materia para inscripción
     steps:
       - intent: proporcionar_materia_para_inscripcion
-      - action: action_ofrecer_mesas_examen
+      - action: inscripcion_mesa_form
+      - active_loop: inscripcion_mesa_form
+
+  - rule: activar cancelar_mesa_form al solicitar cancelación
+    steps:
+      - intent: cancelar_inscripcion_mesa_examen
+      - action: cancelar_mesa_form
+      - active_loop: cancelar_mesa_form
+
+  - rule: enviar cancelar_mesa_form y ejecutar acción
+    condition:
+      - active_loop: cancelar_mesa_form
+    steps:
+      - action: cancelar_mesa_form
+      - active_loop: null
+      - action: action_cancelar_inscripcion_mesa_examen
 
   - rule: continuar inscripcion mesa de examen tras matricula
     condition:

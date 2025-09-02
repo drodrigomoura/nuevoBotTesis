@@ -629,6 +629,43 @@ nlu:
       - necesito saber que materias debo tener para [Investigacion Operativa](materia)
       - cuales son los prerequisitos para cursar [Inteligencia Artificial 2](materia)
       - que necesito para poder cursar [Proyectos Informaticos](materia)
+      - que correlativas tiene [fisica](materia)
+      - que correlativas tiene [fisica 2](materia)
+  - intent: consultar_fechas_parciales
+    examples: |
+      - quiero consultar las fechas de parciales
+      - necesito saber las fechas de los parciales
+      - cuando son los parciales
+      - fechas de examenes parciales
+      - quiero ver las fechas de los examenes parciales
+      - necesito las fechas de parciales de [matematica](materia)
+      - cuando son los parciales de [fisica](materia)
+      - fechas de parciales de [programacion](materia)
+      - quiero saber cuando son los parciales de [historia](materia)
+      - necesito consultar las fechas de parciales de [algebra](materia)
+      - cuando rindo los parciales de [quimica](materia)
+      - fechas de examenes parciales de [biologia](materia)
+      - quiero ver las fechas de parciales de [literatura](materia)
+      - necesito saber las fechas de parciales de [filosofia](materia)
+      - cuando son los parciales de [geografia](materia)
+      - fechas de parciales de [economia](materia)
+      - quiero consultar los parciales de [psicologia](materia)
+      - necesito las fechas de parciales de [sociologia](materia)
+      - cuando rindo parciales de [derecho](materia)
+      - fechas de examenes parciales de [contabilidad](materia)
+      - quiero ver cuando son los parciales de [estadistica](materia)
+      - necesito saber las fechas de parciales de [administracion](materia)
+      - cuando son los parciales de [marketing](materia)
+      - fechas de parciales
+      - examenes parciales
+      - cuando rindo parciales
+      - necesito fechas de parciales
+      - quiero saber cuando son los parciales
+      - consultar fechas de examenes parciales
+      - ver fechas de parciales
+      - cuando tengo parciales
+      - fechas de los examenes parciales
+      - quiero consultar parciales
   - intent: consultar_asistencia
     examples: |
       - quiero consultar mi asistencia
@@ -964,22 +1001,64 @@ nlu:
       - Quiero inscribirme a la mesa de examen de [inteligencia artificial 1](materia)
   - intent: seleccionar_mesa_examen
     examples: |
-      - Quiero inscribirme a la mesa del [25 de julio](fecha_mesa)
-      - A la del [10 de agosto](fecha_mesa)
-      - Al código [12345](codigo_mesa_examen)
-      - Inscribirme a la mesa con código [45678](codigo_mesa_examen)
-      - A la mesa del [2024-07-25](fecha_mesa)
-      - Quiero la mesa [78901](codigo_mesa_examen)
-      - Me quiero inscribir en la mesa con codigo [cod1003](codigo_mesa_examen)
-      - Inscribirme a la mesa con código [cod1003](codigo_mesa_examen)
-      - Quiero la mesa [cod1003](codigo_mesa_examen)
-      - Al código [cod1003](codigo_mesa_examen)
-      - Me quiero inscribir en la mesa con codigo [COD2024](codigo_mesa_examen)
-      - Inscribirme a la mesa con código [COD2024](codigo_mesa_examen)
-      - Quiero la mesa [COD2024](codigo_mesa_examen)
-      - Al código [COD2024](codigo_mesa_examen)
+      - [cod1001](codigo_mesa_examen)
+      - [COD2024](codigo_mesa_examen)
+      - [mesa123](codigo_mesa_examen)
+      - [2025-08-10](fecha_mesa)
+      - [2025-12-15](fecha_mesa)
+      - [2024-07-25](fecha_mesa)
+      - Quiero inscribirme a la mesa [cod1001](codigo_mesa_examen)
+      - Me inscribo a [COD2024](codigo_mesa_examen)
+      - Selecciono la mesa [mesa123](codigo_mesa_examen)
+      - La mesa es [cod1001](codigo_mesa_examen)
+      - Elijo [COD2024](codigo_mesa_examen)
+      - Mi mesa es [mesa123](codigo_mesa_examen)
+      - Quiero la mesa del [2025-08-10](fecha_mesa)
+      - Me inscribo para el [2025-12-15](fecha_mesa)
+      - La fecha de examen es [2024-07-25](fecha_mesa)
+      - Elijo la fecha [2025-08-10](fecha_mesa)
+      - Para el día [2025-12-15](fecha_mesa)
+      - La mesa del [2024-07-25](fecha_mesa)
+  - intent: cancelar_inscripcion_mesa_examen
+    examples: |
+      - Quiero cancelar mi inscripción a la mesa de examen
+      - Necesito cancelar mi inscripción a la mesa de [matematica](materia)
+      - Quiero dar de baja mi inscripción a la mesa de examen
+      - Cancelar inscripción a la mesa de [fisica](materia)
+      - Quiero cancelar mi inscripción a la mesa de [programacion](materia)
+      - Necesito dar de baja mi inscripción a la mesa de examen
+      - Cancelar mi inscripción a la mesa de [historia](materia)
+      - Quiero cancelar mi inscripción a la mesa de [algebra](materia)
+      - Necesito cancelar mi inscripción a la mesa de [quimica](materia)
+      - Dar de baja inscripción a mesa de examen
+      - Cancelar inscripción a mesa de [biologia](materia)
+      - Quiero cancelar mi inscripción a la mesa de [literatura](materia)
+      - Necesito dar de baja mi inscripción a la mesa de [filosofia](materia)
+      - Cancelar mi inscripción a la mesa de [geografia](materia)
+      - Quiero cancelar mi inscripción a la mesa de [economia](materia)
+      - Necesito cancelar mi inscripción a la mesa de [psicologia](materia)
+      - Dar de baja mi inscripción a la mesa de [sociologia](materia)
+      - Cancelar inscripción a mesa de [derecho](materia)
+      - Quiero cancelar mi inscripción a la mesa de [contabilidad](materia)
+      - Necesito dar de baja mi inscripción a la mesa de [estadistica](materia)
+      - Cancelar mi inscripción a la mesa de [administracion](materia)
+      - Quiero cancelar mi inscripción a la mesa de [marketing](materia)
+      - No quiero rendir más el examen de [matematica](materia)
+      - Cambié de opinión, quiero cancelar mi inscripción
+      - Ya no puedo rendir, cancelar inscripción
+      - Tengo que cancelar mi inscripción a la mesa
+      - ¿Puedo cancelar mi inscripción a la mesa de examen?
+      - ¿Cómo cancelo mi inscripción a la mesa?
+      - Dar de baja inscripción
+      - Cancelar inscripción
+      - Baja de mesa de examen
   - regex: codigo_mesa_examen
     examples: |
       - COD[0-9]{4}
       - [a-zA-Z0-9]+
       - cod[0-9]{4}
+  - regex: fecha_mesa
+    examples: |
+      - [0-9]{4}-[0-9]{2}-[0-9]{2}
+      - [0-9]{1,2}/[0-9]{1,2}/[0-9]{4}
+      - [0-9]{1,2}-[0-9]{1,2}-[0-9]{4}

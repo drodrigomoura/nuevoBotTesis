@@ -165,10 +165,14 @@ class ActionConsultarFechasParciales(Action):
                 dispatcher.utter_message("❌ No se encontraron fechas de parciales registradas.")
                 return [SlotSet("flujo_actual", None)]
 
+            # Ordenar los parciales por fecha
+            parciales_ordenados = sorted(fechas_parciales_resp.data, key=lambda x: x.get('fecha_parcial', ''))
+
             dispatcher.utter_message(f"📊 **Fechas de los parciales:**")
 
-            for parcial in fechas_parciales_resp.data:
-                dispatcher.utter_message(f"• **{parcial.get('fecha', 'Parcial sin fecha')}**")
+            for i, parcial in enumerate(parciales_ordenados, 1):
+                fecha = parcial.get('fecha_parcial', 'Sin fecha')
+                dispatcher.utter_message(f"• **Parcial nro {i} - {fecha}**")
 
             dispatcher.utter_message(f"✅ Total de parciales encontrados: {len(fechas_parciales_resp.data)}")
             return [SlotSet("flujo_actual", None), SlotSet("materia", None)]
