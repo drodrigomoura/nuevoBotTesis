@@ -1,0 +1,27 @@
+# Archivos y directorios a ignorar en Docker
+.git
+.gitignore
+README.md
+Dockerfile
+.dockerignore
+.env
+venv_rasa/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.pytest_cache/
+.coverage
+.tox/
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

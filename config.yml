@@ -21,9 +21,9 @@ pipeline:
   max_ngram: 4
 # Clasificador DIET optimizado para español
 - name: DIETClassifier
-  epochs: 100
-  batch_size: 64
-  evaluate_every_number_of_epochs: 20
+  epochs: 50
+  batch_size: 128
+  evaluate_every_number_of_epochs: 10
   constrain_similarities: true
 
 # Mapeo de sinónimos de entidades
@@ -36,15 +36,15 @@ pipeline:
 
 policies:
 - name: MemoizationPolicy
-  max_history: 5
+  max_history: 3
 - name: RulePolicy
   core_fallback_threshold: 0.4
   core_fallback_action_name: "action_default_fallback"
   enable_fallback_prediction: true
-  max_history: 5
+  max_history: 3
 - name: TEDPolicy
-  max_history: 5
-  epochs: 100
-  batch_size: 64
-  evaluate_every_number_of_epochs: 20
+  max_history: 3
+  epochs: 50
+  batch_size: 128
+  evaluate_every_number_of_epochs: 10
 assistant_id: 20231121-211621-relaxed-bookshelf
