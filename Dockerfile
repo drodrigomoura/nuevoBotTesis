@@ -1,51 +1,53 @@
-# Usar una imagen base de Python
-FROM python:3.9-slim
+# Usar imagen base de Python limpia
+FROM python:3.10-slim
 
 # Establecer directorio de trabajo
 WORKDIR /app
 
-# Configurar los repositorios de apt y manejar mejor los errores de red
-RUN apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
-    echo 'Acquire::Retries "5";' > /etc/apt/apt.conf.d/80-retries && \
-    echo "deb http://deb.debian.org/debian bullseye main" > /etc/apt/sources.list && \
-    echo "deb http://security.debian.org/debian-security bullseye-security main" >> /etc/apt/sources.list && \
-    echo "deb http://deb.debian.org/debian bullseye-updates main" >> /etc/apt/sources.list
-
-# Instalar dependencias del sistema necesarias con reintentos
-RUN apt-get update --fix-missing && \
-    apt-get install -y --no-install-recommends \
+# Instalar dependencias del sistema
+RUN apt-get update && apt-get install -y \
     build-essential \
-    python3-dev \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Instalar Rasa y otras dependencias de Python con versiones específicas
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir \
-    rasa==3.1 \
-    python-dotenv==1.0.0 \
-    supabase==1.0.3 \
-    httpx==0.23.3 \
-    typing-extensions==3.10.0.2
+# Crear requirements.txt temporal con versiones específicas compatibles
+RUN echo "rasa==3.6.20" > requirements.txt && \
+    echo "rasa-sdk==3.6.2" >> requirements.txt && \
+    echo "websockets==10.4" >> requirements.txt && \
+    echo "sanic==21.12.2" >> requirements.txt && \
+    echo "spacy>=3.4.0,<3.5.0" >> requirements.txt && \
+    echo "python-dotenv==1.0.0" >> requirements.txt && \
+    echo "supabase==1.0.3" >> requirements.txt && \
+    echo "httpx==0.23.3" >> requirements.txt
 
-# Copiar los archivos del proyecto
-COPY . .
+# Instalar todas las dependencias de una vez
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Exponer el puerto que usa Rasa
-EXPOSE 5005
+# Instalar modelo de spaCy para español
+RUN python -m spacy download es_core_news_sm
 
-# Entrenar el modelo al construir la imagen
-RUN rasa train
+# Eliminar requirements.txt temporal
+RUN rm requirements.txt
 
-# Comando para iniciar el servidor Rasa
-CMD ["rasa", "run", "--enable-api", "--cors", "*", "--port", "5005", "--host", "0.0.0.0"]
+# Copiar archivos de configuración
+COPY config.yml domain.yml credentials.yml endpoints.yml ./
+COPY data/ ./data/
+COPY actions/ ./actions/
 
-FROM rasa/rasa:3.6.20-full
+# Copiar modelo existente
+COPY models/ ./models/
 
-WORKDIR /app
+# Cambiar a root para permisos de archivos
+USER root
+COPY start.sh .
+RUN chmod +x start.sh
+RUN chown 1001:1001 start.sh
 
-COPY . .
+# Volver al usuario rasa
+USER 1001
 
-RUN rasa train
+# Exponer puertos para Rasa y acciones
+EXPOSE 5005 5055
 
-# El comando se especificará en docker-compose 
+# Comando por defecto - ejecutar script de inicio
+CMD ["./start.sh"]
