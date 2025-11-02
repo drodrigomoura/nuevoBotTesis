@@ -1,14 +1,19 @@
 FROM python:3.10-slim
 
 ENV PYTHONUNBUFFERED=1
+ENV PIP_NO_CACHE_DIR=1
 
 WORKDIR /app
 
-COPY requirements.txt .
+# Instalar rasa-sdk primero (cambia poco)
 RUN pip install --upgrade pip && \
-    pip install rasa-sdk==3.6.2 && \
-    pip install -r requirements.txt
+    pip install rasa-sdk==3.6.2
 
+# Copiar e instalar requirements (solo se reinstala si cambia)
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+# Copiar código (cambia frecuentemente, va al final)
 COPY actions/ ./actions/
 
 EXPOSE 5055
