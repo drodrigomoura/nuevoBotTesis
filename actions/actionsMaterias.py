@@ -6,11 +6,15 @@ from rasa_sdk import Action, Tracker
 from rasa_sdk import Action
 from rasa_sdk.events import SlotSet
 import json
+import logging
 
 import os
 from dotenv import load_dotenv
 from supabase import create_client, Client
 import httpx
+
+# Configurar logging
+logger = logging.getLogger(__name__)
 
 load_dotenv()
 url: str = os.getenv("SUPABASE_URL")

@@ -6,27 +6,41 @@ from rasa_sdk import Action, Tracker
 from rasa_sdk import Action
 from rasa_sdk.events import SlotSet
 import json
+import logging
 
 import os
 from dotenv import load_dotenv
 from supabase import create_client, Client
 import httpx
 
+# Configurar logging
+logger = logging.getLogger(__name__)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+
 load_dotenv()
 url: str = os.getenv("SUPABASE_URL")
 key: str = os.getenv("SUPABASE_KEY")
 supabase: Client = create_client(url, key)
+
+logger.info("Supabase client initialized successfully")
 
 class ActionAuthenticateUser(Action):
     def name(self):
         return "action_authenticate_user"
 
     def run(self, dispatcher, tracker, domain):
+        logger.info("=== ACTION: action_authenticate_user iniciada ===")
         token = tracker.get_slot("auth_token")
+        logger.info(f"Token recibido: {'✅ Presente' if token else '❌ Ausente'}")
+
         if token:
-            # No enviar mensaje al usuario si el token es válido
+            logger.info("Usuario autenticado exitosamente")
             return [SlotSet("is_authenticated", True)]
         else:
+            logger.warning("Autenticación fallida: No se recibió token válido")
             dispatcher.utter_message(text="No se recibió un token válido.")
             return [SlotSet("is_authenticated", False)]
 
@@ -36,41 +50,54 @@ class ActionConsultarAsistencia(Action):
         return "action_consultar_asistencia"
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
+        logger.info("=== ACTION: action_consultar_asistencia iniciada ===")
+
         # Verificar si el usuario está autenticado
         is_authenticated = tracker.get_slot('is_authenticated')
+        logger.info(f"Usuario autenticado: {is_authenticated}")
 
         if not is_authenticated:
+            logger.warning("Acceso denegado: Usuario no autenticado")
             dispatcher.utter_message("❌ Necesitas estar autenticado para consultar tu asistencia. Por favor, inicia sesión primero.")
             return []
 
         # Obtener la matrícula del slot
         matricula = tracker.get_slot('matricula')
+        logger.info(f"Matrícula obtenida: {matricula}")
 
         if not matricula:
+            logger.warning("Matrícula faltante")
             dispatcher.utter_message("❌ No tengo tu número de matrícula. Por favor, proporciona tu matrícula para poder consultar tu asistencia.")
             return [SlotSet("flujo_actual", "consultar_asistencia")]
 
         # Obtener la materia del slot
         materia = tracker.get_slot('materia')
+        logger.info(f"Materia solicitada: {materia}")
 
         if not materia:
+            logger.warning("Materia faltante")
             dispatcher.utter_message("❌ No tengo la materia especificada. Por favor, dime de qué materia quieres consultar la asistencia.")
             return [SlotSet("flujo_actual", "consultar_asistencia")]
 
         try:
+            logger.info(f"Buscando materia '{materia}' en Supabase...")
             # Buscar el código de la materia por nombre
             materia_resp = supabase.table("Materia").select("codigo, nombre").ilike("nombre", "%" + materia + "%").execute()
             if not materia_resp.data:
+                logger.warning(f"Materia '{materia}' no encontrada en BD")
                 dispatcher.utter_message(f"❌ No se encontró la materia '{materia}' en la base de datos.")
                 return [SlotSet("flujo_actual", None)]
 
             materia_codigo = materia_resp.data[0]["codigo"]
             nombre_materia = materia_resp.data[0]["nombre"]
+            logger.info(f"Materia encontrada: {nombre_materia} (código: {materia_codigo})")
 
             # Buscar las asistencias del estudiante para esa materia
+            logger.info(f"Consultando asistencias para matrícula {matricula}, materia {materia_codigo}")
             asistencia_resp = supabase.table("Asistencia").select('*').eq("estudiante", matricula).eq("materia", materia_codigo).execute()
 
             if not asistencia_resp.data:
+                logger.warning(f"No se encontraron registros de asistencia para matrícula {matricula} en {nombre_materia}")
                 dispatcher.utter_message(f"📊 No se encontraron registros de asistencia para la matrícula {matricula} en la materia '{nombre_materia}'.")
                 return [SlotSet("flujo_actual", None)]
 
@@ -95,6 +122,8 @@ class ActionConsultarAsistencia(Action):
             else:
                 porcentaje_formateado = 0
 
+            logger.info(f"Asistencia calculada: {clases_asistidas}/{total_clases} ({porcentaje_formateado}%)")
+
             # Mostrar los resultados
             dispatcher.utter_message(f"📊 **Asistencia en {nombre_materia.upper()}:**")
             dispatcher.utter_message(f"🎓 Matrícula: {matricula}")
@@ -115,10 +144,11 @@ class ActionConsultarAsistencia(Action):
             # dispatcher.utter_message(f"📝 **Fórmula utilizada:**")
             # dispatcher.utter_message(f"Porcentaje = ({clases_asistidas} / {total_clases}) × 100 = {porcentaje_formateado}%")
 
+            logger.info("✅ Consulta de asistencia completada exitosamente")
             return [SlotSet("flujo_actual", None), SlotSet("materia", None)]
 
         except Exception as e:
-            print(f"Error al consultar asistencia: {e}")
+            logger.error(f"❌ Error al consultar asistencia: {str(e)}", exc_info=True)
             dispatcher.utter_message("❌ Hubo un error al consultar tu asistencia. Por favor, intenta nuevamente más tarde.")
 
         return []
