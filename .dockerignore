@@ -25,3 +25,9 @@ coverage.xml
 *.swp
 *.swo
 *~
+
+tests/*
+models/*
+actions/*
+**/*.md
+venv

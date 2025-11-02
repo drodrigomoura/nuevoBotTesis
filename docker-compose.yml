@@ -1,17 +1,53 @@
+version: "3.8"
+
 services:
-  rasa-bot:
+  rasa-actions:
+    build:
+      context: .
+      dockerfile: Dockerfile.actions
+    container_name: rasa-actions
+    ports:
+      - "5055:5055"
+    environment:
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_KEY=${SUPABASE_KEY}
+    restart: unless-stopped
+    networks:
+      - rasa-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:5055/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  rasa-server:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: rasa-server
     ports:
       - "5005:5005"
-      - "5055:5055"
     environment:
       - SQLALCHEMY_WARN_20=0
       - SQLALCHEMY_SILENCE_UBER_WARNING=1
       - SUPABASE_URL=${SUPABASE_URL}
       - SUPABASE_KEY=${SUPABASE_KEY}
-    env_file:
-      - .env
     volumes:
       - ./models:/app/models
+    depends_on:
+      rasa-actions:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - rasa-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:5005 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+networks:
+  rasa-network:
+    driver: bridge
