@@ -28,6 +28,5 @@ coverage.xml
 
 tests/*
 models/*
-actions/*
 **/*.md
 venv
