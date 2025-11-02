@@ -13,7 +13,7 @@ services:
     networks:
       - rasa-network
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:5055/webhook || exit 1"]
+      test: ["CMD-SHELL", "curl -f -X POST http://localhost:5055/webhook -H 'Content-Type: application/json' -d '{}' || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 3
