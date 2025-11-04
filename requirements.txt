@@ -1,9 +1,5 @@
 rasa==3.6.20
-rasa-sdk==3.6.2
 websockets==10.4
 sanic==21.12.2
 spacy==3.4.4
 https://github.com/explosion/spacy-models/releases/download/es_core_news_sm-3.4.0/es_core_news_sm-3.4.0-py3-none-any.whl
-python-dotenv==1.0.0
-supabase==1.0.3
-httpx==0.23.3

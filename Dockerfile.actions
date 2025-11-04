@@ -8,12 +8,11 @@ RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-# Instalar rasa-sdk primero (cambia poco)
-RUN pip install --upgrade pip && \
-    pip install rasa-sdk==3.6.2
+# Upgrade pip
+RUN pip install --upgrade pip
 
-# Copiar e instalar requirements (solo se reinstala si cambia)
-COPY requirements.txt .
+# Copiar e instalar todas las dependencias de actions
+COPY actions/requirements.txt .
 RUN pip install -r requirements.txt
 
 # Copiar código (cambia frecuentemente, va al final)
@@ -21,4 +20,4 @@ COPY actions/ ./actions/
 
 EXPOSE 5055
 
-CMD ["rasa", "run", "actions", "--port", "5055"]
+CMD ["python", "-m", "rasa_sdk", "--actions", "actions", "--port", "5055"]
